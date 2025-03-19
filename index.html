@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Conceptos de Git</title>
+  <script data-main="js/main" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.4/require.min.js"></script>
+  <link rel="stylesheet" href="css/explaingit.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-gray-50">
+  <a href="https://github.com/onlywei/explain-git-with-d3" target="_blank" id="github"
+    class="fixed top-4 right-4 flex items-center space-x-2 bg-gray-800 text-white px-4 py-2 rounded shadow-lg hover:bg-gray-700 transition-colors text-sm z-[100]">
+    <span class="font-semibold">Proyecto en GitHub</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 md:w-5 md:h-5" viewBox="0 -3.5 256 256"
+      preserveAspectRatio="xMinYMin meet">
+      <g fill="currentColor">
+        <path
+          d="M127.505 0C57.095 0 0 57.085 0 127.505c0 56.336 36.534 104.13 87.196 120.99 6.372 1.18 8.712-2.766 8.712-6.134 0-3.04-.119-13.085-.173-23.739-35.473 7.713-42.958-15.044-42.958-15.044-5.8-14.738-14.157-18.656-14.157-18.656-11.568-7.914.872-7.752.872-7.752 12.804.9 19.546 13.14 19.546 13.14 11.372 19.493 29.828 13.857 37.104 10.6 1.144-8.242 4.449-13.866 8.095-17.05-28.32-3.225-58.092-14.158-58.092-63.014 0-13.92 4.981-25.295 13.138-34.224-1.324-3.212-5.688-16.18 1.235-33.743 0 0 10.707-3.427 35.073 13.07 10.17-2.826 21.078-4.242 31.914-4.29 10.836.048 21.752 1.464 31.942 4.29 24.337-16.497 35.029-13.07 35.029-13.07 6.94 17.563 2.574 30.531 1.25 33.743 8.175 8.929 13.122 20.303 13.122 34.224 0 48.972-29.828 59.756-58.22 62.912 4.573 3.957 8.648 11.717 8.648 23.612 0 17.06-.148 30.791-.148 34.991 0 3.393 2.295 7.369 8.759 6.117 50.634-16.879 87.122-64.656 87.122-120.973C255.009 57.085 197.922 0 127.505 0" />
+        <path
+          d="M47.755 181.634c-.28.633-1.278.823-2.185.389-.925-.416-1.445-1.28-1.145-1.916.275-.652 1.273-.834 2.196-.396.927.415 1.455 1.287 1.134 1.923M54.027 187.23c-.608.564-1.797.302-2.604-.589-.834-.889-.99-2.077-.373-2.65.627-.563 1.78-.3 2.616.59.834.899.996 2.08.36 2.65M58.33 194.39c-.782.543-2.06.034-2.849-1.1-.781-1.133-.781-2.493.017-3.038.792-.545 2.05-.055 2.85 1.07.78 1.153.78 2.513-.019 3.069M65.606 202.683c-.699.77-2.187.564-3.277-.488-1.114-1.028-1.425-2.487-.724-3.258.707-.772 2.204-.555 3.302.488 1.107 1.026 1.445 2.496.7 3.258M75.01 205.483c-.307.998-1.741 1.452-3.185 1.028-1.442-.437-2.386-1.607-2.095-2.616.3-1.005 1.74-1.478 3.195-1.024 1.44.435 2.386 1.596 2.086 2.612M85.714 206.67c.036 1.052-1.189 1.924-2.705 1.943-1.525.033-2.758-.818-2.774-1.852 0-1.062 1.197-1.926 2.721-1.951 1.516-.03 2.758.815 2.758 1.86M96.228 206.267c.182 1.026-.872 2.08-2.377 2.36-1.48.27-2.85-.363-3.039-1.38-.184-1.052.89-2.105 2.367-2.378 1.508-.262 2.857.355 3.049 1.398" />
+      </g>
+    </svg>
+  </a>
+
+  <a href="https://github.com/onlywei/explain-git-with-d3" target="_blank" id="github-mobile"
+    class="fixed bottom-4 right-4 flex items-center space-x-2 bg-gray-800 text-white items-center justify-center rounded-full w-12 h-12 shadow-lg hover:bg-gray-700 transition-colors z-[100]">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 -3.5 256 256"
+      preserveAspectRatio="xMinYMin meet">
+      <g fill="currentColor">
+        <path
+          d="M127.505 0C57.095 0 0 57.085 0 127.505c0 56.336 36.534 104.13 87.196 120.99 6.372 1.18 8.712-2.766 8.712-6.134 0-3.04-.119-13.085-.173-23.739-35.473 7.713-42.958-15.044-42.958-15.044-5.8-14.738-14.157-18.656-14.157-18.656-11.568-7.914.872-7.752.872-7.752 12.804.9 19.546 13.14 19.546 13.14 11.372 19.493 29.828 13.857 37.104 10.6 1.144-8.242 4.449-13.866 8.095-17.05-28.32-3.225-58.092-14.158-58.092-63.014 0-13.92 4.981-25.295 13.138-34.224-1.324-3.212-5.688-16.18 1.235-33.743 0 0 10.707-3.427 35.073 13.07 10.17-2.826 21.078-4.242 31.914-4.29 10.836.048 21.752 1.464 31.942 4.29 24.337-16.497 35.029-13.07 35.029-13.07 6.94 17.563 2.574 30.531 1.25 33.743 8.175 8.929 13.122 20.303 13.122 34.224 0 48.972-29.828 59.756-58.22 62.912 4.573 3.957 8.648 11.717 8.648 23.612 0 17.06-.148 30.791-.148 34.991 0 3.393 2.295 7.369 8.759 6.117 50.634-16.879 87.122-64.656 87.122-120.973C255.009 57.085 197.922 0 127.505 0" />
+        <path
+          d="M47.755 181.634c-.28.633-1.278.823-2.185.389-.925-.416-1.445-1.28-1.145-1.916.275-.652 1.273-.834 2.196-.396.927.415 1.455 1.287 1.134 1.923M54.027 187.23c-.608.564-1.797.302-2.604-.589-.834-.889-.99-2.077-.373-2.65.627-.563 1.78-.3 2.616.59.834.899.996 2.08.36 2.65M58.33 194.39c-.782.543-2.06.034-2.849-1.1-.781-1.133-.781-2.493.017-3.038.792-.545 2.05-.055 2.85 1.07.78 1.153.78 2.513-.019 3.069M65.606 202.683c-.699.77-2.187.564-3.277-.488-1.114-1.028-1.425-2.487-.724-3.258.707-.772 2.204-.555 3.302.488 1.107 1.026 1.445 2.496.7 3.258M75.01 205.483c-.307.998-1.741 1.452-3.185 1.028-1.442-.437-2.386-1.607-2.095-2.616.3-1.005 1.74-1.478 3.195-1.024 1.44.435 2.386 1.596 2.086 2.612M85.714 206.67c.036 1.052-1.189 1.924-2.705 1.943-1.525.033-2.758-.818-2.774-1.852 0-1.062 1.197-1.926 2.721-1.951 1.516-.03 2.758.815 2.758 1.86M96.228 206.267c.182 1.026-.872 2.08-2.377 2.36-1.48.27-2.85-.363-3.039-1.38-.184-1.052.89-2.105 2.367-2.378 1.508-.262 2.857.355 3.049 1.398" />
+      </g>
+    </svg>
+  </a>
+
+
+  <div class="container mx-auto px-4 py-6 md:py-8">
+    <!-- Header -->
+    <header class="mb-6 md:mb-8 text-center">
+      <h1 class="text-3xl sm:text-3xl md:text-5xl font-bold text-gray-800 mb-3 md:mb-4">
+        Conceptos de Git
+      </h1>
+      <p class="text-sm md:text-base text-gray-600 max-w-2xl mx-auto">
+        Esta web te ayudará a entender visualmente conceptos básicos de git utilizando SVG y D3. ¡Explora y diviértete
+        aprendiendo!
+        Selecciona algún comando del menú para comenzar.
+      </p>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+      <!-- Sidebar -->
+      <nav class="md:col-span-1 bg-gray-100 p-3 md:p-4 border border-gray-200 rounded space-y-4 md:space-y-6">
+        <!-- Grupo: Comandos básicos -->
+        <div>
+          <h4 class="text-base md:text-lg font-semibold text-gray-700 mb-1 md:mb-2">Comandos básicos</h4>
+          <ul class="space-y-1">
+            <li><a id="open-init" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+              href="#init">git init</a></li>
+            <li><a id="open-clone" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+                href="#clone">git clone</a></li>
+            <li><a id="open-status" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+                href="#status">git status</a></li>
+            <li><a id="open-commit" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+                href="#commit">git add y commit</a></li>
+            <li><a id="open-branch" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+                href="#branch">git branch</a></li>
+            <li><a id="open-checkout" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+                href="#checkout">git checkout</a></li>
+            <li><a id="open-checkout-b" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+                href="#checkout-b">git checkout -b</a></li>
+          </ul>
+        </div>
+        <!-- Grupo: Deshacer commits -->
+        <div>
+          <h4 class="text-base md:text-lg font-semibold text-gray-700 mb-1 md:mb-2">Deshacer commits</h4>
+          <ul class="space-y-1">
+            <li><a id="open-reset" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+                href="#reset">git reset</a></li>
+            <li><a id="open-revert" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+                href="#revert">git revert</a></li>
+          </ul>
+        </div>
+        <!-- Grupo: Ramas -->
+        <div>
+          <h4 class="text-base md:text-lg font-semibold text-gray-700 mb-1 md:mb-2">Ramas</h4>
+          <ul class="space-y-1">
+            <li><a id="open-merge" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+                href="#merge">git merge</a></li>
+            <li><a id="open-rebase" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+                href="#rebase">git rebase</a></li>
+          </ul>
+        </div>
+        <!-- Grupo: Remoto -->
+        <div>
+          <h4 class="text-base md:text-lg font-semibold text-gray-700 mb-1 md:mb-2">Remoto</h4>
+          <ul class="space-y-1">
+            <li><a id="open-fetch" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+                href="#fetch">git fetch</a></li>
+            <li><a id="open-pull" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+                href="#pull">git pull</a></li>
+            <li><a id="open-push" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+                href="#push">git push</a></li>
+            <li><a id="open-tag" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+                href="#tag">git tag</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Contenido -->
+      <main class="md:col-span-3 space-y-4 md:space-y-6">
+        <!-- Start Git Init -->
+        <section id="ExplainGitInit-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200 text-pretty">
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Inicializando un repositorio en un directorio existente</h2>
+          <p class="text-sm md:text-base">
+            Puedes obtener un proyecto Git de dos maneras: 
+          </p>
+          <ul class="list-disc ml-4">
+            <li>
+              <p class="text-sm md:text-base">
+                La primera es tomar un proyecto o directorio existente e importarlo en Git. <span class="cmd font-mono bg-gray-100 px-1 rounded">git init</span>
+              </p>
+            </li>
+            <li>
+              <p class="text-sm md:text-base">
+                La segunda es clonar un repositorio existente en Git desde otro servidor. <span class="cmd font-mono bg-gray-100 px-1 rounded">git clone</span>
+              </p>
+            </li>
+          </ul>
+          <p class="text-sm md:text-base">Al correr el comando:</p>
+          <p class="text-sm md:text-base">
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git init << directorio >> </span>
+          </p>
+          <p class="text-sm md:text-base">
+            Esto crea un subdirectorio oculto nuevo llamado <b>.git</b>, el cual contiene todos los archivos necesarios del repositorio. Por defecto, si no escribimos un directorio, Git creará el repositorio en el directorio actual. Es importante tener en cuenta que todavía no hay nada en tu proyecto que esté bajo seguimiento. 
+          </p>
+          <p class="text-sm md:text-base">
+           ℹ️ <b>Dato:</b> Si deseas hacer una copia de seguridad de tu repositorio, con tan solo copiar esta carpeta a cualquier otro lugar ya tienes tu copia completa.
+          </p>
+          <p class="text-sm md:text-base">
+            Si hacemos un ls -F1 veremos los siguientes archivos: 
+          </p>
+          <p class="text-sm md:text-base italic"> 
+            (Haz hover sobre los nombres de los archivos para ver su descripción)
+          </p>
+          <p class="text-sm md:text-base">
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+              HEAD ----> NÚCLEO DE GIT
+              <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                Parte fundamental del sistema de control de versiones de Git.
+              </span>
+            </span>  
+          
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+              index ----> NÚCLEO DE GIT
+              <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                Área de preparación donde Git almacena cambios antes de confirmarlos.
+              </span>
+            </span>  
+          
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+              config
+              <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                Archivo de configuración que almacena ajustes locales del repositorio.
+              </span>
+            </span>  
+          
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+              description
+              <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                Archivo que proporciona una breve descripción del repositorio para <a href="https://git-scm.com/book/es/v2/Git-en-el-Servidor-GitWeb" target="_blank" class="text-blue-500 hover:underline italic">GitWeb</a>.
+              </span>
+            </span>  
+          
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+              hooks/ 
+              <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                Carpeta donde se almacenan scripts de automatización de Git.
+              </span>
+            </span>   
+          
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+              info/
+              <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                Contiene información adicional del repositorio como archivos a ignorar globalmente, además de los presentes en el .gitignore.
+              </span>
+            </span>  
+          
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+              objects/ ----> NÚCLEO DE GIT
+              <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                Carpeta donde Git almacena todos los objetos (commits, árboles, blobs, etc.).
+              </span>
+            </span>   
+          
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+              refs/ ----> NÚCLEO DE GIT
+              <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                Contiene referencias a los commits, como ramas y etiquetas.
+              </span>
+            </span>  
+          </p>
+          
+
+          <!-- End Contenido -->
+
+          <div class="playground-container mt-4" id="playground-init"></div>
+        </section>
+        <!-- End Git init -->
+
+        <!-- Start Git Clone -->
+        <section id="ExplainGitClone-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200 text-pretty">
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Clonando un repositorio existente</h2>
+          <p class="text-sm md:text-base">
+            Si deseas obtener una copia de un repositorio Git existente — por ejemplo, un proyecto en el que te gustaría contribuir — el comando que necesitas es 
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git clone</span>. Git recibe una copia de casi todos los datos que tiene el servidor. Cada versión de cada archivo de la historia del proyecto es descargada por defecto si no se utiliza nigún parámetro adicional.
+          </p>
+          <p class="text-sm md:text-base">
+            Si deseas clonar un repositorio, necesitas tener el URL del repositorio. Este URL puede ser de diferentes protocolos, como HTTPS o SSH.
+          </p>
+          <p class="text-sm md:text-base">Al correr el comando:</p>
+          <p class="text-sm md:text-base">
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git clone << URL >> </span>
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git clone https://github.com/git-visual/git-visual </span>
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git clone https://github.com/git-visual/git-visual nombre-proyecto </span>
+          </p>
+          <p class="text-sm md:text-base">
+            El segundo comando crea un directorio llamado git-visual, inicializa un directorio .git en su interior, descarga toda la información de ese repositorio y saca una copia de trabajo de la última versión. El tercer comando realiza lo mismo, pero el nombre del directorio de destino será nombre-proyecto.
+          </p>
+          <p class="text-sm md:text-base">
+            En caso de que el repositorio sea muy extenso, puedes clonar solo la última versión del proyecto con el comando:
+          </p>
+          <p class="text-sm md:text-base">
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git clone https://github.com/git-visual/git-visual nombre-proyecto --depth=1 </span>
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git clone https://github.com/git-visual/git-visual nombre-proyecto --filter=blob:none </span>
+          </p>
+          <p class="text-sm md:text-base">
+            El primer comando clona solo la última versión del proyecto, mientras que el segundo clona el proyecto sin blobs, es decir, sin archivos binarios.
+          </p>
+         
+          <!-- End Contenido -->
+
+          <div class="playground-container mt-4" id="playground-clone"></div>
+        </section>
+        <!-- End Git Clone -->
+
+        <!-- Start Git status -->
+        <section id="ExplainGitStatus-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200 text-pretty">
+          <!-- Start Los tres estados -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Los tres estados</h2>
+
+          <p class="text-sm md:text-base">
+            Git tiene tres estados principales en los que se pueden encontrar tus archivos:
+          </p>
+          <ul class="list-disc ml-6">
+            <li>
+              <p class="text-sm md:text-base">
+                <b>Modificado (modified):</b> has modificado el archivo pero todavía no lo has confirmado a tu base de
+                datos.
+              </p>
+            </li>
+            <li>
+              <p class="text-sm md:text-base">
+                <b>Preparado (staged):</b> has marcado un archivo modificado en su versión actual para que vaya en tu
+                próximo commit (git add).
+              </p>
+            </li>
+            <li>
+              <p class="text-sm md:text-base">
+                <b>Confirmado (committed):</b> los datos están almacenados de manera segura en tu base de datos local.
+              </p>
+            </li>
+          </ul>
+          
+          <p class="text-sm md:text-base">
+            <a href="https://git-scm.com/book/es/v2/images/areas.png" target="_blank"
+              class="text-blue-500 hover:underline italic">
+              Imagen de secciones principales de un proyecto de Git - Git Book
+              <a>
+          </p>
+          <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-4">
+            <p class="text-sm md:text-base">
+              El <b>directorio de trabajo</b> es una copia de una versión del proyecto. Estos archivos se sacan de la base de
+              datos comprimida en el directorio de Git, y se colocan en disco para que los puedas usar o modificar.
+            </p>
+            <p class="text-sm md:text-base">
+              El <b>área de preparación</b> es un archivo, generalmente contenido en tu directorio de Git, que almacena
+              información acerca de lo que va a ir en tu próxima confirmación. A veces se le denomina índice (“index”).
+            </p>
+            <p class="text-sm md:text-base">
+              El <b>directorio de Git</b> es donde se almacenan los metadatos y la base de datos de objetos para tu proyecto. Es
+              la parte más importante de Git, y es lo que se copia cuando clonas un repositorio desde otra computadora.
+            </p>
+          </div>
+          
+          <p class="text-sm md:text-base">
+            El flujo de trabajo básico en Git es algo así:
+          </p>
+          <ol class="list-decimal ml-6">
+            <li>
+              <p class="text-sm md:text-base">
+                Modificas una serie de archivos en tu directorio de trabajo.
+              </p>
+            </li>
+            <li>
+              <p class="text-sm md:text-base">
+                Preparas los archivos, añadiéndolos a tu área de preparación. <span class="cmd font-mono bg-gray-100 px-1 rounded">git add</span>
+              </p>
+            </li>
+            <li>
+              <p class="text-sm md:text-base">
+                Confirmas los cambios, haces un commit. <span class="cmd font-mono bg-gray-100 px-1 rounded">git commit</span>
+              </p>
+            </li>
+          </ol>
+         <p class="text-sm md:text-base">
+          Si una versión concreta de un archivo está en el directorio de Git, se considera confirmada <b>(committed)</b>. Si ha sufrido cambios desde que se obtuvo del repositorio, pero ha sido añadida al área de preparación, está preparada <b>(staged)</b>. Y si ha sufrido cambios desde que se obtuvo del repositorio, pero no se ha preparado, está modificada <b>(modified)</b>. Si un archivo está en el directorio de trabajo, pero no en el área de preparación, no se ha preparado <b>(Untracked)</b>
+         </p>
+
+         <p class="text-sm md:text-base">
+          <b>La herramienta principal para determinar qué archivos están en qué estado es el comando</b> <span class="cmd font-mono bg-gray-100 px-1 rounded">git status</span>. Escribe en la terminal el comando y observa los resultados. Si escribes <span class="cmd font-mono bg-gray-100 px-1 rounded">git status -s</span> obtendrás una versión más corta y concisa. 
+         </p>
+
+         <p class="text-sm md:text-base">
+          Hay tres ejemplos de uso de git status en el siguiente playground. Escribe <span class="cmd font-mono bg-gray-100 px-1 rounded">git status --example1</span> y asi sucesivamente en la terminal para ver los resultados.
+         </p>
+          <!-- End Los tres estados -->
+
+          <div class="playground-container mt-4" id="playground-status"></div>
+        </section>
+        <!-- End Git status -->
+
+        <!-- Start Git add y commit -->
+        <section id="ExplainGitCommit-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200 text-pretty">
+          <!-- Definición de commit -->
+          <h2 class="text-xl sm:text-xl mt-4 md:text-2xl font-bold text-gray-800">¿Qué es un commit?</h2>
+          <p class="text-sm md:text-base">
+            Un commit en un repositorio git registra un
+            <span class="cmd font-mono bg-gray-100 px-1 rounded relative group">
+              snapshot
+              <span
+                class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                Cada vez que confirmas un cambio, o guardas el estado de tu proyecto en Git, él básicamente toma una
+                foto del aspecto de todos tus archivos en ese momento y guarda una referencia a esa copia instantánea.
+              </span>
+            </span>
+            de todos los archivos en tu directorio. Para ser eficiente, si los archivos no se han modificado Git no
+            almacena el archivo de nuevo, sino un enlace al archivo anterior idéntico que ya tiene almacenado. Git
+            maneja sus datos como una secuencia de copias instantáneas.
+          </p>
+          <p class="text-sm md:text-base">
+            <a href="https://git-scm.com/book/es/v2/images/snapshots.png" target="_blank"
+              class="text-blue-500 hover:underline italic">
+              Imagen de referencia - Git Book
+              <a>
+          </p>
+          <p class="text-sm md:text-base">
+            Todo en Git es verificado mediante una <span class="font-bold">suma de comprobación</span>.
+            El mecanismo que usa Git para generar esta suma se conoce como hash SHA-1 y se calcula con
+            base en los contenidos del archivo o estructura del directorio. Un hash SHA-1 se ve de la siguiente
+            forma:
+          </p>
+          <p class="text-sm md:text-base">
+            <span class="font-mono bg-gray-100 px-1 rounded">24b9da6552252987aa493b52f8696cd6d3b00373</span>
+            <span class="italic">[40 caracteres hexadecimales (0-9 y a-f)]</span>
+          </p>
+          <p class="text-sm md:text-base">
+            Esto es importante, porque <b>Git guarda todo no por nombre de archivo, sino por el valor hash de sus
+              contenidos.</b> Los commits se identifican por dichos hashes.
+          </p>
+
+          <p class="text-sm md:text-base">
+            Vamos a omitir la parte de añadir archivos para commit en esta explicación.
+            Supón que ya sabes hacerlo; si no, busca otro tutorial.
+          </p>
+          <p class="text-sm md:text-base">
+            Imagina que ya tienes tus archivos preparados y escribe <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git commit</span> tantas veces como quieras en la terminal.
+          </p>
+          <div class="playground-container mt-4"></div>
+        </section>
+        <!-- End Git add y commit -->
+
+        <section id="ExplainGitTag-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <p class="text-sm md:text-base">
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git tag name</span> creará una etiqueta llamada “name”
+            que apuntará al commit actualmente chequeado.
+          </p>
+          <p class="text-sm md:text-base">
+            Las etiquetas pueden eliminarse usando <span class="cmd font-mono bg-gray-100 px-1 rounded">git tag -d
+              name</span> (próximamente).
+          </p>
+          <p class="text-sm md:text-base">
+            Prueba a escribir <span class="cmd font-mono bg-gray-100 px-1 rounded">git commit</span> y <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git tag</span> hasta comprender el concepto.
+          </p>
+          <div class="playground-container mt-4"></div>
+        </section>
+
+        <!-- Se incluyen las demás secciones siguiendo el mismo estilo -->
+        <section id="ExplainGitBranch-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <p class="text-sm md:text-base">
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git branch name</span> creará una nueva rama llamada
+            “name”.
+            Las ramas apuntan al commit actualmente chequeado.
+          </p>
+          <p class="text-sm md:text-base">
+            Se pueden eliminar usando <span class="cmd font-mono bg-gray-100 px-1 rounded">git branch -d name</span>.
+          </p>
+          <p class="text-sm md:text-base">
+            Prueba a usar <span class="cmd font-mono bg-gray-100 px-1 rounded">git commit</span> y <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git branch</span> hasta comprender el funcionamiento.
+          </p>
+          <div class="playground-container mt-4"></div>
+        </section>
+
+        <section id="ExplainGitCheckout-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <p class="text-sm md:text-base">
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git checkout</span> se usa para cambiar entre ramas.
+            Por ejemplo, para pasar de la rama master a dev, escribe <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git checkout dev</span>.
+          </p>
+          <p class="text-sm md:text-base">
+            También puedes cambiar a commits individuales. Prueba a hacer un commit nuevo y luego escribe <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git checkout bb92e0e</span>.
+          </p>
+          <p class="text-sm md:text-base">
+            Experimenta con <span class="cmd font-mono bg-gray-100 px-1 rounded">git commit</span>,
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git branch</span> y
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git checkout</span> hasta entenderlo.
+          </p>
+          <div class="playground-container mt-4"></div>
+        </section>
+
+        <section id="ExplainGitCheckout-b-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <p class="text-sm md:text-base">
+            Puedes combinar <span class="cmd font-mono bg-gray-100 px-1 rounded">git branch</span> y
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git checkout</span> con <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git checkout -b branchname</span>.
+            Esto creará la rama (si no existe) y cambiará a ella inmediatamente.
+          </p>
+          <div class="playground-container mt-4"></div>
+        </section>
+
+        <!-- Otras secciones (reset, revert, merge, rebase, fetch, pull, push, clean, fetchrebase, deletebranches, freeplay) siguen el mismo patrón -->
+        <section id="ExplainGitReset-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <p>
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span> mueve HEAD y la rama actual al commit
+            especificado,
+            descartando los commits posteriores. Es útil para deshacer un commit innecesario.
+          </p>
+          <p>
+            Este comando se usa normalmente con las banderas <span
+              class="font-mono bg-gray-100 px-1 rounded">--soft</span>, <span
+              class="font-mono bg-gray-100 px-1 rounded">--mixed</span> o <span
+              class="font-mono bg-gray-100 px-1 rounded">--hard</span>.
+            Consulta <a href="https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified"
+              class="text-blue-500 hover:underline">aquí</a> para más información. En esta visualización solo se usa
+            <span class="font-mono bg-gray-100 px-1 rounded">--hard</span>.
+          </p>
+          <p>
+            “HEAD^” se refiere al commit anterior a HEAD; “HEAD^^” es dos commits atrás, y así sucesivamente.
+          </p>
+          <p>
+            <b>Atención:</b> No uses <span class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span> para
+            descartar commits ya compartidos con el remoto.
+          </p>
+          <div class="playground-container mt-4"></div>
+        </section>
+
+        <section id="ExplainGitRevert-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <p>
+            Para deshacer commits que ya han sido compartidos, en lugar de <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span> se utiliza <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git revert</span>.
+          </p>
+          <p>
+            Este comando crea un nuevo commit que revierte los cambios del commit indicado.
+          </p>
+          <div class="playground-container mt-4"></div>
+        </section>
+
+        <section id="ExplainGitMerge-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <p>
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git merge</span> crea un commit con dos padres,
+            combinando los cambios de ambas ramas.
+          </p>
+          <p>
+            Si no hay divergencia, se realiza una fusión por avance rápido (“fast-forward”). Prueba a hacer <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git merge dev</span> en la rama ‘ff’.
+          </p>
+          <div class="playground-container mt-4"></div>
+        </section>
+
+        <section id="ExplainGitRebase-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <p>
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git rebase</span> mueve los commits de una rama para
+            reubicarlos sobre otro commit.
+          </p>
+          <p>
+            Observa cómo cambian los IDs de commit al realizar la rebase; recuerda que genera nuevos commits, por lo que
+            no debe usarse en ramas compartidas.
+          </p>
+          <div class="playground-container mt-4"></div>
+        </section>
+
+        <section id="ExplainGitFetch-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <p>
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git fetch</span> actualiza las “ramas remotas” en tu
+            repositorio local.
+          </p>
+          <div class="playground-container mt-4"></div>
+        </section>
+
+        <section id="ExplainGitPull-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <p>
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git pull</span> combina un <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git fetch</span> seguido de un <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git merge</span> (o rebase si se indica) para actualizar la
+            rama actual.
+          </p>
+          <p>
+            Puedes usar <span class="cmd font-mono bg-gray-100 px-1 rounded">git pull --rebase</span> para rebasar en
+            lugar de fusionar. Configura este comportamiento por defecto con <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git config branch.BRANCHNAME.rebase true</span>.
+          </p>
+          <div class="playground-container mt-4"></div>
+        </section>
+
+        <section id="ExplainGitPush-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <p>
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git push</span> enviará los commits locales a la rama
+            correspondiente en el repositorio remoto.
+          </p>
+          <p>
+            Si hay divergencia entre la rama local y la remota, se rechazará el push y deberás hacer un pull antes de
+            intentarlo de nuevo.
+          </p>
+          <div class="playground-container mt-4"></div>
+        </section>
+
+        <section id="ExplainGitClean-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <p>
+            Un ejemplo sencillo es restaurar el estado de tu rama local al del origen con <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git reset origin/master</span>.
+          </p>
+          <p>
+            Nota: Esto no elimina archivos no rastreados. Para ello, usa <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git clean -df</span>.
+          </p>
+          <div class="playground-container mt-4"></div>
+        </section>
+
+        <section id="ExplainGitFetchRebase-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <p>
+            Si trabajas en una rama local y deseas actualizarla con el último código de origin/master sin cambiar de
+            rama,
+            primero ejecuta <span class="cmd font-mono bg-gray-100 px-1 rounded">git fetch</span> y luego <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git rebase origin/master</span>.
+          </p>
+          <div class="playground-container mt-4"></div>
+        </section>
+
+        <section id="ExplainGitDeleteBranches-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <p>
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git branch -d</span> se utiliza para eliminar ramas.
+            Prueba a borrar algunas de las ramas pre-creadas en el playground.
+          </p>
+          <div class="playground-container mt-4"></div>
+        </section>
+
+        <section id="ExplainGitFree-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <p>
+            Esta es una zona libre para que experimentes sin restricciones.
+          </p>
+          <div class="playground-container mt-4"></div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Sección de Ejemplos Específicos -->
+    <section class="mt-8 md:mt-12">
+      <h2 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3 md:mb-4">Ejemplos específicos</h2>
+      <p class="text-sm md:text-base text-gray-600 mb-4">
+        A continuación, se muestran algunos escenarios reales comunes y útiles.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+        <div class="flex flex-col space-y-2">
+          <a id="open-clean"
+            class="openswitch block p-2 md:p-3 text-sm md:text-base bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
+            href="#clean">
+            Restaurar rama local al estado en el servidor de origen
+          </a>
+          <a id="open-fetchrebase"
+            class="openswitch block p-2 md:p-3 text-sm md:text-base bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
+            href="#fetchrebase">
+            Actualizar rama local privada con lo último del origen
+          </a>
+          <a id="open-deletebranches"
+            class="openswitch block p-2 md:p-3 text-sm md:text-base bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
+            href="#deletebranches">
+            Eliminar ramas locales
+          </a>
+        </div>
+        <div class="flex flex-col space-y-2">
+          <a id="open-freeplay"
+            class="openswitch block p-2 md:p-3 text-sm md:text-base bg-green-100 text-green-700 rounded hover:bg-green-200"
+            href="#freeplay">
+            Playground
+          </a>
+          <a id="open-zen"
+            class="openswitch block p-2 md:p-3 text-sm md:text-base bg-purple-100 text-purple-700 rounded hover:bg-purple-200"
+            href="#zen">
+            Modo Zen
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p class="text-sm md:text-base text-balance text-gray-600 mt-8 md:mt-12">
+        Fork del proyecto de <a href="https://github.com/onlywei/explain-git-with-d3" target="_blank"
+          class="text-blue-500 hover:underline">Wei Wang</a>.
+      </p>
+      <p class="text-sm md:text-base text-balance text-gray-600">
+        Hecho por <a href="https://github.com/vterreno" target="_blank"
+          class="text-blue-500 hover:underline">@vterreno</a>. Si encuentras algún error o deseas colaborar <a
+          href="https://github.com/vterreno" target="_blank" class="text-blue-500 hover:underline">Github</a>.
+      </p>
+      <p class="text-sm md:text-base text-balance text-gray-600">
+        Versión 1.0.0
+      </p>
+    </footer>
+  </div>
+
+  <!-- Contenedor para Zen Mode -->
+  <div id="ExplainGitZen-Container" class="hidden">
+    <div class="playground-container"></div>
+  </div>
+
+  <!-- SVG definitions (oculto) -->
+  <svg class="hidden" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="triangle" refX="5" refY="5" markerUnits="strokeWidth" fill="#666" markerWidth="4" markerHeight="3"
+        orient="auto" viewBox="0 0 10 10">
+        <path d="M 0 0 L 10 5 L 0 10 z"></path>
+      </marker>
+      <marker id="faded-triangle" refX="5" refY="5" markerUnits="strokeWidth" fill="#DDD" markerWidth="4"
+        markerHeight="3" orient="auto" viewBox="0 0 10 10">
+        <path d="M 0 0 L 10 5 L 0 10 z"></path>
+      </marker>
+      <marker id="brown-triangle" refX="5" refY="5" markerUnits="strokeWidth" fill="#663300" markerWidth="4"
+        markerHeight="3" orient="auto" viewBox="0 0 10 10">
+        <path d="M 0 0 L 10 5 L 0 10 z"></path>
+      </marker>
+    </defs>
+  </svg>
+
+  <!-- Código JavaScript (se mantiene la funcionalidad original) -->
+  <script type="text/javascript">
+    /* window.addEventListener('DOMContentLoaded', () => {
+        if (window.location.hash) {
+            history.replaceState(null, "", window.location.pathname + window.location.search);
+        }
+    }); */
+
+    require(['explaingit'], function (explainGit) {
+      var examples = {
+        'init': {
+          name: 'Init',
+          height: 200,
+          baseLine: 0.4,
+          commitData: [{ id: 'e137e9b', tags: ['master'] }],
+          initialMessage: 'Escribe "git init" en la terminal.'
+        },
+        'clone': {
+          name: 'Clone',
+          height: 200,
+          baseLine: 0.4,
+          commitData: [{ id: 'e137e9b', tags: ['master'] }],
+          initialMessage: 'Escribe "git clone https://github.com/git-visual/git-visual" en la terminal.'
+        },
+        'status': {
+          name: 'Status',
+          height: 200,
+          baseLine: 0.4,
+          commitData: [{ id: 'e137e9b', tags: ['master'] }],
+          initialMessage: 'Escribe "git status" en la terminal.'
+        },
+        'commit': {
+          name: 'Commit',
+          height: 200,
+          baseLine: 0.4,
+          commitData: [{ id: 'e137e9b', tags: ['master'] }],
+          initialMessage: 'Escribe "git commit" en la terminal.'
+        },
+        'branch': {
+          name: 'Branch',
+          baseLine: 0.6,
+          commitData: [{ id: 'e137e9b', tags: ['master'] }]
+        },
+        'tag': {
+          name: 'Tag',
+          baseLine: 0.6,
+          commitData: [{ id: 'e137e9b', tags: ['master'] }]
+        },
+        'checkout': {
+          name: 'Checkout',
+          height: 500,
+          commitData: [
+            { id: 'e137e9b' },
+            { id: 'bb92e0e', parent: 'e137e9b', tags: ['master'] },
+            { id: 'e088135', parent: 'e137e9b', tags: ['dev'] }
+          ],
+          initialMessage: 'Usa git checkout, git branch y git commit comandos hasta que los entiendas.'
+        },
+        'checkout-b': {
+          name: 'Checkout-b',
+          height: 500,
+          commitData: [
+            { id: 'e137e9b' },
+            { id: 'f5b32c8', parent: 'e137e9b' },
+            { id: 'bb92e0e', parent: 'f5b32c8', tags: ['master'] },
+            { id: 'e088135', parent: 'e137e9b', tags: ['dev'] }
+          ],
+          initialMessage: 'Usa git checkout -b, git branch y git commit comandos hasta que los entiendas.'
+        },
+        'reset': {
+          name: 'Reset',
+          height: 200,
+          baseLine: 0.5,
+          commitData: [
+            { id: 'e137e9b' },
+            { id: '0e70093', parent: 'e137e9b' },
+            { id: '3e33afd', parent: '0e70093', tags: ['master'] }
+          ],
+          initialMessage: 'Escribe "git reset HEAD^".'
+        },
+        'revert': {
+          name: 'Revert',
+          height: 200,
+          baseLine: 0.5,
+          commitData: [
+            { id: 'e137e9b' },
+            { id: '0e70093', parent: 'e137e9b' },
+            { id: '3e33afd', parent: '0e70093', tags: ['master'] }
+          ],
+          initialMessage: 'Escribe "git revert 0e70093".'
+        },
+        'merge': {
+          name: 'Merge',
+          height: 500,
+          commitData: [
+            { id: 'e137e9b' },
+            { id: 'bb92e0e', parent: 'e137e9b', tags: ['master'] },
+            { id: 'f5b32c8', parent: 'e137e9b', tags: ['ff'] },
+            { id: 'e088135', parent: 'f5b32c8', tags: ['dev'] }
+          ],
+          initialMessage: 'Escribe "git merge dev".'
+        },
+        'rebase': {
+          name: 'Rebase',
+          height: 500,
+          commitData: [
+            { id: 'e137e9b' },
+            { id: 'bb92e0e', parent: 'e137e9b', tags: ['master'] },
+            { id: 'f5b32c8', parent: 'e137e9b' },
+            { id: 'e088135', parent: 'f5b32c8', tags: ['dev'] }
+          ],
+          currentBranch: 'dev',
+          initialMessage: 'Escribe "git rebase master".'
+        },
+        'fetch': {
+          name: 'Fetch',
+          height: 500,
+          commitData: [
+            { id: 'e137e9b', tags: ['origin/master'] },
+            { id: '6ce726f', parent: 'e137e9b' },
+            { id: 'bb92e0e', parent: '6ce726f', tags: ['master'] },
+            { id: '0cff760', parent: 'e137e9b', tags: ['origin/dev'] },
+            { id: '4ed301d', parent: '0cff760', tags: ['dev'] }
+          ],
+          originData: [
+            { id: 'e137e9b' },
+            { id: '7eb7654', parent: 'e137e9b' },
+            { id: '090e2b8', parent: '7eb7654' },
+            { id: 'ee5df4b', parent: '090e2b8', tags: ['master'] },
+            { id: '0cff760', parent: 'e137e9b' },
+            { id: '2f8d946', parent: '0cff760' },
+            { id: '29235ca', parent: '2f8d946', tags: ['dev'] }
+          ],
+          initialMessage: 'Compara cuidadosamente los IDs de los commits entre el origen y el repositorio local. Luego, escribe "git fetch".'
+        },
+        'pull': {
+          name: 'Pull',
+          height: 500,
+          commitData: [
+            { id: 'e137e9b', tags: ['origin/master'] },
+            { id: '46d095b', parent: 'e137e9b', tags: ['master'] }
+          ],
+          originData: [
+            { id: 'e137e9b' },
+            { id: '7eb7654', parent: 'e137e9b' },
+            { id: '090e2b8', parent: '7eb7654' },
+            { id: 'ee5df4b', parent: '090e2b8', tags: ['master'] }
+          ],
+          initialMessage: 'Compara cuidadosamente los IDs de los commits entre el origen y el repositorio local. Luego, escribe "git pull".'
+        },
+        'push': {
+          name: 'Push',
+          height: 500,
+          commitData: [
+            { id: 'e137e9b', tags: ['origin/master'] },
+            { id: '46d095b', parent: 'e137e9b', tags: ['master'] }
+          ],
+          originData: [
+            { id: 'e137e9b' },
+            { id: '7eb7654', parent: 'e137e9b', tags: ['master'] }
+          ],
+          initialMessage: 'Compara cuidadosamente los IDs de los commits entre el origen y el repositorio local. Luego, escribe "git push".'
+        },
+        'clean': {
+          name: 'Clean',
+          height: 200,
+          baseLine: 0.4,
+          commitData: [
+            { id: 'e137e9b', tags: ['origin/master'] },
+            { id: '0e70093', parent: 'e137e9b' },
+            { id: '3e33afd', parent: '0e70093', tags: ['master'] }
+          ],
+          initialMessage: 'Escribe "git reset origin/master".'
+        },
+        'fetchrebase': {
+          name: 'FetchRebase',
+          height: 500,
+          commitData: [
+            { id: 'e137e9b', tags: ['origin/master', 'master'] },
+            { id: '46d095b', parent: 'e137e9b' },
+            { id: 'dccdc4d', parent: '46d095b', tags: ['my-branch'] }
+          ],
+          currentBranch: 'my-branch',
+          originData: [
+            { id: 'e137e9b' },
+            { id: '7eb7654', parent: 'e137e9b' },
+            { id: '090e2b8', parent: '7eb7654' },
+            { id: 'ee5df4b', parent: '090e2b8', tags: ['master'] }
+          ],
+          initialMessage: 'Primero escribe "git fetch". Luego, escribe "git rebase origin/master".'
+        },
+        'deletebranches': {
+          name: 'DeleteBranches',
+          height: 500,
+          baseLine: 0.6,
+          commitData: [
+            { id: 'e137e9b' },
+            { id: 'bb92e0e', parent: 'e137e9b' },
+            { id: 'd25ee9b', parent: 'bb92e0e', tags: ['master'] },
+            { id: '071ff28', parent: 'e137e9b', tags: ['protoss'] },
+            { id: 'f5b32c8', parent: 'bb92e0e' },
+            { id: 'e088135', parent: 'f5b32c8', tags: ['zerg'] },
+            { id: '9e6c322', parent: 'bb92e0e' },
+            { id: '593ae02', parent: '9e6c322', tags: ['terran'] }
+          ],
+          currentBranch: 'terran',
+          initialMessage: 'Elimina algunas ramas.'
+        },
+        'freeplay': {
+          name: 'Free',
+          height: 700,
+          commitData: [
+            { id: 'e137e9b', tags: ['origin/master', 'master'] }
+          ],
+          originData: [
+            { id: 'e137e9b' },
+            { id: '7eb7654', parent: 'e137e9b' },
+            { id: '090e2b8', parent: '7eb7654' },
+            { id: 'ee5df4b', parent: '090e2b8', tags: ['master'] }
+          ],
+          initialMessage: 'Disfruta!'
+        }
+      };
+
+      window.addEventListener('hashchange', open, false);
+      window.addEventListener('load', open, false);
+
+      function open() {
+        var hash = window.location.hash.substr(1),
+          linkId = 'open-' + hash,
+          example = examples[hash];
+
+        if (example) {
+          explainGit.reset();
+          document.getElementById(linkId).classList.add('selected');
+          explainGit.open(example);
+        } else if (hash === 'zen') {
+          explainGit.reset();
+          explainGit.open({
+            name: 'Zen',
+            height: '100%',
+            commitData: [{ id: 'e137e9b', tags: ['master'], message: 'first commit' }],
+            initialMessage: 'Disfruta! Para salir del modo Zen, escribe "exit" en la terminal.'
+          });
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
