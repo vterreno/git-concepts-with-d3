@@ -11,7 +11,7 @@
 </head>
 
 <body class="bg-gray-50">
-  <a href="https://github.com/onlywei/explain-git-with-d3" target="_blank" id="github"
+  <a href="https://github.com/vterreno/git-concepts-with-d3" target="_blank" id="github"
     class="fixed top-4 right-4 flex items-center space-x-2 bg-gray-800 text-white px-4 py-2 rounded shadow-lg hover:bg-gray-700 transition-colors text-sm z-[100]">
     <span class="font-semibold">Proyecto en GitHub</span>
     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 md:w-5 md:h-5" viewBox="0 -3.5 256 256"
@@ -25,7 +25,7 @@
     </svg>
   </a>
 
-  <a href="https://github.com/onlywei/explain-git-with-d3" target="_blank" id="github-mobile"
+  <a href="https://github.com/vterreno/git-concepts-with-d3" target="_blank" id="github-mobile"
     class="fixed bottom-4 right-4 flex items-center space-x-2 bg-gray-800 text-white items-center justify-center rounded-full w-12 h-12 shadow-lg hover:bg-gray-700 transition-colors z-[100]">
     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 -3.5 256 256"
       preserveAspectRatio="xMinYMin meet">
@@ -144,6 +144,7 @@
           <p class="text-sm md:text-base">
            ℹ️ <b>Dato:</b> Si deseas hacer una copia de seguridad de tu repositorio, con tan solo copiar esta carpeta a cualquier otro lugar ya tienes tu copia completa.
           </p>
+          <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
           <p class="text-sm md:text-base">
             Si hacemos un ls -F1 veremos los siguientes archivos: 
           </p>
@@ -225,6 +226,9 @@
             <span class="cmd font-mono bg-gray-100 px-1 rounded">git clone</span>. Git recibe una copia de casi todos los datos que tiene el servidor. Cada versión de cada archivo de la historia del proyecto es descargada por defecto si no se utiliza nigún parámetro adicional.
           </p>
           <p class="text-sm md:text-base">
+            Internamente lo que hace <span class="cmd font-mono bg-gray-100 px-1 rounded">git clone</span> es llamar primero al comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git init</span> para crear un nuevo repositorio. Luego, copia todos los datos del repositorio remoto, y finalmente, crea un puntero a la rama principal del repositorio remoto.
+          </p>
+          <p class="text-sm md:text-base">
             Si deseas clonar un repositorio, necesitas tener el URL del repositorio. Este URL puede ser de diferentes protocolos, como HTTPS o SSH.
           </p>
           <p class="text-sm md:text-base">Al correr el comando:</p>
@@ -272,15 +276,20 @@
             <li>
               <p class="text-sm md:text-base">
                 <b>Preparado (staged):</b> has marcado un archivo modificado en su versión actual para que vaya en tu
-                próximo commit (git add).
+                próximo commit.
               </p>
             </li>
             <li>
               <p class="text-sm md:text-base">
-                <b>Confirmado (committed):</b> los datos están almacenados de manera segura en tu base de datos local.
+                <b>Confirmado (committed):</b> los datos están almacenados de manera segura en tu <b>base de datos local</b>.
               </p>
             </li>
           </ul>
+
+          <p class="text-sm mt-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
+            ℹ️ Git utiliza una base de datos local para almacenar diferentes tipos de objetos: 
+            <b>blobs</b>, <b>trees</b>, <b>commits</b>.
+          </p>
           
           <p class="text-sm md:text-base">
             <a href="https://git-scm.com/book/es/v2/images/areas.png" target="_blank"
@@ -323,6 +332,7 @@
               </p>
             </li>
           </ol>
+        <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
          <p class="text-sm md:text-base">
           Si una versión concreta de un archivo está en el directorio de Git, se considera confirmada <b>(committed)</b>. Si ha sufrido cambios desde que se obtuvo del repositorio, pero ha sido añadida al área de preparación, está preparada <b>(staged)</b>. Y si ha sufrido cambios desde que se obtuvo del repositorio, pero no se ha preparado, está modificada <b>(modified)</b>. Si un archivo está en el directorio de trabajo, pero no en el área de preparación, no se ha preparado <b>(Untracked)</b>
          </p>
@@ -342,7 +352,7 @@
 
         <!-- Start Git add y commit -->
         <section id="ExplainGitCommit-Container"
-          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200 text-pretty">
+          class="concept-container bg-white text-pretty p-4 md:p-6 rounded border border-gray-200 text-pretty">
           <!-- Definición de commit -->
           <h2 class="text-xl sm:text-xl mt-4 md:text-2xl font-bold text-gray-800">¿Qué es un commit?</h2>
           <p class="text-sm md:text-base">
@@ -379,14 +389,73 @@
             Esto es importante, porque <b>Git guarda todo no por nombre de archivo, sino por el valor hash de sus
               contenidos.</b> Los commits se identifican por dichos hashes.
           </p>
-
-          <p class="text-sm md:text-base">
-            Vamos a omitir la parte de añadir archivos para commit en esta explicación.
-            Supón que ya sabes hacerlo; si no, busca otro tutorial.
+          <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
+            ⚠️ <b>Los commits son inmutables, es decir, una vez que se han creado no se pueden modificar.</b> Esto es porque como vimos anteriormente, un commit es una foto de los archivos del proyecto en un momento dado. Si se modificara un commit, se estaría modificando la historia del repositorio. 
           </p>
           <p class="text-sm md:text-base">
-            Imagina que ya tienes tus archivos preparados y escribe <span
-              class="cmd font-mono bg-gray-100 px-1 rounded">git commit</span> tantas veces como quieras en la terminal.
+            Los commits tienen un mensaje y el contenido de los mismos se guardan en un objeto de tipo <b>commit</b> en la base de datos de Git. Cada commit tiene un puntero al commit anterior, formando una cadena de commits. Además, cada commit tiene un puntero a un objeto de tipo <b>tree</b> <span class="italic">(como un directorio)</span>, que representa el estado del proyecto en ese commit. 
+          </p>
+          <p class="text-sm md:text-base">
+            Un commit tiene la siguiente estructura:
+            <p class="text-sm md:text-base italic"> 
+              (Haz hover sobre los nombres de los archivos para ver su descripción)
+            </p>
+            <p class="text-sm md:text-base">
+              <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+                commit 24aa9fca654ad8aadfcdd6b1avd90f0b65d6f0d6
+                <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                  Hash del commit.
+                </span>
+              </span>  
+            
+              <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+                tree e81d18d4f3e40f22864b6c89522c472a45065bef
+                <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                  Hash del objeto tree que representa el estado del proyecto en ese commit.
+                </span>
+              </span>  
+            
+              <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+                parent 47a1f67cb63a9c6dc853bdd0cc0f413fba71f8c8
+                <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                  Hash del commit anterior (commit padre).
+                </span>
+              </span>  
+            
+              <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+                author John Doe &lt;johndoe@gmail.com&gt; 1253391781 -0400
+                <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                  Autor del commit con su nombre, email y fecha.
+                </span>
+              </span>  
+            
+              <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+                committer John Doe &lt;johndoe@gmail.com&gt; 1253391781 -0400
+                <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                  Quién confirmó el commit con su nombre, email y fecha.
+                </span>
+              </span>   
+            
+              <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+                <br>
+                <span class="ml-4">fix: fix on default resources migrations</span>
+                <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                  Mensaje del commit.
+                </span>
+              </span>  
+            </p>  
+            <p class="text-sm md:text-base">
+              Los mensajes en los commits son importantes para que otros desarrolladores puedan entender los cambios realizados. Es recomendable que sean descriptivos y claros. Si te interesa conocer más sobre cómo escribir buenos mensajes de commit, te recomiendo leer <a href="#" target="_blank" class="text-blue-500 hover:underline">este artículo</a>.
+            </p>
+          </p>
+          <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+          <p class="text-sm md:text-base">El comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git add</span> si recibe como paramétro un <span class="cmd font-mono bg-gray-100 px-1 rounded">.</span> significa que debe añadir a todos los archivos <span class="italic">(incluyendo aquellos en subdirectorios)</span> al área de preparación. También, si queremos agregar un archivo en particular o directorio podemos ejecutar <span class="cmd font-mono bg-gray-100 px-1 rounded">git add {nombre-archivo}</span> o <span class="cmd font-mono bg-gray-100 px-1 rounded">git add {nombre-directorio/}</span>.
+          </p>
+          
+          <p class="text-sm md:text-base">
+            Imagina que ya tenes tus archivos preparados y estamos listos para confirmarlos. Escribe <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git commit</span> o <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git commit -m</span> tantas veces como quieras en la terminal.
           </p>
           <div class="playground-container mt-4"></div>
         </section>
@@ -651,7 +720,7 @@
       <p class="text-sm md:text-base text-balance text-gray-600">
         Hecho por <a href="https://github.com/vterreno" target="_blank"
           class="text-blue-500 hover:underline">@vterreno</a>. Si encuentras algún error o deseas colaborar <a
-          href="https://github.com/vterreno" target="_blank" class="text-blue-500 hover:underline">Github</a>.
+          href="https://github.com/vterreno/git-concepts-with-d3" target="_blank" class="text-blue-500 hover:underline">Github</a>.
       </p>
       <p class="text-sm md:text-base text-balance text-gray-600">
         Versión 1.0.0
