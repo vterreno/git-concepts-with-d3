@@ -12,6 +12,9 @@ define(['d3'], function () {
         this._commandHistory = [];
         this._currentCommand = -1;
         this._tempCommand = '';
+        this.stagingArea = [];
+        this.workingDirectory = ['index.html', 'css/styles.css', 'js/main.js'];
+        this.previousHash = config.previousHash;
         this.rebaseConfig = {}; // to configure branches for rebase
     }
 
@@ -114,6 +117,9 @@ define(['d3'], function () {
             if (split[0].toLowerCase() === 'exit') {
                 document.getElementById('ExplainGitZen-Container').style.display = 'none';
                 history.replaceState(null, "", window.location.pathname + window.location.search);
+                let link = 'open-' + this.previousHash
+                document.getElementById(link).click();
+
             }
 
             this.log.append('div')
@@ -191,22 +197,81 @@ define(['d3'], function () {
             this._scrollToBottom();
         },
 
+        add: function (args) {
+            if (args.length < 1) {
+                this.info(
+                    'Por favor provee un nombre de archivo o un punto ' +
+                    'para agregar todos los archivos al staging area.'
+                );
+                return;
+            }
+
+            // Si se ingresa ".", agregamos todos los archivos no trackeados del directorio de trabajo
+            if (args[0] === '.') {
+                this.workingDirectory.forEach(file => {
+                    if (this.stagingArea.indexOf(file) === -1) {
+                        this.stagingArea.push(file);
+                    }
+                });
+                this.info('Se han agregado todos los archivos al staging area.');
+                return;
+            }
+
+            // Agregar archivo individual si existe en el directorio de trabajo
+            const file = args[0];
+            if (this.workingDirectory.indexOf(file) === -1) {
+                this.info('El archivo "' + file + '" no existe en el directorio de trabajo.');
+                return;
+            }
+            if (this.stagingArea.indexOf(file) === -1) {
+                this.stagingArea.push(file);
+                this.info(file + ' ha sido agregado al staging area.');
+            } else {
+                this.info(file + ' ya estaba en el staging area.');
+            }
+        },
+
+        unstage: function (args) {
+            if (args.length < 1) {
+                this.info('Debes indicar un archivo para deshacer el git add.');
+                return;
+            }
+            const file = args[0];
+            const index = this.stagingArea.indexOf(file);
+            if (index !== -1) {
+                this.stagingArea.splice(index, 1);
+                this.info(file + ' ha sido removido del staging area.');
+            } else {
+                this.info(file + ' no está en el staging area.');
+            }
+        },
+
         commit: function (args) {
+            if (this.stagingArea.length === 0) {
+                this.info(
+                    'No hay nada en el staging area para commitear. ' +
+                    'Por favor agrega archivos al staging area antes de commitear.'
+                );
+                return;
+            }
+            // Aquí se podría simular el commit utilizando los archivos en stagingArea
             if (args.length >= 2) {
                 var arg = args.shift();
-
                 switch (arg) {
                     case '-m':
                         var message = args.join(" ");
-                        this.historyView.commit({}, message);
+                        this.historyView.commit({ files: this.stagingArea.slice() }, message);
                         break;
                     default:
-                        this.historyView.commit();
+                        this.historyView.commit({ files: this.stagingArea.slice() });
                         break;
                 }
             } else {
-                this.historyView.commit();
+                this.historyView.commit({ files: this.stagingArea.slice() });
             }
+            // Una vez realizado el commit, vaciamos el staging area
+            this.stagingArea = [];
+            this._addFlag = false;
         },
 
         branch: function (args) {
@@ -309,51 +374,28 @@ define(['d3'], function () {
         },
 
         status: function (args) {
-            switch (args[0]) {
-                case '--example1':
-                    this.info(`
-## Ejemplo 1 - Cambios en el directorio de trabajo - Creamos un README.md
-On branch master
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-                        
-  README.md
-                        
-nothing added to commit but untracked files present (use "git add" to track)
-                        `)
-                    break;
-                case '--example2':
-                    this.info(`
-## Ejemplo 2 - Cambios en el directorio de trabajo - Agregamos el README.md al staging area
-On branch master
-Changes to be committed:
-  (use "git restore --staged <file>..." to unstage)
-                        
-  new file:   README.md
-                     `)
-                    break;
-                case '--example3':
-                    this.info(`
-## Ejemplo 4 - Cambios en el directorio de trabajo - Cambios en el README.md
-On branch master
-Changes not staged for commit:
-    (use "git add <file>..." to update what will be committed)
-    (use "git restore <file>..." to discard changes in working directory)
-
-    modified:   README.md
-
-no changes added to commit (use "git add" and/or "git commit -a")
-                    `)
-                    break;
-                default:
-                    this.info(`
-On branch master
-nothing to commit, working tree clean
-                        `);
-
+            this.previousHash = window.location.hash
+            let message = 'On branch master\n\n';
+            if (this.stagingArea.length > 0) {
+                message += 'Changes to be committed:\n';
+                this.stagingArea.forEach(file => {
+                    message += '  new file:   ' + file + '\n';
+                });
+                message += '\n';
             }
+            // Simulamos los archivos en el directorio de trabajo que no están en staging area
+            const untracked = this.workingDirectory.filter(file => this.stagingArea.indexOf(file) === -1);
+            if (untracked.length > 0) {
+                message += 'Untracked files:\n';
+                untracked.forEach(file => {
+                    message += '  ' + file + '\n';
+                });
+                message += '\n';
+            } else {
+                message += 'nothing added to commit but untracked files present (use "git add" to track)\n';
+            }
+            this.info(message);
         },
-
 
         tag: function (args) {
             if (args.length < 1) {

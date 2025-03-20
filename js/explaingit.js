@@ -35,7 +35,8 @@ define(['historyview', 'controlbox', 'd3'], function (HistoryView, ControlBox, d
         controlBox = new ControlBox({
             historyView: historyView,
             originView: originView,
-            initialMessage: args.initialMessage
+            initialMessage: args.initialMessage,
+            previousHash: args.previousHash,
         });
 
         controlBox.render(playground);

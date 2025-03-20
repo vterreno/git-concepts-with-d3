@@ -60,29 +60,31 @@
         <div>
           <h4 class="text-base md:text-lg font-semibold text-gray-700 mb-1 md:mb-2">Comandos básicos</h4>
           <ul class="space-y-1">
-            <li><a id="open-init" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
-              href="#init">git init</a></li>
-            <li><a id="open-clone" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+            <li><a id="open-init" onclick="savePreviousHash('init')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+                href="#init">git init</a></li>
+            <li><a id="open-clone" onclick="savePreviousHash('clone')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
                 href="#clone">git clone</a></li>
-            <li><a id="open-status" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+            <li><a id="open-status" onclick="savePreviousHash('status')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
                 href="#status">git status</a></li>
-            <li><a id="open-commit" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+            <li><a id="open-commit" onclick="savePreviousHash('commit')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
                 href="#commit">git add y commit</a></li>
-            <li><a id="open-branch" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+            <li><a id="open-branch" onclick="savePreviousHash('branch')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
                 href="#branch">git branch</a></li>
-            <li><a id="open-checkout" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+            <li><a id="open-checkout" onclick="savePreviousHash('checkout')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
                 href="#checkout">git checkout</a></li>
-            <li><a id="open-checkout-b" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+            <li><a id="open-checkout-b" onclick="savePreviousHash('checkout-b')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
                 href="#checkout-b">git checkout -b</a></li>
+            <li><a id="open-tag" onclick="savePreviousHash('tag')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+                href="#tag">git tag</a></li>
           </ul>
         </div>
         <!-- Grupo: Deshacer commits -->
         <div>
           <h4 class="text-base md:text-lg font-semibold text-gray-700 mb-1 md:mb-2">Deshacer commits</h4>
           <ul class="space-y-1">
-            <li><a id="open-reset" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+            <li><a id="open-reset" onclick="savePreviousHash('reset')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
                 href="#reset">git reset</a></li>
-            <li><a id="open-revert" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+            <li><a id="open-revert" onclick="savePreviousHash('revert')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
                 href="#revert">git revert</a></li>
           </ul>
         </div>
@@ -90,9 +92,9 @@
         <div>
           <h4 class="text-base md:text-lg font-semibold text-gray-700 mb-1 md:mb-2">Ramas</h4>
           <ul class="space-y-1">
-            <li><a id="open-merge" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+            <li><a id="open-merge" onclick="savePreviousHash('merge')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
                 href="#merge">git merge</a></li>
-            <li><a id="open-rebase" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+            <li><a id="open-rebase" onclick="savePreviousHash('rebase')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
                 href="#rebase">git rebase</a></li>
           </ul>
         </div>
@@ -100,14 +102,12 @@
         <div>
           <h4 class="text-base md:text-lg font-semibold text-gray-700 mb-1 md:mb-2">Remoto</h4>
           <ul class="space-y-1">
-            <li><a id="open-fetch" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+            <li><a id="open-fetch" onclick="savePreviousHash('fetch')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
                 href="#fetch">git fetch</a></li>
-            <li><a id="open-pull" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+            <li><a id="open-pull" onclick="savePreviousHash('pull')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
                 href="#pull">git pull</a></li>
-            <li><a id="open-push" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
+            <li><a id="open-push" onclick="savePreviousHash('push')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
                 href="#push">git push</a></li>
-            <li><a id="open-tag" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
-                href="#tag">git tag</a></li>
           </ul>
         </div>
       </nav>
@@ -118,97 +118,114 @@
         <section id="ExplainGitInit-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200 text-pretty">
           <!-- Start Contenido -->
-          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Inicializando un repositorio en un directorio existente</h2>
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Inicializando un repositorio en un
+            directorio existente</h2>
           <p class="text-sm md:text-base">
-            Puedes obtener un proyecto Git de dos maneras: 
+            Puedes obtener un proyecto Git de dos maneras:
           </p>
           <ul class="list-disc ml-4">
             <li>
               <p class="text-sm md:text-base">
-                La primera es tomar un proyecto o directorio existente e importarlo en Git. <span class="cmd font-mono bg-gray-100 px-1 rounded">git init</span>
+                La primera es tomar un proyecto o directorio existente e importarlo en Git. <span
+                  class="cmd font-mono bg-gray-100 px-1 rounded">git init</span>
               </p>
             </li>
             <li>
               <p class="text-sm md:text-base">
-                La segunda es clonar un repositorio existente en Git desde otro servidor. <span class="cmd font-mono bg-gray-100 px-1 rounded">git clone</span>
+                La segunda es clonar un repositorio existente en Git desde otro servidor. <span
+                  class="cmd font-mono bg-gray-100 px-1 rounded">git clone</span>
               </p>
             </li>
           </ul>
           <p class="text-sm md:text-base">Al correr el comando:</p>
           <p class="text-sm md:text-base">
-            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git init << directorio >> </span>
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git init << directorio>> </span>
           </p>
           <p class="text-sm md:text-base">
-            Esto crea un subdirectorio oculto nuevo llamado <b>.git</b>, el cual contiene todos los archivos necesarios del repositorio. Por defecto, si no escribimos un directorio, Git creará el repositorio en el directorio actual. Es importante tener en cuenta que todavía no hay nada en tu proyecto que esté bajo seguimiento. 
+            Esto crea un subdirectorio oculto nuevo llamado <b>.git</b>, el cual contiene todos los archivos necesarios
+            del repositorio. Por defecto, si no escribimos un directorio, Git creará el repositorio en el directorio
+            actual. Es importante tener en cuenta que todavía no hay nada en tu proyecto que esté bajo seguimiento.
           </p>
           <p class="text-sm md:text-base">
-           ℹ️ <b>Dato:</b> Si deseas hacer una copia de seguridad de tu repositorio, con tan solo copiar esta carpeta a cualquier otro lugar ya tienes tu copia completa.
+            ℹ️ <b>Dato:</b> Si deseas hacer una copia de seguridad de tu repositorio, con tan solo copiar esta carpeta a
+            cualquier otro lugar ya tienes tu copia completa.
           </p>
           <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
           <p class="text-sm md:text-base">
-            Si hacemos un ls -F1 veremos los siguientes archivos: 
+            Si hacemos un ls -F1 veremos los siguientes archivos:
           </p>
-          <p class="text-sm md:text-base italic"> 
+          <p class="text-sm md:text-base italic">
             (Haz hover sobre los nombres de los archivos para ver su descripción)
           </p>
           <p class="text-sm md:text-base">
             <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
               HEAD ----> NÚCLEO DE GIT
-              <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+              <span
+                class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
                 Parte fundamental del sistema de control de versiones de Git.
               </span>
-            </span>  
-          
+            </span>
+
             <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
               index ----> NÚCLEO DE GIT
-              <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+              <span
+                class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
                 Área de preparación donde Git almacena cambios antes de confirmarlos.
               </span>
-            </span>  
-          
+            </span>
+
             <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
               config
-              <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+              <span
+                class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
                 Archivo de configuración que almacena ajustes locales del repositorio.
               </span>
-            </span>  
-          
+            </span>
+
             <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
               description
-              <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
-                Archivo que proporciona una breve descripción del repositorio para <a href="https://git-scm.com/book/es/v2/Git-en-el-Servidor-GitWeb" target="_blank" class="text-blue-500 hover:underline italic">GitWeb</a>.
+              <span
+                class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                Archivo que proporciona una breve descripción del repositorio para <a
+                  href="https://git-scm.com/book/es/v2/Git-en-el-Servidor-GitWeb" target="_blank"
+                  class="text-blue-500 hover:underline italic">GitWeb</a>.
               </span>
-            </span>  
-          
+            </span>
+
             <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
-              hooks/ 
-              <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+              hooks/
+              <span
+                class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
                 Carpeta donde se almacenan scripts de automatización de Git.
               </span>
-            </span>   
-          
+            </span>
+
             <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
               info/
-              <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
-                Contiene información adicional del repositorio como archivos a ignorar globalmente, además de los presentes en el .gitignore.
+              <span
+                class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                Contiene información adicional del repositorio como archivos a ignorar globalmente, además de los
+                presentes en el .gitignore.
               </span>
-            </span>  
-          
+            </span>
+
             <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
               objects/ ----> NÚCLEO DE GIT
-              <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+              <span
+                class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
                 Carpeta donde Git almacena todos los objetos (commits, árboles, blobs, etc.).
               </span>
-            </span>   
-          
+            </span>
+
             <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
               refs/ ----> NÚCLEO DE GIT
-              <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+              <span
+                class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
                 Contiene referencias a los commits, como ramas y etiquetas.
               </span>
-            </span>  
+            </span>
           </p>
-          
+
 
           <!-- End Contenido -->
 
@@ -222,35 +239,50 @@
           <!-- Start Contenido -->
           <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Clonando un repositorio existente</h2>
           <p class="text-sm md:text-base">
-            Si deseas obtener una copia de un repositorio Git existente — por ejemplo, un proyecto en el que te gustaría contribuir — el comando que necesitas es 
-            <span class="cmd font-mono bg-gray-100 px-1 rounded">git clone</span>. Git recibe una copia de casi todos los datos que tiene el servidor. Cada versión de cada archivo de la historia del proyecto es descargada por defecto si no se utiliza nigún parámetro adicional.
+            Si deseas obtener una copia de un repositorio Git existente — por ejemplo, un proyecto en el que te gustaría
+            contribuir — el comando que necesitas es
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git clone</span>. Git recibe una copia de casi todos
+            los datos que tiene el servidor. Cada versión de cada archivo de la historia del proyecto es descargada por
+            defecto si no se utiliza nigún parámetro adicional.
           </p>
           <p class="text-sm md:text-base">
-            Internamente lo que hace <span class="cmd font-mono bg-gray-100 px-1 rounded">git clone</span> es llamar primero al comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git init</span> para crear un nuevo repositorio. Luego, copia todos los datos del repositorio remoto, y finalmente, crea un puntero a la rama principal del repositorio remoto.
+            Internamente lo que hace <span class="cmd font-mono bg-gray-100 px-1 rounded">git clone</span> es llamar
+            primero al comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git init</span> para crear un nuevo
+            repositorio. Luego, copia todos los datos del repositorio remoto, y finalmente, crea un puntero a la rama
+            principal del repositorio remoto.
           </p>
           <p class="text-sm md:text-base">
-            Si deseas clonar un repositorio, necesitas tener el URL del repositorio. Este URL puede ser de diferentes protocolos, como HTTPS o SSH.
+            Si deseas clonar un repositorio, necesitas tener el URL del repositorio. Este URL puede ser de diferentes
+            protocolos, como HTTPS o SSH.
           </p>
           <p class="text-sm md:text-base">Al correr el comando:</p>
           <p class="text-sm md:text-base">
-            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git clone << URL >> </span>
-            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git clone https://github.com/git-visual/git-visual </span>
-            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git clone https://github.com/git-visual/git-visual nombre-proyecto </span>
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git clone << URL>> </span>
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git clone
+              https://github.com/git-visual/git-visual </span>
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git clone
+              https://github.com/git-visual/git-visual nombre-proyecto </span>
           </p>
           <p class="text-sm md:text-base">
-            El segundo comando crea un directorio llamado git-visual, inicializa un directorio .git en su interior, descarga toda la información de ese repositorio y saca una copia de trabajo de la última versión. El tercer comando realiza lo mismo, pero el nombre del directorio de destino será nombre-proyecto.
+            El segundo comando crea un directorio llamado git-visual, inicializa un directorio .git en su interior,
+            descarga toda la información de ese repositorio y saca una copia de trabajo de la última versión. El tercer
+            comando realiza lo mismo, pero el nombre del directorio de destino será nombre-proyecto.
           </p>
           <p class="text-sm md:text-base">
-            En caso de que el repositorio sea muy extenso, puedes clonar solo la última versión del proyecto con el comando:
+            En caso de que el repositorio sea muy extenso, puedes clonar solo la última versión del proyecto con el
+            comando:
           </p>
           <p class="text-sm md:text-base">
-            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git clone https://github.com/git-visual/git-visual nombre-proyecto --depth=1 </span>
-            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git clone https://github.com/git-visual/git-visual nombre-proyecto --filter=blob:none </span>
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git clone
+              https://github.com/git-visual/git-visual nombre-proyecto --depth=1 </span>
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded">$ git clone
+              https://github.com/git-visual/git-visual nombre-proyecto --filter=blob:none </span>
           </p>
           <p class="text-sm md:text-base">
-            El primer comando clona solo la última versión del proyecto, mientras que el segundo clona el proyecto sin blobs, es decir, sin archivos binarios.
+            El primer comando clona solo la última versión del proyecto, mientras que el segundo clona el proyecto sin
+            blobs, es decir, sin archivos binarios.
           </p>
-         
+
           <!-- End Contenido -->
 
           <div class="playground-container mt-4" id="playground-clone"></div>
@@ -281,16 +313,17 @@
             </li>
             <li>
               <p class="text-sm md:text-base">
-                <b>Confirmado (committed):</b> los datos están almacenados de manera segura en tu <b>base de datos local</b>.
+                <b>Confirmado (committed):</b> los datos están almacenados de manera segura en tu <b>base de datos
+                  local</b>.
               </p>
             </li>
           </ul>
 
           <p class="text-sm mt-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
-            ℹ️ Git utiliza una base de datos local para almacenar diferentes tipos de objetos: 
+            ℹ️ Git utiliza una base de datos local para almacenar diferentes tipos de objetos:
             <b>blobs</b>, <b>trees</b>, <b>commits</b>.
           </p>
-          
+
           <p class="text-sm md:text-base">
             <a href="https://git-scm.com/book/es/v2/images/areas.png" target="_blank"
               class="text-blue-500 hover:underline italic">
@@ -299,7 +332,8 @@
           </p>
           <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-4">
             <p class="text-sm md:text-base">
-              El <b>directorio de trabajo</b> es una copia de una versión del proyecto. Estos archivos se sacan de la base de
+              El <b>directorio de trabajo</b> es una copia de una versión del proyecto. Estos archivos se sacan de la
+              base de
               datos comprimida en el directorio de Git, y se colocan en disco para que los puedas usar o modificar.
             </p>
             <p class="text-sm md:text-base">
@@ -307,11 +341,12 @@
               información acerca de lo que va a ir en tu próxima confirmación. A veces se le denomina índice (“index”).
             </p>
             <p class="text-sm md:text-base">
-              El <b>directorio de Git</b> es donde se almacenan los metadatos y la base de datos de objetos para tu proyecto. Es
+              El <b>directorio de Git</b> es donde se almacenan los metadatos y la base de datos de objetos para tu
+              proyecto. Es
               la parte más importante de Git, y es lo que se copia cuando clonas un repositorio desde otra computadora.
             </p>
           </div>
-          
+
           <p class="text-sm md:text-base">
             El flujo de trabajo básico en Git es algo así:
           </p>
@@ -323,27 +358,38 @@
             </li>
             <li>
               <p class="text-sm md:text-base">
-                Preparas los archivos, añadiéndolos a tu área de preparación. <span class="cmd font-mono bg-gray-100 px-1 rounded">git add</span>
+                Preparas los archivos, añadiéndolos a tu área de preparación. <span
+                  class="cmd font-mono bg-gray-100 px-1 rounded">git add</span>
               </p>
             </li>
             <li>
               <p class="text-sm md:text-base">
-                Confirmas los cambios, haces un commit. <span class="cmd font-mono bg-gray-100 px-1 rounded">git commit</span>
+                Confirmas los cambios, haces un commit. <span class="cmd font-mono bg-gray-100 px-1 rounded">git
+                  commit</span>
               </p>
             </li>
           </ol>
-        <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
-         <p class="text-sm md:text-base">
-          Si una versión concreta de un archivo está en el directorio de Git, se considera confirmada <b>(committed)</b>. Si ha sufrido cambios desde que se obtuvo del repositorio, pero ha sido añadida al área de preparación, está preparada <b>(staged)</b>. Y si ha sufrido cambios desde que se obtuvo del repositorio, pero no se ha preparado, está modificada <b>(modified)</b>. Si un archivo está en el directorio de trabajo, pero no en el área de preparación, no se ha preparado <b>(Untracked)</b>
-         </p>
+          <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+          <p class="text-sm md:text-base">
+            Si una versión concreta de un archivo está en el directorio de Git, se considera confirmada
+            <b>(committed)</b>. Si ha sufrido cambios desde que se obtuvo del repositorio, pero ha sido añadida al área
+            de preparación, está preparada <b>(staged)</b>. Y si ha sufrido cambios desde que se obtuvo del repositorio,
+            pero no se ha preparado, está modificada <b>(modified)</b>. Si un archivo está en el directorio de trabajo,
+            pero no en el área de preparación, no se ha preparado <b>(Untracked)</b>
+          </p>
 
-         <p class="text-sm md:text-base">
-          <b>La herramienta principal para determinar qué archivos están en qué estado es el comando</b> <span class="cmd font-mono bg-gray-100 px-1 rounded">git status</span>. Escribe en la terminal el comando y observa los resultados. Si escribes <span class="cmd font-mono bg-gray-100 px-1 rounded">git status -s</span> obtendrás una versión más corta y concisa. 
-         </p>
+          <p class="text-sm md:text-base">
+            <b>La herramienta principal para determinar qué archivos están en qué estado es el comando</b> <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git status</span>. Escribe en la terminal el comando y
+            observa los resultados. Si escribes <span class="cmd font-mono bg-gray-100 px-1 rounded">git status
+              -s</span> obtendrás una versión más corta y concisa.
+          </p>
 
-         <p class="text-sm md:text-base">
-          Hay tres ejemplos de uso de git status en el siguiente playground. Escribe <span class="cmd font-mono bg-gray-100 px-1 rounded">git status --example1</span> y asi sucesivamente en la terminal para ver los resultados.
-         </p>
+          <p class="text-sm md:text-base">
+            Hay tres ejemplos de uso de git status en el siguiente playground. Escribe <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git status --example1</span> y asi sucesivamente en la
+            terminal para ver los resultados.
+          </p>
           <!-- End Los tres estados -->
 
           <div class="playground-container mt-4" id="playground-status"></div>
@@ -390,72 +436,93 @@
               contenidos.</b> Los commits se identifican por dichos hashes.
           </p>
           <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
-            ⚠️ <b>Los commits son inmutables, es decir, una vez que se han creado no se pueden modificar.</b> Esto es porque como vimos anteriormente, un commit es una foto de los archivos del proyecto en un momento dado. Si se modificara un commit, se estaría modificando la historia del repositorio. 
+            ⚠️ <b>Los commits son inmutables, es decir, una vez que se han creado no se pueden modificar.</b> Esto es
+            porque como vimos anteriormente, un commit es una foto de los archivos del proyecto en un momento dado. Si
+            se modificara un commit, se estaría modificando la historia del repositorio.
           </p>
           <p class="text-sm md:text-base">
-            Los commits tienen un mensaje y el contenido de los mismos se guardan en un objeto de tipo <b>commit</b> en la base de datos de Git. Cada commit tiene un puntero al commit anterior, formando una cadena de commits. Además, cada commit tiene un puntero a un objeto de tipo <b>tree</b> <span class="italic">(como un directorio)</span>, que representa el estado del proyecto en ese commit. 
+            Los commits tienen un mensaje y el contenido de los mismos se guardan en un objeto de tipo <b>commit</b> en
+            la base de datos de Git. Cada commit tiene un puntero al commit anterior, formando una cadena de commits.
+            Además, cada commit tiene un puntero a un objeto de tipo <b>tree</b> <span class="italic">(como un
+              directorio)</span>, que representa el estado del proyecto en ese commit.
           </p>
           <p class="text-sm md:text-base">
             Un commit tiene la siguiente estructura:
-            <p class="text-sm md:text-base italic"> 
-              (Haz hover sobre los nombres de los archivos para ver su descripción)
-            </p>
-            <p class="text-sm md:text-base">
-              <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
-                commit 24aa9fca654ad8aadfcdd6b1avd90f0b65d6f0d6
-                <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
-                  Hash del commit.
-                </span>
-              </span>  
-            
-              <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
-                tree e81d18d4f3e40f22864b6c89522c472a45065bef
-                <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
-                  Hash del objeto tree que representa el estado del proyecto en ese commit.
-                </span>
-              </span>  
-            
-              <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
-                parent 47a1f67cb63a9c6dc853bdd0cc0f413fba71f8c8
-                <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
-                  Hash del commit anterior (commit padre).
-                </span>
-              </span>  
-            
-              <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
-                author John Doe &lt;johndoe@gmail.com&gt; 1253391781 -0400
-                <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
-                  Autor del commit con su nombre, email y fecha.
-                </span>
-              </span>  
-            
-              <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
-                committer John Doe &lt;johndoe@gmail.com&gt; 1253391781 -0400
-                <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
-                  Quién confirmó el commit con su nombre, email y fecha.
-                </span>
-              </span>   
-            
-              <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
-                <br>
-                <span class="ml-4">fix: fix on default resources migrations</span>
-                <span class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
-                  Mensaje del commit.
-                </span>
-              </span>  
-            </p>  
-            <p class="text-sm md:text-base">
-              Los mensajes en los commits son importantes para que otros desarrolladores puedan entender los cambios realizados. Es recomendable que sean descriptivos y claros. Si te interesa conocer más sobre cómo escribir buenos mensajes de commit, te recomiendo leer <a href="#" target="_blank" class="text-blue-500 hover:underline">este artículo</a>.
-            </p>
+          <p class="text-sm md:text-base italic">
+            (Haz hover sobre los nombres de los archivos para ver su descripción)
+          </p>
+          <p class="text-sm md:text-base">
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+              commit 24aa9fca654ad8aadfcdd6b1avd90f0b65d6f0d6
+              <span
+                class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                Hash del commit.
+              </span>
+            </span>
+
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+              tree e81d18d4f3e40f22864b6c89522c472a45065bef
+              <span
+                class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                Hash del objeto tree que representa el estado del proyecto en ese commit.
+              </span>
+            </span>
+
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+              parent 47a1f67cb63a9c6dc853bdd0cc0f413fba71f8c8
+              <span
+                class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                Hash del commit anterior (commit padre).
+              </span>
+            </span>
+
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+              author John Doe &lt;johndoe@gmail.com&gt; 1253391781 -0400
+              <span
+                class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                Autor del commit con su nombre, email y fecha.
+              </span>
+            </span>
+
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+              committer John Doe &lt;johndoe@gmail.com&gt; 1253391781 -0400
+              <span
+                class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                Quién confirmó el commit con su nombre, email y fecha.
+              </span>
+            </span>
+
+            <span class="font-mono bg-gray-100 px-1 w-full block rounded relative group">
+              <br>
+              <span class="ml-4">fix: fix on default resources migrations</span>
+              <span
+                class="absolute -translate-x-1/2 bottom-full mb-2 w-64 text-sm bg-gray-900 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+                Mensaje del commit.
+              </span>
+            </span>
+          </p>
+          <p class="text-sm md:text-base">
+            Los mensajes en los commits son importantes para que otros desarrolladores puedan entender los cambios
+            realizados. Es recomendable que sean descriptivos y claros. Si te interesa conocer más sobre cómo escribir
+            buenos mensajes de commit, te recomiendo leer <a href="#" target="_blank"
+              class="text-blue-500 hover:underline">este artículo</a>.
+          </p>
           </p>
           <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
-          <p class="text-sm md:text-base">El comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git add</span> si recibe como paramétro un <span class="cmd font-mono bg-gray-100 px-1 rounded">.</span> significa que debe añadir a todos los archivos <span class="italic">(incluyendo aquellos en subdirectorios dentro del directorio que nos encontremos)</span> al área de preparación. También, si queremos agregar un archivo en particular o directorio podemos ejecutar <span class="cmd font-mono bg-gray-100 px-1 rounded">git add {nombre-archivo}</span> o <span class="cmd font-mono bg-gray-100 px-1 rounded">git add {nombre-directorio/}</span>.
+          <p class="text-sm md:text-base">El comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git add</span>
+            si recibe como paramétro un <span class="cmd font-mono bg-gray-100 px-1 rounded">.</span> significa que debe
+            añadir a todos los archivos <span class="italic">(incluyendo aquellos en subdirectorios dentro del
+              directorio que nos encontremos)</span> al área de preparación. También, si queremos agregar un archivo en
+            particular o directorio podemos ejecutar <span class="cmd font-mono bg-gray-100 px-1 rounded">git add
+              {nombre-archivo}</span> o <span class="cmd font-mono bg-gray-100 px-1 rounded">git add
+              {nombre-directorio/}</span>.
           </p>
-          
+
           <p class="text-sm md:text-base">
             Imagina que ya tenes tus archivos preparados y estamos listos para confirmarlos. Escribe <span
               class="cmd font-mono bg-gray-100 px-1 rounded">git commit</span> o <span
-              class="cmd font-mono bg-gray-100 px-1 rounded">git commit -m</span> tantas veces como quieras en la terminal.
+              class="cmd font-mono bg-gray-100 px-1 rounded">git commit -m</span> tantas veces como quieras en la
+            terminal.
           </p>
           <div class="playground-container mt-4" id="playground-commit"></div>
         </section>
@@ -483,18 +550,35 @@
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
           <h2 class="text-xl sm:text-xl mt-4 md:text-2xl font-bold text-gray-800">¿Qué es una rama?</h2>
           <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
-            <b>Una rama en Git es simplemente un puntero móvil que referencia a un commit.</b> Cuando hacemos un commit, el puntero de la rama avanza automáticamente al último commit confirmado. <br> <br>
-            
-            <b>Las ramas son mutables</b>, es decir, pueden cambiar a lo largo del tiempo. En Git, cada rama representa una línea de desarrollo que puede evolucionar de manera independiente. Esto permite realizar cambios, agregar nuevas funcionalidades o corregir errores sin afectar directamente la rama principal (usualmente denominada <span class="cmd font-mono bg-gray-100 px-1 rounded">master</span> o <span class="cmd font-mono bg-gray-100 px-1 rounded">main</span>). Las ramas pueden ser modificadas, eliminadas o fusionadas con otras ramas según sea necesario.
+            <b>Una rama en Git es simplemente un puntero móvil que referencia a un commit.</b> Cuando hacemos un commit,
+            el puntero de la rama avanza automáticamente al último commit confirmado. <br> <br>
+
+            <b>Las ramas son mutables</b>, es decir, pueden cambiar a lo largo del tiempo. En Git, cada rama representa
+            una línea de desarrollo que puede evolucionar de manera independiente. Esto permite realizar cambios,
+            agregar nuevas funcionalidades o corregir errores sin afectar directamente la rama principal (usualmente
+            denominada <span class="cmd font-mono bg-gray-100 px-1 rounded">master</span> o <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">main</span>). Las ramas pueden ser modificadas, eliminadas
+            o fusionadas con otras ramas según sea necesario.
           </p>
           <p class="text-sm md:text-base">
-           También, podemos afirmar que una rama es una forma más sencilla de referirse a un commit. En lugar de utilizar un hash complicado y dificil de recordar, los desarrolladores utilizan nombres o palabras clave <span class="italic" >(como por ejemplo: hotfix-home-button, hero-landing-feature, entre otros)</span>.
+            También, podemos afirmar que una rama es una forma más sencilla de referirse a un commit. En lugar de
+            utilizar un hash complicado y dificil de recordar, los desarrolladores utilizan nombres o palabras clave
+            <span class="italic">(como por ejemplo: hotfix-home-button, hero-landing-feature, entre otros)</span>.
           </p>
           <p class="text-sm md:text-base">
-            Las ramas pueden tener cualquier nombre y podes crear tantas como necesites. Para crear una rama nueva, escribimos en la terminal <span class="cmd font-mono bg-gray-100 px-1 rounded">git branch name</span>. Este comando creará una nueva rama llamada “name” que apuntará al commit actualmente confirmado. Otro comando muy útil es <span class="cmd font-mono bg-gray-100 px-1 rounded">git branch -d name</span>, que nos permite eliminar una rama <span class="italic">(name)</span> que ya no necesitamos. 
+            Las ramas pueden tener cualquier nombre y podes crear tantas como necesites. Para crear una rama nueva,
+            escribimos en la terminal <span class="cmd font-mono bg-gray-100 px-1 rounded">git branch name</span>. Este
+            comando creará una nueva rama llamada “name” que apuntará al commit actualmente confirmado. Otro comando muy
+            útil es <span class="cmd font-mono bg-gray-100 px-1 rounded">git branch -d name</span>, que nos permite
+            eliminar una rama <span class="italic">(name)</span> que ya no necesitamos.
           </p>
           <p class="text-sm md:text-base">
-            Las ramas surgen de la necesidad de trabajar en paralelo en diferentes características o versiones de un proyecto, son muy útiles para trabajar en equipos distribuidos o para mantener un flujo de trabajo organizado. Como estándar en la industria del software se suele utilizar <b>Git flow</b>, un modelo de ramificación que define cómo se deben crear y fusionar las ramas en un proyecto. Si te interesa conocer más sobre Git flow, te recomiendo leer <a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank" class="text-blue-500 hover:underline">este artículo</a>.
+            Las ramas surgen de la necesidad de trabajar en paralelo en diferentes características o versiones de un
+            proyecto, son muy útiles para trabajar en equipos distribuidos o para mantener un flujo de trabajo
+            organizado. Como estándar en la industria del software se suele utilizar <b>Git flow</b>, un modelo de
+            ramificación que define cómo se deben crear y fusionar las ramas en un proyecto. Si te interesa conocer más
+            sobre Git flow, te recomiendo leer <a href="https://nvie.com/posts/a-successful-git-branching-model/"
+              target="_blank" class="text-blue-500 hover:underline">este artículo</a>.
           </p>
           <p class="text-sm md:text-base">
             Escribe en la terminal <span class="cmd font-mono bg-gray-100 px-1 rounded">git commit</span> y <span
@@ -689,16 +773,19 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
         <div class="flex flex-col space-y-2">
           <a id="open-clean"
+            onclick="savePreviousHash('clean')"
             class="openswitch block p-2 md:p-3 text-sm md:text-base bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
             href="#clean">
             Restaurar rama local al estado en el servidor de origen
           </a>
           <a id="open-fetchrebase"
+            onclick="savePreviousHash('fetchrebase')"
             class="openswitch block p-2 md:p-3 text-sm md:text-base bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
             href="#fetchrebase">
             Actualizar rama local privada con lo último del origen
           </a>
           <a id="open-deletebranches"
+            onclick="savePreviousHash('deletebranches')"
             class="openswitch block p-2 md:p-3 text-sm md:text-base bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
             href="#deletebranches">
             Eliminar ramas locales
@@ -706,6 +793,7 @@
         </div>
         <div class="flex flex-col space-y-2">
           <a id="open-freeplay"
+            onclick="savePreviousHash('freeplay')"
             class="openswitch block p-2 md:p-3 text-sm md:text-base bg-green-100 text-green-700 rounded hover:bg-green-200"
             href="#freeplay">
             Playground
@@ -727,7 +815,8 @@
       <p class="text-sm md:text-base text-balance text-gray-600">
         Hecho por <a href="https://github.com/vterreno" target="_blank"
           class="text-blue-500 hover:underline">@vterreno</a>. Si encuentras algún error o deseas colaborar <a
-          href="https://github.com/vterreno/git-concepts-with-d3" target="_blank" class="text-blue-500 hover:underline">Github</a>.
+          href="https://github.com/vterreno/git-concepts-with-d3" target="_blank"
+          class="text-blue-500 hover:underline">Github</a>.
       </p>
       <p class="text-sm md:text-base text-balance text-gray-600">
         Versión 1.0.0
@@ -758,13 +847,17 @@
     </defs>
   </svg>
 
-  <!-- Código JavaScript (se mantiene la funcionalidad original) -->
   <script type="text/javascript">
     /* window.addEventListener('DOMContentLoaded', () => {
         if (window.location.hash) {
             history.replaceState(null, "", window.location.pathname + window.location.search);
         }
     }); */
+
+    let previousHash = '';
+    function savePreviousHash(hash) {
+      previousHash = hash;
+    }
 
     require(['explaingit'], function (explainGit) {
       var examples = {
@@ -794,7 +887,7 @@
           height: 200,
           baseLine: 0.4,
           commitData: [{ id: 'e137e9b', tags: ['master'] }],
-          initialMessage: 'Escribe "git commit" en la terminal.'
+          initialMessage: 'Escribe "git add y git commit" en la terminal.'
         },
         'branch': {
           name: 'Branch',
@@ -993,6 +1086,7 @@
         if (example) {
           explainGit.reset();
           document.getElementById(linkId).classList.add('selected');
+          example.previousHash = previousHash;
           explainGit.open(example);
         } else if (hash === 'zen') {
           explainGit.reset();
@@ -1000,7 +1094,8 @@
             name: 'Zen',
             height: '100%',
             commitData: [{ id: 'e137e9b', tags: ['master'], message: 'first commit' }],
-            initialMessage: 'Disfruta! Para salir del modo Zen, escribe "exit" en la terminal.'
+            initialMessage: 'Disfruta! Para salir del modo Zen, escribe "exit" en la terminal.',
+            previousHash: previousHash
           });
         }
       }
