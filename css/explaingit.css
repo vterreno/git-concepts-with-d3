@@ -230,14 +230,14 @@ text.id-label {
 	font-family: Courier New;
 	font-weight: bolder;
 	fill: #666;
-	font-size: 10px;
+	font-size: 12px;
 }
 
 text.message-label {
     text-anchor: middle;
     font-family: Courier New;
     fill: #666;
-    font-size: 10px;
+    font-size: 13px;
 }
 
 g.branch-tag > rect {
@@ -288,6 +288,14 @@ g.head-tag > text {
 
 #playground-init .control-box, #playground-clone .control-box, #playground-status .control-box {
     width: 100%;
+}
+
+#playground-commit .control-box {
+    width: 40%;
+}
+
+#playground-commit .svg-container {
+    margin-left: 40%;
 }
 
 #playground-init, #playground-clone, #playground-status {
@@ -349,6 +357,14 @@ g.head-tag > text {
     #playground-init .control-box, #playground-clone .control-box, #playground-status .control-box {
         width: 100%;
         height: 100%;
+    }
+
+    #playground-commit .control-box {
+        width: 100%;
+    }
+    
+    #playground-commit .svg-container {
+        margin-left: 0%;
     }
   }
   
