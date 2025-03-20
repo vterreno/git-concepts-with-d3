@@ -449,7 +449,7 @@
             </p>
           </p>
           <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
-          <p class="text-sm md:text-base">El comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git add</span> si recibe como paramétro un <span class="cmd font-mono bg-gray-100 px-1 rounded">.</span> significa que debe añadir a todos los archivos <span class="italic">(incluyendo aquellos en subdirectorios)</span> al área de preparación. También, si queremos agregar un archivo en particular o directorio podemos ejecutar <span class="cmd font-mono bg-gray-100 px-1 rounded">git add {nombre-archivo}</span> o <span class="cmd font-mono bg-gray-100 px-1 rounded">git add {nombre-directorio/}</span>.
+          <p class="text-sm md:text-base">El comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git add</span> si recibe como paramétro un <span class="cmd font-mono bg-gray-100 px-1 rounded">.</span> significa que debe añadir a todos los archivos <span class="italic">(incluyendo aquellos en subdirectorios dentro del directorio que nos encontremos)</span> al área de preparación. También, si queremos agregar un archivo en particular o directorio podemos ejecutar <span class="cmd font-mono bg-gray-100 px-1 rounded">git add {nombre-archivo}</span> o <span class="cmd font-mono bg-gray-100 px-1 rounded">git add {nombre-directorio/}</span>.
           </p>
           
           <p class="text-sm md:text-base">
@@ -457,7 +457,7 @@
               class="cmd font-mono bg-gray-100 px-1 rounded">git commit</span> o <span
               class="cmd font-mono bg-gray-100 px-1 rounded">git commit -m</span> tantas veces como quieras en la terminal.
           </p>
-          <div class="playground-container mt-4"></div>
+          <div class="playground-container mt-4" id="playground-commit"></div>
         </section>
         <!-- End Git add y commit -->
 
@@ -478,20 +478,27 @@
           <div class="playground-container mt-4"></div>
         </section>
 
-        <!-- Se incluyen las demás secciones siguiendo el mismo estilo -->
+        <!-- Git branch -->
         <section id="ExplainGitBranch-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
-          <p class="text-sm md:text-base">
-            <span class="cmd font-mono bg-gray-100 px-1 rounded">git branch name</span> creará una nueva rama llamada
-            “name”.
-            Las ramas apuntan al commit actualmente chequeado.
+          <h2 class="text-xl sm:text-xl mt-4 md:text-2xl font-bold text-gray-800">¿Qué es una rama?</h2>
+          <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
+            <b>Una rama en Git es simplemente un puntero móvil que referencia a un commit.</b> Cuando hacemos un commit, el puntero de la rama avanza automáticamente al último commit confirmado. <br> <br>
+            
+            <b>Las ramas son mutables</b>, es decir, pueden cambiar a lo largo del tiempo. En Git, cada rama representa una línea de desarrollo que puede evolucionar de manera independiente. Esto permite realizar cambios, agregar nuevas funcionalidades o corregir errores sin afectar directamente la rama principal (usualmente denominada <span class="cmd font-mono bg-gray-100 px-1 rounded">master</span> o <span class="cmd font-mono bg-gray-100 px-1 rounded">main</span>). Las ramas pueden ser modificadas, eliminadas o fusionadas con otras ramas según sea necesario.
           </p>
           <p class="text-sm md:text-base">
-            Se pueden eliminar usando <span class="cmd font-mono bg-gray-100 px-1 rounded">git branch -d name</span>.
+           También, podemos afirmar que una rama es una forma más sencilla de referirse a un commit. En lugar de utilizar un hash complicado y dificil de recordar, los desarrolladores utilizan nombres o palabras clave <span class="italic" >(como por ejemplo: hotfix-home-button, hero-landing-feature, entre otros)</span>.
           </p>
           <p class="text-sm md:text-base">
-            Prueba a usar <span class="cmd font-mono bg-gray-100 px-1 rounded">git commit</span> y <span
-              class="cmd font-mono bg-gray-100 px-1 rounded">git branch</span> hasta comprender el funcionamiento.
+            Las ramas pueden tener cualquier nombre y podes crear tantas como necesites. Para crear una rama nueva, escribimos en la terminal <span class="cmd font-mono bg-gray-100 px-1 rounded">git branch name</span>. Este comando creará una nueva rama llamada “name” que apuntará al commit actualmente confirmado. Otro comando muy útil es <span class="cmd font-mono bg-gray-100 px-1 rounded">git branch -d name</span>, que nos permite eliminar una rama <span class="italic">(name)</span> que ya no necesitamos. 
+          </p>
+          <p class="text-sm md:text-base">
+            Las ramas surgen de la necesidad de trabajar en paralelo en diferentes características o versiones de un proyecto, son muy útiles para trabajar en equipos distribuidos o para mantener un flujo de trabajo organizado. Como estándar en la industria del software se suele utilizar <b>Git flow</b>, un modelo de ramificación que define cómo se deben crear y fusionar las ramas en un proyecto. Si te interesa conocer más sobre Git flow, te recomiendo leer <a href="https://nvie.com/posts/a-successful-git-branching-model/" target="_blank" class="text-blue-500 hover:underline">este artículo</a>.
+          </p>
+          <p class="text-sm md:text-base">
+            Escribe en la terminal <span class="cmd font-mono bg-gray-100 px-1 rounded">git commit</span> y <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git branch</span> hasta comprender el concepto.
           </p>
           <div class="playground-container mt-4"></div>
         </section>
