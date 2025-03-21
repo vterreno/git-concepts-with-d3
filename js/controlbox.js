@@ -207,6 +207,10 @@ define(['d3'], function () {
 
             // Si se ingresa ".", agregamos todos los archivos no trackeados del directorio de trabajo
             if (args[0] === '.') {
+                if (this.workingDirectory.length === 0) {
+                    this.info('No hay archivos en el directorio de trabajo para agregar.');
+                    return;
+                }
                 this.workingDirectory.forEach(file => {
                     if (this.stagingArea.indexOf(file) === -1) {
                         this.stagingArea.push(file);
@@ -270,7 +274,7 @@ define(['d3'], function () {
             }
             // Una vez realizado el commit, vaciamos el staging area
             this.stagingArea = [];
-            this.workingDirectory = [];
+            this.workingDirectory.slice(0, this.workingDirectory.length);
         },
 
         branch: function (args) {
