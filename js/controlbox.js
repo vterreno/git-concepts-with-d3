@@ -257,7 +257,7 @@ define(['d3'], function () {
                 );
                 return;
             }
-            // Aquí se podría simular el commit utilizando los archivos en stagingArea
+            // Realizar el commit
             if (args.length >= 2) {
                 var arg = args.shift();
                 switch (arg) {
@@ -272,9 +272,17 @@ define(['d3'], function () {
             } else {
                 this.historyView.commit({ files: this.stagingArea.slice() });
             }
-            // Una vez realizado el commit, vaciamos el staging area
+            // Marcar cada archivo del stagingArea como comiteado en el workingDirectory
+            this.stagingArea.forEach(function (fileName) {
+                var fileObj = this.workingDirectory.find(function (obj) {
+                    return obj.name === fileName;
+                });
+                if (fileObj) {
+                    fileObj.commit = true;
+                }
+            }, this);
+
             this.stagingArea = [];
-            this.workingDirectory.slice(0, this.workingDirectory.length);
         },
 
         branch: function (args) {
@@ -382,7 +390,9 @@ define(['d3'], function () {
             if (this.stagingArea.length > 0) {
                 message += 'Changes to be committed:\n';
                 this.stagingArea.forEach(file => {
-                    message += '  new file:   ' + file + '\n';
+                    if (file.commit == false) {
+                        message += '  new file:   ' + file.name + '\n';
+                    } 
                 });
                 message += '\n';
             }
@@ -391,7 +401,9 @@ define(['d3'], function () {
             if (untracked.length > 0) {
                 message += 'Untracked files:\n';
                 untracked.forEach(file => {
-                    message += '  ' + file + '\n';
+                    if (file.commit == false ){
+                        message += '  ' + file.name + '\n';
+                    }
                 });
                 message += '\n';
             } else {

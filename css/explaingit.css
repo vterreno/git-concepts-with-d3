@@ -349,6 +349,11 @@ g.head-tag > text {
     margin-left: 45%;
 }
 
+#playground-commit .file-box {
+    width: 60%;
+    margin-left: 40%;
+}
+
 #playground-status .svg-container {
     display: none;
 }

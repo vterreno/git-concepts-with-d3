@@ -7,13 +7,17 @@ define(['d3'], function () {
       */
      function FileBox(config) {
           this.controlBox = config.controlBox;
-          this.workingDirectory = ['css/style.css', 'js/index.js', 'index.html'];
+          this.workingDirectory = [
+               { name: 'css/style.css', commit: false },
+               { name: 'js/index.js', commit: false },
+               { name: 'index.html', commit: false }
+          ];
      }
 
      FileBox.prototype = {
           render: function (container) {
                var fBox = this,
-                    fBoxContainer, input, titleContainer, title, buttonContainer, cleanButton, exampleButton;
+                    fBoxContainer, input, titleContainer, title, buttonContainer, cleanButton;
 
                fBoxContainer = container.append('div')
                     .classed('file-box', true);
@@ -32,15 +36,12 @@ define(['d3'], function () {
                     .classed('btn cursor-pointer bg-gray-500 hover:bg-gray-700 text-white text-sm py-2 px-4 rounded mr-2', true)
                     .text('Limpiar');
 
-
                // Evento para limpiar el directorio de trabajo
                cleanButton.on('click', function () {
                     fBox.workingDirectory.splice(0, fBox.workingDirectory.length);
                     fBox.updateFileTree();
                     this.value = '';
                });
-
-               
 
                this.treeContainer = fBoxContainer.append('div')
                     .classed('file-tree', true);
@@ -51,9 +52,10 @@ define(['d3'], function () {
 
                input.on('keyup', function () {
                     if (d3.event.keyCode === 13) { // Enter
-                         let path = fBox.normalizePath(this.value.trim());
-                         if (path && !fBox.workingDirectory.includes(path)) {
-                              fBox.workingDirectory.push(path);
+                         let nombre = fBox.normalizePath(this.value.trim());
+                         // Verificamos si ya existe un archivo/directorio con el mismo nombre
+                         if (nombre && !fBox.workingDirectory.find(f => f.name === nombre)) {
+                              fBox.workingDirectory.push({ name: nombre, commit: false });
                               fBox.updateFileTree();
                               this.value = '';
                          }
@@ -86,7 +88,9 @@ define(['d3'], function () {
           buildTree: function () {
                const tree = { name: '', children: [], type: 'directory' };
 
-               this.workingDirectory.forEach(path => {
+               // Para cada archivo/directorio en workingDirectory se construye la estructura de árbol
+               this.workingDirectory.forEach(fileObj => {
+                    const path = fileObj.name;
                     const parts = path.split('/').filter(p => p !== '');
                     let current = tree;
                     const isDir = path.endsWith('/');
@@ -103,6 +107,10 @@ define(['d3'], function () {
                                    children: [],
                                    path: parts.slice(0, index + 1).join('/') + (type === 'directory' ? '/' : '')
                               };
+                              // Si es un archivo y es el último componente, asignamos el estado de commit
+                              if (isLast && type === 'file') {
+                                   child.committed = fileObj.commit;
+                              }
                               current.children.push(child);
                          }
                          current = child;
@@ -134,13 +142,17 @@ define(['d3'], function () {
                               this.renderTree(childrenContainer, node.children, level + 1);
                          }
                     } else {
-                         nodeDiv.append('span')
+                         // Si el archivo ya fue comiteado, se puede aplicar una clase adicional para diferenciarlo
+                         const fileSpan = nodeDiv.append('span')
                               .classed('file', true)
                               .text(node.name);
+                         if (node.committed) {
+                              fileSpan.classed('committed', true);
+                         }
                     }
                });
           }
-     }
+     };
 
      return FileBox;
 });
