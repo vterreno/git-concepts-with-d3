@@ -1,4 +1,4 @@
-define(['historyview', 'controlbox', 'd3'], function (HistoryView, ControlBox, d3) {
+define(['historyview', 'controlbox', 'filebox', 'd3'], function (HistoryView, ControlBox, FileBox, d3) {
     var prefix = 'ExplainGit',
         openSandBoxes = [],
         open,
@@ -12,7 +12,7 @@ define(['historyview', 'controlbox', 'd3'], function (HistoryView, ControlBox, d
             container = d3.select('#' + containerId),
             playground = container.select('.playground-container'),
             historyView, originView = null,
-            controlBox;
+            controlBox, fileBox;
 
         container.style('display', 'block');
 
@@ -32,19 +32,26 @@ define(['historyview', 'controlbox', 'd3'], function (HistoryView, ControlBox, d
             originView.render(playground);
         }
 
+        fileBox = new FileBox({
+            controlBox: controlBox,
+        });
+
         controlBox = new ControlBox({
             historyView: historyView,
             originView: originView,
             initialMessage: args.initialMessage,
             previousHash: args.previousHash,
+            workingDirectory: fileBox.workingDirectory 
         });
 
+        fileBox.render(playground);
         controlBox.render(playground);
         historyView.render(playground);
 
         openSandBoxes.push({
             hv: historyView,
             cb: controlBox,
+            fb: fileBox,
             container: container
         });
     };
@@ -54,6 +61,7 @@ define(['historyview', 'controlbox', 'd3'], function (HistoryView, ControlBox, d
             var osb = openSandBoxes[i];
             osb.hv.destroy();
             osb.cb.destroy();
+            osb.fb.destroy();
             osb.container.style('display', 'none');
         }
 
@@ -64,6 +72,7 @@ define(['historyview', 'controlbox', 'd3'], function (HistoryView, ControlBox, d
     explainGit = {
         HistoryView: HistoryView,
         ControlBox: ControlBox,
+        FileBox: FileBox,
         generateId: HistoryView.generateId,
         open: open,
         reset: reset

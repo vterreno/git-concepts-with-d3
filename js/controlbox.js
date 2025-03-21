@@ -13,7 +13,7 @@ define(['d3'], function () {
         this._currentCommand = -1;
         this._tempCommand = '';
         this.stagingArea = [];
-        this.workingDirectory = ['index.html', 'css/styles.css', 'js/main.js'];
+        this.workingDirectory = config.workingDirectory || []; 
         this.previousHash = config.previousHash;
         this.rebaseConfig = {}; // to configure branches for rebase
     }
@@ -25,7 +25,6 @@ define(['d3'], function () {
 
             cBoxContainer = container.append('div')
                 .classed('control-box', true);
-
 
             log = cBoxContainer.append('div')
                 .classed('log', true);
@@ -271,7 +270,7 @@ define(['d3'], function () {
             }
             // Una vez realizado el commit, vaciamos el staging area
             this.stagingArea = [];
-            this._addFlag = false;
+            this.workingDirectory = [];
         },
 
         branch: function (args) {

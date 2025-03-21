@@ -286,8 +286,12 @@ g.head-tag > text {
     height: 100%;
 }
 
-#playground-init .control-box, #playground-clone .control-box, #playground-status .control-box {
+#playground-init .control-box, #playground-clone .control-box {
     width: 100%;
+}
+
+#playground-status .control-box {
+    width: 45%;
 }
 
 #playground-commit .control-box {
@@ -300,6 +304,53 @@ g.head-tag > text {
 
 #playground-init, #playground-clone, #playground-status {
     height: 30em;
+}
+
+.file-box {
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.file-tree {
+    font-family: monospace;
+    height: 150px; 
+    overflow-y: auto; 
+}
+
+.tree-node {
+    margin: 3px 0;
+}
+
+.directory {
+    color: #555;
+    font-weight: bold;
+}
+
+.directory::before {
+    content: '📁 ';
+}
+
+.file::before {
+    content: '📄 ';
+    margin-right: 5px;
+}
+
+.file-box input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+}
+
+#playground-status .file-box {
+    width: 55%;
+    margin-left: 45%;
+}
+
+#playground-status .svg-container {
+    display: none;
 }
 
 /* Ajustes generales para móviles */
@@ -354,17 +405,37 @@ g.head-tag > text {
         display: flex;
     }
 
-    #playground-init .control-box, #playground-clone .control-box, #playground-status .control-box {
+    #playground-init .control-box, #playground-clone .control-box {
         width: 100%;
         height: 100%;
     }
 
-    #playground-commit .control-box {
+    #playground-commit .control-box, #playground-status .control-box {
         width: 100%;
     }
     
     #playground-commit .svg-container {
         margin-left: 0%;
+    }
+
+    #playground-init .svg-container, 
+    #playground-init .file-box, 
+    #playground-clone .svg-container, 
+    #playground-clone .file-box,
+    #playground-status .svg-container
+    {
+        display: none;
+    }
+
+    #playground-status {
+        height: 35em;
+    }
+
+    #playground-status .file-box {
+        width: 100%;
+        margin-left: 0%;
+        position: absolute;
+        bottom: 1em;
     }
   }
   
