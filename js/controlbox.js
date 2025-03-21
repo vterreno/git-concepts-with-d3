@@ -222,12 +222,17 @@ define(['d3'], function () {
 
             // Agregar archivo individual si existe en el directorio de trabajo
             const file = args[0];
-            if (this.workingDirectory.indexOf(file) === -1) {
+            const fileObjWorkingDirectory = this.workingDirectory.find(f => f.name === file);
+            if (!fileObjWorkingDirectory) {
                 this.info('El archivo "' + file + '" no existe en el directorio de trabajo.');
                 return;
             }
-            if (this.stagingArea.indexOf(file) === -1) {
-                this.stagingArea.push(file);
+            
+            // Verificar si ya está en el stagingArea
+            const fileObjStagingArea = this.stagingArea.find(f => f.name === file);
+            if (!fileObjStagingArea) {
+                // Agregar archivo al stagingArea
+                this.stagingArea.push(fileObjWorkingDirectory);
                 this.info(file + ' ha sido agregado al staging area.');
             } else {
                 this.info(file + ' ya estaba en el staging area.');
@@ -275,7 +280,7 @@ define(['d3'], function () {
             // Marcar cada archivo del stagingArea como comiteado en el workingDirectory
             this.stagingArea.forEach(function (fileName) {
                 var fileObj = this.workingDirectory.find(function (obj) {
-                    return obj.name === fileName;
+                    return obj.name === fileName.name;
                 });
                 if (fileObj) {
                     fileObj.commit = true;
@@ -387,7 +392,21 @@ define(['d3'], function () {
         status: function (args) {
             this.previousHash = window.location.hash
             let message = 'On branch master\n\n';
-            if (this.stagingArea.length > 0) {
+            let flag = false;
+            let count = 0;
+
+            this.workingDirectory.forEach(file => {
+                console.log(file);
+                if (file.commit == true) {
+                    count++
+                }
+            });
+
+            if (count == this.workingDirectory.length) {
+                flag = true;
+            }
+
+            if (this.stagingArea.length > 0 && flag === false) {
                 message += 'Changes to be committed:\n';
                 this.stagingArea.forEach(file => {
                     if (file.commit == false) {
@@ -398,7 +417,7 @@ define(['d3'], function () {
             }
             // Simulamos los archivos en el directorio de trabajo que no están en staging area
             const untracked = this.workingDirectory.filter(file => this.stagingArea.indexOf(file) === -1);
-            if (untracked.length > 0) {
+            if (untracked.length > 0 && flag === false) {
                 message += 'Untracked files:\n';
                 untracked.forEach(file => {
                     if (file.commit == false ){
