@@ -7,7 +7,7 @@ define(['d3'], function () {
       */
      function FileBox(config) {
           this.controlBox = config.controlBox;
-          this.workingDirectory = [];
+          this.workingDirectory = ['css/style.css', 'js/index.js', 'index.html'];
      }
 
      FileBox.prototype = {
@@ -32,9 +32,6 @@ define(['d3'], function () {
                     .classed('btn cursor-pointer bg-gray-500 hover:bg-gray-700 text-white text-sm py-2 px-4 rounded mr-2', true)
                     .text('Limpiar');
 
-               exampleButton = buttonContainer.append('button')
-                    .classed('btn cursor-pointer bg-blue-500 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded', true)
-                    .text('Ejemplo');
 
                // Evento para limpiar el directorio de trabajo
                cleanButton.on('click', function () {
@@ -43,17 +40,7 @@ define(['d3'], function () {
                     this.value = '';
                });
 
-               // Evento para agregar archivos y directorios de ejemplo
-               exampleButton.on('click', function () {
-                    var exampleFiles = ['css/style.css', 'js/index.js', 'index.html'];
-                    exampleFiles.forEach(function (file) {
-                         var path = fBox.normalizePath(file);
-                         if (!fBox.workingDirectory.includes(path)) {
-                              fBox.workingDirectory.push(path);
-                         }
-                    });
-                    fBox.updateFileTree();
-               });
+               
 
                this.treeContainer = fBoxContainer.append('div')
                     .classed('file-tree', true);
