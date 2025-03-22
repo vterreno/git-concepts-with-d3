@@ -961,21 +961,6 @@
             proyecto.
           </p>
           <p class="text-sm md:text-base">
-            Ejemplo visual:
-          </p>
-          <pre class="text-sm md:text-base">                         A---B---C (rama_feature)  
-                        /  
-          D---E---F---G (main)  
-          </pre>
-          <p class="text-sm md:text-base mb-4">
-            Al hacer <span class="cmd font-mono bg-gray-100 px-1 rounded">git rebase main</span> desde rama_feature, los
-            commits A, B y C se aplican sobre G:
-          </p>
-          <pre lass="text-sm md:text-base">                        A'--B'--C' (rama_feature)  
-                      /  
-          D---E---F---G (main)  
-          </pre>
-          <p class="text-sm md:text-base">
             De esta forma, mantenemos un historial lineal lo cual evita commits de merge innecesarios. Nos ayuda
             a sincronizar nuestra rama con los últimos cambios de main o una rama principal. Por último, nos permite 
             limpiar commits, es decir, podemos combinar, editar o eliminar commits antes de fusionarlos.
@@ -1023,7 +1008,7 @@
           <ul class="list-disc ml-6 text-sm md:text-base">
             <li class="my-2">
               <b>Rebase</b> <span class="font-mono bg-gray-100 px-1 rounded">--onto</span>: útil para mover una rama que depende de otra. Por ejemplo, si featureB se basó en featureA pero debe moverse a main:
-              <span class="cmd font-mono bg-gray-100 px-1 rounded">git rebase --onto main featureA featureB</span>.
+              <span class="cmd font-mono bg-gray-100 px-1 rounded">git rebase --onto main featA featB</span>.
             </li>
             <li class="my-2">
               <b>Recuperar commits perdidos:</b> si accidentalmente borraste algunos commits, usa 
