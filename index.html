@@ -728,48 +728,133 @@
         </section>
         <!-- End Git Tag -->
 
-
+        <!-- Start Git Reset -->
         <section id="ExplainGitReset-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
-          <p>
-            <span class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span> mueve HEAD y la rama actual al commit
-            especificado,
-            descartando los commits posteriores. Es útil para deshacer un commit innecesario.
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Parte 1: Volver atras el historial</h2>
+          <p class="text-sm md:text-base">
+            El comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span> se utiliza para <span
+              class="italic">"rebobinar"</span> el historial de commits y, dependiendo de la opción usada,
+            para modificar también el área de preparación y el directorio de trabajo. Es importante notar que <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span>
+            mueve el puntero de HEAD y de la rama actual, afectando directamente la <span
+              class="italic">"historia"</span> del proyecto.
           </p>
-          <p>
-            Este comando se usa normalmente con las banderas <span
-              class="font-mono bg-gray-100 px-1 rounded">--soft</span>, <span
-              class="font-mono bg-gray-100 px-1 rounded">--mixed</span> o <span
+          <p class="text-sm md:text-base">
+            Cuando corremos <span class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span>, Git realiza las
+            siguientes acciones:
+          <ul class="list-disc ml-6 text-sm md:text-base">
+            <li class="my-2">
+              <b>Actualiza el historial de commits (HEAD):</b> el puntero se mueve al commit indicado. Esto es
+              fundamental, ya
+              que define el punto de "rebobinado" en la historia.
+            </li>
+            <li>
+              <b>Modifica el índice del área de preparación y/o directorio de trabajo:</b> dependiendo de las opciones
+              usadas, Git decide si
+              los cambios en el área de preparación y en los archivos de trabajo se mantienen, se deshacen o se
+              eliminan.
+            </li>
+          </ul>
+          </p>
+          <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+          <p class="text-sm md:text-base">
+            Existen tres formas de utilizar este comando: <span
+              class="font-mono bg-gray-100 px-1 rounded">--hard</span>, <span
+              class="font-mono bg-gray-100 px-1 rounded">--soft</span> y <span
+              class="font-mono bg-gray-100 px-1 rounded">--mixed</span>.
+          </p>
+          <p class="text-sm md:text-base">
+          <ul class="list-disc ml-6 text-sm md:text-base">
+            <li class="mb-2">
+              <b>Modo --hard:</b> este modo mueve el puntero del commit (HEAD y la rama actual) al commit especificado.
+              Además,
+              restablece tanto el índice del área de preparación como el directorio de trabajo para que coincidan
+              exactamente con ese commit.
+              <b>Como resultado, todos los cambios no confirmados se pierden, ya que el área de preparación y los
+                archivos de trabajo se sobrescriben.</b> Esta opción
+              se utiliza generalmente cuando queremos descartar por completo los cambios locales y regresar a un estado
+              anterior conocido.
+            </li>
+            <li class="mb-2">
+              <b>Modo --mixed (opción por defecto):</b> esta alternativa a diferencia de la primera <b>mueve el puntero
+                del
+                commit al commit especificado, reinicia el índice del área de preparación para que refleje el estado de
+                ese commit, pero
+                deja intacto el directorio de trabajo.</b> Los cambios que se habían preparado (staged) se "despreparan"
+              y quedan como modificaciones en el directorio de trabajo. Esta opción esta definida por defecto en Git
+              porque es ideal para reorganizar o refinar los cambios antes de hacer un nuevo commit.
+            </li>
+            <li>
+              <b>Modo --soft:</b> este modo solo <b>mueve el puntero del commit al commit indicado, sin tocar el índice
+                de
+                la área de preparación ni el directorio de trabajo.</b> Por ende, los cambios preparados y los archivos
+              modificados permanecen intactos, listos para ser confirmados nuevamente. Es útil para combinar o
+              reorganizar commits sin perder el trabajo que ya has preparado. Por ejemplo, cuando queres deshacer
+              commits recientes pero mantener los cambios listos para un nuevo commit.
+            </li>
+          </ul>
+          </p>
+          <p class="text-sm md:text-base">
+            Para utilizar un modo debemos ejecutar el siguiente comando: <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git reset --[modo] [hash-commit]</span>
+          </p>
+          <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
+            ℹ️ Info: “HEAD^” se refiere al commit anterior a HEAD; “HEAD^^” es dos commits atrás, y así sucesivamente.
+          </p>
+          <p class="text-sm md:text-base">
+            En el playground solamente se puede utilizar el modo <span
               class="font-mono bg-gray-100 px-1 rounded">--hard</span>.
-            Consulta <a href="https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified"
-              class="text-blue-500 hover:underline">aquí</a> para más información. En esta visualización solo se usa
-            <span class="font-mono bg-gray-100 px-1 rounded">--hard</span>.
           </p>
-          <p>
-            “HEAD^” se refiere al commit anterior a HEAD; “HEAD^^” es dos commits atrás, y así sucesivamente.
-          </p>
-          <p>
-            <b>Atención:</b> No uses <span class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span> para
-            descartar commits ya compartidos con el remoto.
-          </p>
-          <div class="playground-container mt-4"></div>
-        </section>
+          <!-- End Contenido -->
 
+          <div class="playground-container mt-4" id="playground-reset"></div>
+        </section>
+        <!-- End Git Reset -->
+
+        <!-- Start Git Revert -->
         <section id="ExplainGitRevert-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
-          <p>
-            Para deshacer commits que ya han sido compartidos, en lugar de <span
-              class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span> se utiliza <span
-              class="cmd font-mono bg-gray-100 px-1 rounded">git revert</span>.
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Parte 2: Deshacer commits compartidos</h2>
+          <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
+            El comando git <span class="cmd font-mono bg-gray-100 px-1 rounded">git revert</span> es una herramienta
+            para "deshacer" cambios en Git, pero a diferencia de otros métodos,
+            no elimina el commit problemático del historial. En lugar de borrarlo, Git invierte los cambios realizados
+            por ese commit y crea un nuevo commit con la acción inversa. Esto garantiza que el historial completo del
+            proyecto se mantenga intacto, lo que es esencial para la integridad y la colaboración en equipo.
           </p>
-          <p>
-            Este comando crea un nuevo commit que revierte los cambios del commit indicado.
+          <p class="text-sm md:text-base">
+            Como mencionamos, este comando crea un nuevo commit que revierte los cambios del commit indicado. El puntero
+            de la rama se mueve al nuevo commit, manteniendo el historial lineal y completo. Así, se conserva la
+            trazabilidad de todas las modificaciones. Dado que el historial no se altera, <b>
+              esta es la opción ideal para deshacer cambios en commits que
+              ya han sido compartidos en un repositorio remoto.
+            </b>
           </p>
-          <div class="playground-container mt-4"></div>
-        </section>
+          <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Diferencias entre reset y revert</h2>
+          <p class="text-sm md:text-base">
+            La primera diferencia, es que <span class="cmd font-mono bg-gray-100 px-1 rounded">git revert</span> no altera el historial del proyecto <span class="italic">; 
+              se considera una acción "segura" para revertir cambios en repositorios compartidos</span>. 
+          </p>
+          <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
+            La segunda es que <span class="cmd font-mono bg-gray-100 px-1 rounded">git revert</span> permite hacer foco en commit particular en un punto arbitrario de la historia
+            del repositorio. Mientras que, <span class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span> solamente puede trabajar hacia atrás en la historia desde el commit actual.
+            Por ejemplo, si queremos deshacer un commit que ocurrió hace 5 commits atrás, <span class="cmd font-mono bg-gray-100 px-1 rounded">git revert</span> es la opción correcta. De lo contrario, 
+            si utilizaramos <span class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span> estaríamos eliminando los commits posteriores a ese commit.
+          </p>
+          <!-- End Contenido -->
 
+          <div class="playground-container mt-4" id="playground-revert"></div>
+        </section>
+        <!-- End Git Revert -->
+
+        <!-- Start Git Merge -->
         <section id="ExplainGitMerge-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <!-- Start Contenido -->
           <p>
             <span class="cmd font-mono bg-gray-100 px-1 rounded">git merge</span> crea un commit con dos padres,
             combinando los cambios de ambas ramas.
@@ -963,7 +1048,7 @@
 
     const searchInput = document.getElementById('search');
     let typingTimer;
-    const doneTypingInterval = 500; 
+    const doneTypingInterval = 500;
 
     const commands = ["init", "clone", "status", "commit", "show", "branch", "checkout", "checkout-b", "add", "tag", "reset", "revert", "merge", "rebase", "fetch", "pull", "push", "clean"];
 
@@ -978,9 +1063,9 @@
 
     function updateHash() {
       let inputValue = searchInput.value.trim().toLowerCase();
-      if (inputValue === "") return; 
+      if (inputValue === "") return;
 
-  
+
       let foundCommand = commands.find(cmd => cmd.startsWith(inputValue));
       if (!foundCommand) {
         foundCommand = commands.find(cmd => cmd.includes(inputValue));
@@ -1072,7 +1157,7 @@
         },
         'reset': {
           name: 'Reset',
-          height: 200,
+          height: 300,
           baseLine: 0.5,
           commitData: [
             { id: 'e137e9b' },
@@ -1083,7 +1168,7 @@
         },
         'revert': {
           name: 'Revert',
-          height: 200,
+          height: 300,
           baseLine: 0.5,
           commitData: [
             { id: 'e137e9b' },

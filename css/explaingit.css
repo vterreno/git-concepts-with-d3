@@ -358,7 +358,9 @@ g.head-tag > text {
 #playground-branch .file-box, 
 #playground-checkout .file-box, 
 #playground-checkout-b .file-box, 
-#playground-tag .file-box {
+#playground-tag .file-box,
+#playground-reset .file-box,
+#playground-revert .file-box {
     width: 70%;
     margin-left: 30%;
 }
@@ -366,14 +368,18 @@ g.head-tag > text {
 #playground-branch .control-box, 
 #playground-checkout .control-box, 
 #playground-checkout-b .control-box, 
-#playground-tag .control-box {
+#playground-tag .control-box,
+#playground-reset .control-box,
+#playground-revert .control-box {
     width: 30%;
 }
 
 #playground-branch .svg-container, 
 #playground-checkout .svg-container, 
 #playground-checkout-b .svg-container, 
-#playground-tag .svg-container {
+#playground-tag .svg-container,
+#playground-reset .svg-container,
+#playground-revert .svg-container {
     margin-left: 30%;
 }
 
@@ -446,7 +452,9 @@ g.head-tag > text {
     #playground-checkout .control-box, 
     #playground-checkout-b .control-box,
     #playground-tag .control-box,
-    #playground-show .control-box {
+    #playground-show .control-box,
+    #playground-reset .control-box,
+    #playground-revert .control-box{
         width: 100%;
     }
     
@@ -455,7 +463,9 @@ g.head-tag > text {
     #playground-checkout .svg-container, 
     #playground-checkout-b .svg-container,
     #playground-tag .svg-container,
-    #playground-show .svg-container {
+    #playground-show .svg-container,
+    #playground-reset .svg-container,
+    #playground-revert .svg-container {
         margin-left: 0%;
         padding-top: 0;
         position: absolute;
@@ -472,7 +482,9 @@ g.head-tag > text {
     }
 
     #playground-branch .file-box, 
-    #playground-tag .file-box {
+    #playground-tag .file-box,
+    #playground-reset .file-box,
+    #playground-revert .file-box {
         width: 100%;
         margin-left: 0%;
         position: absolute;
@@ -511,6 +523,14 @@ g.head-tag > text {
 
     #playground-status {
         height: 35em;
+    }
+
+    #playground-reset, #playground-revert {
+        height: 51.4em;
+    }
+
+    #playground-reset .file-box, #playground-revert .file-box {
+        bottom: 19em;
     }
 
     #playground-status .file-box {
