@@ -58,56 +58,76 @@
       <nav class="md:col-span-1 bg-gray-100 p-3 md:p-4 border border-gray-200 rounded space-y-4 md:space-y-6">
         <!-- Grupo: Comandos básicos -->
         <div>
+          <input type="text" id="search" placeholder="Buscar comando..."
+            class="w-full mb-4 p-2 border border-gray-200 bg-white rounded focus:outline-none focus:ring focus:ring-blue-300">
           <h4 class="text-base md:text-lg font-semibold text-gray-700 mb-1 md:mb-2">Comandos básicos</h4>
           <ul class="space-y-1">
-            <li><a id="open-init" onclick="savePreviousHash('init')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
-                href="#init">git init</a></li>
-            <li><a id="open-clone" onclick="savePreviousHash('clone')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
-                href="#clone">git clone</a></li>
-            <li><a id="open-status" onclick="savePreviousHash('status')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
-                href="#status">git status</a></li>
-            <li><a id="open-commit" onclick="savePreviousHash('commit')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
-                href="#commit">git add y commit</a></li>
-            <li><a id="open-branch" onclick="savePreviousHash('branch')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
-                href="#branch">git branch</a></li>
-            <li><a id="open-checkout" onclick="savePreviousHash('checkout')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
-                href="#checkout">git checkout</a></li>
-            <li><a id="open-checkout-b" onclick="savePreviousHash('checkout-b')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
-                href="#checkout-b">git checkout -b</a></li>
-            <li><a id="open-tag" onclick="savePreviousHash('tag')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
-                href="#tag">git tag</a></li>
+            <li><a id="open-init" onclick="savePreviousHash('init')"
+                class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base" href="#init">git init</a>
+            </li>
+            <li><a id="open-clone" onclick="savePreviousHash('clone')"
+                class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base" href="#clone">git
+                clone</a></li>
+            <li><a id="open-status" onclick="savePreviousHash('status')"
+                class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base" href="#status">git
+                status</a></li>
+            <li><a id="open-commit" onclick="savePreviousHash('commit')"
+                class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base" href="#commit">git add y
+                commit</a></li>
+            <li><a id="open-show" onclick="savePreviousHash('show')"
+                class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base" href="#show">git show</a>
+            </li>
+            <li><a id="open-branch" onclick="savePreviousHash('branch')"
+                class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base" href="#branch">git
+                branch</a></li>
+            <li><a id="open-checkout" onclick="savePreviousHash('checkout')"
+                class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base" href="#checkout">git
+                checkout</a></li>
+            <li><a id="open-checkout-b" onclick="savePreviousHash('checkout-b')"
+                class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base" href="#checkout-b">git
+                checkout -b</a></li>
+            <li><a id="open-tag" onclick="savePreviousHash('tag')"
+                class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base" href="#tag">git tag</a>
+            </li>
           </ul>
         </div>
         <!-- Grupo: Deshacer commits -->
         <div>
           <h4 class="text-base md:text-lg font-semibold text-gray-700 mb-1 md:mb-2">Deshacer commits</h4>
           <ul class="space-y-1">
-            <li><a id="open-reset" onclick="savePreviousHash('reset')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
-                href="#reset">git reset</a></li>
-            <li><a id="open-revert" onclick="savePreviousHash('revert')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
-                href="#revert">git revert</a></li>
+            <li><a id="open-reset" onclick="savePreviousHash('reset')"
+                class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base" href="#reset">git
+                reset</a></li>
+            <li><a id="open-revert" onclick="savePreviousHash('revert')"
+                class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base" href="#revert">git
+                revert</a></li>
           </ul>
         </div>
         <!-- Grupo: Ramas -->
         <div>
           <h4 class="text-base md:text-lg font-semibold text-gray-700 mb-1 md:mb-2">Ramas</h4>
           <ul class="space-y-1">
-            <li><a id="open-merge" onclick="savePreviousHash('merge')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
-                href="#merge">git merge</a></li>
-            <li><a id="open-rebase" onclick="savePreviousHash('rebase')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
-                href="#rebase">git rebase</a></li>
+            <li><a id="open-merge" onclick="savePreviousHash('merge')"
+                class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base" href="#merge">git
+                merge</a></li>
+            <li><a id="open-rebase" onclick="savePreviousHash('rebase')"
+                class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base" href="#rebase">git
+                rebase</a></li>
           </ul>
         </div>
         <!-- Grupo: Remoto -->
         <div>
           <h4 class="text-base md:text-lg font-semibold text-gray-700 mb-1 md:mb-2">Remoto</h4>
           <ul class="space-y-1">
-            <li><a id="open-fetch" onclick="savePreviousHash('fetch')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
-                href="#fetch">git fetch</a></li>
-            <li><a id="open-pull" onclick="savePreviousHash('pull')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
-                href="#pull">git pull</a></li>
-            <li><a id="open-push" onclick="savePreviousHash('push')" class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base"
-                href="#push">git push</a></li>
+            <li><a id="open-fetch" onclick="savePreviousHash('fetch')"
+                class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base" href="#fetch">git
+                fetch</a></li>
+            <li><a id="open-pull" onclick="savePreviousHash('pull')"
+                class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base" href="#pull">git pull</a>
+            </li>
+            <li><a id="open-push" onclick="savePreviousHash('push')"
+                class="block p-2 hover:bg-gray-200 rounded text-blue-600 text-sm md:text-base" href="#push">git push</a>
+            </li>
           </ul>
         </div>
       </nav>
@@ -282,17 +302,16 @@
             El primer comando clona solo la última versión del proyecto, mientras que el segundo clona el proyecto sin
             blobs, es decir, sin archivos binarios.
           </p>
-
           <!-- End Contenido -->
 
           <div class="playground-container mt-4" id="playground-clone"></div>
         </section>
         <!-- End Git Clone -->
 
-        <!-- Start Git status -->
+        <!-- Start Git Status -->
         <section id="ExplainGitStatus-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200 text-pretty">
-          <!-- Start Los tres estados -->
+          <!-- Start Contenido -->
           <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Los tres estados</h2>
 
           <p class="text-sm md:text-base">
@@ -384,17 +403,17 @@
             observa los resultados. Si escribes <span class="cmd font-mono bg-gray-100 px-1 rounded">git status
               -s</span> obtendrás una versión más corta y concisa.
           </p>
-          <!-- End Los tres estados -->
+          <!-- End Contenido -->
 
           <div class="playground-container mt-4" id="playground-status"></div>
         </section>
-        <!-- End Git status -->
+        <!-- End Git Status -->
 
-        <!-- Start Git add y commit -->
+        <!-- Start Git Add y Commit -->
         <section id="ExplainGitCommit-Container"
           class="concept-container bg-white text-pretty p-4 md:p-6 rounded border border-gray-200 text-pretty">
-          <!-- Definición de commit -->
-          <h2 class="text-xl sm:text-xl mt-4 md:text-2xl font-bold text-gray-800">¿Qué es un commit?</h2>
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">¿Qué es un commit?</h2>
           <p class="text-sm md:text-base">
             Un commit en un repositorio git registra un
             <span class="cmd font-mono bg-gray-100 px-1 rounded relative group">
@@ -513,36 +532,52 @@
           </p>
 
           <p class="text-sm md:text-base">
-            Imagina que ya tenes tus archivos preparados y estamos listos para confirmarlos. Escribe <span
-              class="cmd font-mono bg-gray-100 px-1 rounded">git commit</span> o <span
-              class="cmd font-mono bg-gray-100 px-1 rounded">git commit -m</span> tantas veces como quieras en la
-            terminal.
+            En el directorio de nuestro proyecto ya tenemos algunos directorios y archivos de ejemplo. Escribe <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git add</span> para agregarlos al área de staging y luego,
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git commit -m</span> para confirmar los cambios. Podes
+            agregar tantos directorios o archivos como necesites.
           </p>
+          <!-- End Contenido -->
+
           <div class="playground-container mt-4" id="playground-commit"></div>
         </section>
-        <!-- End Git add y commit -->
+        <!-- End Git Add y Commit -->
 
-        <section id="ExplainGitTag-Container"
-          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+        <!-- Start Git Show -->
+        <section id="ExplainGitShow-Container"
+          class="concept-container bg-white text-pretty p-4 md:p-6 rounded border border-gray-200 text-pretty">
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">¿Cómo puedo ver el contenido de una
+            rama/commit/tag?</h2>
           <p class="text-sm md:text-base">
-            <span class="cmd font-mono bg-gray-100 px-1 rounded">git tag name</span> creará una etiqueta llamada “name”
-            que apuntará al commit actualmente chequeado.
+            Para ver el contenido de alguno de estos elementos utilizamos el comando <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git show</span>. Este comando nos muestra los cambios
+            realizados en el commit, la rama o el tag en cuestión <span class="italic">(además, de mostrar información
+              extra como el autor, la fecha de creación, entre otros)</span>.
+            Si no se especifica nada Git mostrará el último commit realizado.
           </p>
           <p class="text-sm md:text-base">
-            Las etiquetas pueden eliminarse usando <span class="cmd font-mono bg-gray-100 px-1 rounded">git tag -d
-              name</span> (próximamente).
+            Este comando puede recibir diferentes parámetros, por ejemplo: <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git show --name-only</span> para mostrar solo los nombres
+            de los archivos modificados, <span class="cmd font-mono bg-gray-100 px-1 rounded">git show
+              --name-status</span> para mostrar los nombres de los archivos y el estado de los mismos, entre otros. Si
+            te
+            interesa conocer mas sobre los parámetros que recibe el comando <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git show</span>, te recomiendo leer la <a
+              href="https://git-scm.com/docs/git-show" target="_blank" class="text-blue-500 hover:underline">
+              documentación oficial de Git</a>.
           </p>
-          <p class="text-sm md:text-base">
-            Prueba a escribir <span class="cmd font-mono bg-gray-100 px-1 rounded">git commit</span> y <span
-              class="cmd font-mono bg-gray-100 px-1 rounded">git tag</span> hasta comprender el concepto.
-          </p>
-          <div class="playground-container mt-4"></div>
+          <!-- End Contenido -->
+
+          <div class="playground-container mt-4" id="playground-show"></div>
         </section>
+        <!-- End Git Show -->
 
-        <!-- Git branch -->
+        <!-- Git Branch -->
         <section id="ExplainGitBranch-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
-          <h2 class="text-xl sm:text-xl mt-4 md:text-2xl font-bold text-gray-800">¿Qué es una rama?</h2>
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">¿Qué es una rama?</h2>
           <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
             <b>Una rama en Git es simplemente un puntero móvil que referencia a un commit.</b> Cuando hacemos un commit,
             el puntero de la rama avanza automáticamente al último commit confirmado. <br> <br>
@@ -574,44 +609,126 @@
             sobre Git flow, te recomiendo leer <a href="https://nvie.com/posts/a-successful-git-branching-model/"
               target="_blank" class="text-blue-500 hover:underline">este artículo</a>.
           </p>
-          <p class="text-sm md:text-base">
-            Escribe en la terminal <span class="cmd font-mono bg-gray-100 px-1 rounded">git commit</span> y <span
-              class="cmd font-mono bg-gray-100 px-1 rounded">git branch</span> hasta comprender el concepto.
-          </p>
-          <div class="playground-container mt-4"></div>
+          <!-- End Contenido -->
+          <div class="playground-container mt-4" id="playground-branch"></div>
         </section>
+        <!-- End Git branch -->
 
+        <!-- Git Checkout -->
         <section id="ExplainGitCheckout-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">¿Cómo moverse entre ramas?</h2>
           <p class="text-sm md:text-base">
-            <span class="cmd font-mono bg-gray-100 px-1 rounded">git checkout</span> se usa para cambiar entre ramas.
-            Por ejemplo, para pasar de la rama master a dev, escribe <span
-              class="cmd font-mono bg-gray-100 px-1 rounded">git checkout dev</span>.
+            Para movernos entre ramas <span class="italic">(punteros que hacen referencia a un commit)</span> o commits
+            particulares,
+            utilizamos el comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git checkout</span>.
+            Por ejemplo, para pasar de la rama master a la rama dev, escribimos <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git checkout dev</span> o si queres ir a un commit en
+            específico utilizamos <span class="cmd font-mono bg-gray-100 px-1 rounded">git checkout e088135</span>.
           </p>
-          <p class="text-sm md:text-base">
-            También puedes cambiar a commits individuales. Prueba a hacer un commit nuevo y luego escribe <span
-              class="cmd font-mono bg-gray-100 px-1 rounded">git checkout bb92e0e</span>.
-          </p>
-          <p class="text-sm md:text-base">
-            Experimenta con <span class="cmd font-mono bg-gray-100 px-1 rounded">git commit</span>,
-            <span class="cmd font-mono bg-gray-100 px-1 rounded">git branch</span> y
-            <span class="cmd font-mono bg-gray-100 px-1 rounded">git checkout</span> hasta entenderlo.
-          </p>
-          <div class="playground-container mt-4"></div>
+          <!-- End Contenido -->
+          <div class="playground-container mt-4" id="playground-checkout"></div>
         </section>
+        <!-- End Git Checkout -->
 
+        <!-- Git Checkout -b -->
         <section id="ExplainGitCheckout-b-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Combinando comandos</h2>
           <p class="text-sm md:text-base">
-            Puedes combinar <span class="cmd font-mono bg-gray-100 px-1 rounded">git branch</span> y
+            Git es flexible y ha incorporado atajos para optimizar ciertas operaciones recurrentes como la creación de
+            nuevas ramas y moverse hacía ellas. Surge entonces la posibilidad de combinar <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git branch</span> y
             <span class="cmd font-mono bg-gray-100 px-1 rounded">git checkout</span> con <span
               class="cmd font-mono bg-gray-100 px-1 rounded">git checkout -b branchname</span>.
             Esto creará la rama (si no existe) y cambiará a ella inmediatamente.
           </p>
-          <div class="playground-container mt-4"></div>
+          <!-- End Contenido -->
+          <div class="playground-container mt-4" id="playground-checkout-b"></div>
         </section>
+        <!-- End Git Checkout -b -->
 
-        <!-- Otras secciones (reset, revert, merge, rebase, fetch, pull, push, clean, fetchrebase, deletebranches, freeplay) siguen el mismo patrón -->
+        <!-- Start Git Tag -->
+        <section id="ExplainGitTag-Container"
+          class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">¿Qué es una etiqueta?</h2>
+          <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
+            Una etiqueta en Git es una referencia a un commit específico. Se utilizan para marcar puntos importantes en
+            la historia del proyecto, como versiones de lanzamiento <span class="italic">(v1.0, v2.0, entre
+              otros)</span>. Las etiquetas son inmutables, es decir, una vez
+            creadas no pueden ser modificadas.
+          </p>
+          <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+          <h3 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">
+            Tipos de etiquetas
+          </h3>
+          <p class="text-sm md:text-base">
+            En Git existen dos tipos de etiquetas: <b>anotadas</b> y <b>ligeras</b>.
+          </p>
+          <ul class="list-disc ml-6">
+            <li>
+              <p class="text-sm md:text-base">
+                <b>Etiquetas anotadas:</b> son almacenadas como objetos completos en la base de datos de Git. Tienen un
+                <b>checksum</b>; contienen el nombre del etiquetador, correo electrónico, fecha y un mensaje asociado.
+                Para crear
+                una etiqueta anotada, se utiliza el comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git tag
+                  -a
+                  name</span> (podemos agregar la bandera -m como en los mensajes de los commits). Normalmente, se
+                recomienda utilizar este tipo de etiquetas.
+              </p>
+            </li>
+            <li>
+              <p class="text-sm md:text-base">
+                <b>Etiquetas ligeras:</b> son simplemente un puntero a un commit específico, es decir, es el
+                <b>checksum</b> de un commit guardado en un archivo.
+                No contienen información adicional. Para crear una etiqueta ligera, se utiliza el comando <span class="cmd font-mono bg-gray-100 px-1
+                  rounded">git tag name</span>. <b>Son similares a las ramas, pero no cambian de posición.</b> Este
+                tipo de etiquetas
+                se utilizan de forma temporal o si por alguna razón no necesitas información adicional. De lo contrario,
+                es recomendable utilizar etiquetas anotadas.
+              </p>
+            </li>
+          </ul>
+          <p class="text-sm md:text-base">
+            Para ver el contenido de una etiqueta, utilizamos el comando <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git show name</span>. Si es una etiqueta ligera, solamente
+            veremos el contenido del commit al que hace
+            referencia, en cambio, si es anotada veremos la información adicional. Puede ocurrir que nos olvidemos de
+            agregar una etiqueta a un commit anterior al
+            último confirmado. Para ello, utilizamos el comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git
+              tag -a name hash-del-commit</span>.
+          </p>
+          <p class="text-sm md:text-base">
+            Por defecto, el comando <span class="cmd font-mono bg-gray-100 px-1 rounded"> git push </span>
+            no transfiere las etiquetas a los servidores remotos. Debemos enviarlas de forma explícita al servidor luego
+            de que las hayamos creado.
+            Para ello, ejecutamos <span class="cmd font-mono bg-gray-100 px-1 rounded"> git push origin [etiqueta]
+            </span> o <span class="cmd font-mono bg-gray-100 px-1 rounded"> git push --tags </span>
+            <span class="italic">(para enviar todas las etiquetas)</span>; este proceso es similar al de compartir ramas
+            remotas.
+          </p>
+          <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
+            <b>🚨 Atención:</b> tenes que tener cuidado al enviar etiquetas al servidor remoto, porque podría causar
+            conflictos o problemas si otras personas ya están trabajando
+            en ese mismo commit sin la etiqueta.
+          </p>
+          <p class="text-sm md:text-base">
+            Para eliminar una etiqueta de forma local, utilizamos el comando <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git tag -d name</span>. Si deseamos eliminar una del
+            servidor remoto,
+            ejecutamos el comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git push origin --delete
+              name</span>.
+          </p>
+          <!-- End Contenido -->
+
+          <div class="playground-container mt-4" id="playground-tag"></div>
+        </section>
+        <!-- End Git Tag -->
+
+
         <section id="ExplainGitReset-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
           <p>
@@ -766,28 +883,24 @@
       </p>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
         <div class="flex flex-col space-y-2">
-          <a id="open-clean"
-            onclick="savePreviousHash('clean')"
+          <a id="open-clean" onclick="savePreviousHash('clean')"
             class="openswitch block p-2 md:p-3 text-sm md:text-base bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
             href="#clean">
             Restaurar rama local al estado en el servidor de origen
           </a>
-          <a id="open-fetchrebase"
-            onclick="savePreviousHash('fetchrebase')"
+          <a id="open-fetchrebase" onclick="savePreviousHash('fetchrebase')"
             class="openswitch block p-2 md:p-3 text-sm md:text-base bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
             href="#fetchrebase">
             Actualizar rama local privada con lo último del origen
           </a>
-          <a id="open-deletebranches"
-            onclick="savePreviousHash('deletebranches')"
+          <a id="open-deletebranches" onclick="savePreviousHash('deletebranches')"
             class="openswitch block p-2 md:p-3 text-sm md:text-base bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
             href="#deletebranches">
             Eliminar ramas locales
           </a>
         </div>
         <div class="flex flex-col space-y-2">
-          <a id="open-freeplay"
-            onclick="savePreviousHash('freeplay')"
+          <a id="open-freeplay" onclick="savePreviousHash('freeplay')"
             class="openswitch block p-2 md:p-3 text-sm md:text-base bg-green-100 text-green-700 rounded hover:bg-green-200"
             href="#freeplay">
             Playground
@@ -848,6 +961,40 @@
         }
     }); */
 
+    const searchInput = document.getElementById('search');
+    let typingTimer;
+    const doneTypingInterval = 500; 
+
+    const commands = ["init", "clone", "status", "commit", "show", "branch", "checkout", "checkout-b", "add", "tag", "reset", "revert", "merge", "rebase", "fetch", "pull", "push", "clean"];
+
+    searchInput.addEventListener('keyup', () => {
+      clearTimeout(typingTimer);
+      typingTimer = setTimeout(updateHash, doneTypingInterval);
+    });
+
+    searchInput.addEventListener('keydown', () => {
+      clearTimeout(typingTimer);
+    });
+
+    function updateHash() {
+      let inputValue = searchInput.value.trim().toLowerCase();
+      if (inputValue === "") return; 
+
+  
+      let foundCommand = commands.find(cmd => cmd.startsWith(inputValue));
+      if (!foundCommand) {
+        foundCommand = commands.find(cmd => cmd.includes(inputValue));
+      }
+
+      if (foundCommand) {
+        if (foundCommand === "add") {
+          foundCommand = "commit";
+        }
+        window.location.hash = foundCommand;
+      }
+    }
+
+
     let previousHash = '';
     function savePreviousHash(hash) {
       previousHash = hash;
@@ -881,17 +1028,26 @@
           height: 200,
           baseLine: 0.4,
           commitData: [{ id: 'e137e9b', tags: ['master'] }],
-          initialMessage: 'Escribe "git add y git commit" en la terminal.'
+          initialMessage: 'Escribe "git add . y git commit" en la terminal.'
+        },
+        'show': {
+          name: 'Show',
+          height: 200,
+          baseLine: 0.4,
+          commitData: [{ id: 'e137e9b', tags: ['master'] }],
+          initialMessage: 'Escribe "git show master" en la terminal.'
         },
         'branch': {
           name: 'Branch',
           baseLine: 0.6,
-          commitData: [{ id: 'e137e9b', tags: ['master'] }]
+          commitData: [{ id: 'e137e9b', tags: ['master'] }],
+          initialMessage: 'Escribe "git branch dev" en la terminal.'
         },
         'tag': {
           name: 'Tag',
           baseLine: 0.6,
-          commitData: [{ id: 'e137e9b', tags: ['master'] }]
+          commitData: [{ id: 'e137e9b', tags: ['master'], message: 'first commit' }],
+          initialMessage: 'Escribe "git tag v1.0" en la terminal.'
         },
         'checkout': {
           name: 'Checkout',
@@ -901,7 +1057,7 @@
             { id: 'bb92e0e', parent: 'e137e9b', tags: ['master'] },
             { id: 'e088135', parent: 'e137e9b', tags: ['dev'] }
           ],
-          initialMessage: 'Usa git checkout, git branch y git commit comandos hasta que los entiendas.'
+          initialMessage: 'Escribe "git checkout dev" en la terminal.'
         },
         'checkout-b': {
           name: 'Checkout-b',
@@ -912,7 +1068,7 @@
             { id: 'bb92e0e', parent: 'f5b32c8', tags: ['master'] },
             { id: 'e088135', parent: 'e137e9b', tags: ['dev'] }
           ],
-          initialMessage: 'Usa git checkout -b, git branch y git commit comandos hasta que los entiendas.'
+          initialMessage: 'Escribe "git checkout -b staging" en la terminal.'
         },
         'reset': {
           name: 'Reset',

@@ -857,6 +857,21 @@ define(['d3'], function () {
             this.branch('[' + name + ']');
         },
 
+        deleteTag: function (commitHash, tagName) {
+            var commit = this.getCommit(commitHash);
+
+            if (!commit) {
+                throw new Error('No se puede encontrar el tag: ' + tagName);
+            }
+
+            if (commit.tags.indexOf(tagName) === -1) {
+                throw new Error('El tag no existe.');
+            }
+
+            commit.tags.splice(commit.tags.indexOf(tagName), 1);
+            this.renderTags();
+        },
+
         deleteBranch: function (name) {
             var branchIndex,
                 commit;

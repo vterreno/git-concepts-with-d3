@@ -14,6 +14,7 @@ define(['d3'], function () {
         this._tempCommand = '';
         this.stagingArea = [];
         this.workingDirectory = config.workingDirectory || []; 
+        this.tags = [];
         this.previousHash = config.previousHash;
         this.rebaseConfig = {}; // to configure branches for rebase
     }
@@ -191,6 +192,7 @@ define(['d3'], function () {
         },
 
         error: function (msg) {
+            if (msg == "Cannot read properties of null (reading 'parent')") return;
             msg = msg || 'Comando no reconocido';
             this.log.append('div').classed('error', true).html(msg);
             this._scrollToBottom();
@@ -216,7 +218,6 @@ define(['d3'], function () {
                         this.stagingArea.push(file);
                     }
                 });
-                this.info('Se han agregado todos los archivos al staging area.');
                 return;
             }
 
@@ -231,11 +232,7 @@ define(['d3'], function () {
             // Verificar si ya está en el stagingArea
             const fileObjStagingArea = this.stagingArea.find(f => f.name === file);
             if (!fileObjStagingArea) {
-                // Agregar archivo al stagingArea
                 this.stagingArea.push(fileObjWorkingDirectory);
-                this.info(file + ' ha sido agregado al staging area.');
-            } else {
-                this.info(file + ' ya estaba en el staging area.');
             }
         },
 
@@ -396,7 +393,6 @@ define(['d3'], function () {
             let count = 0;
 
             this.workingDirectory.forEach(file => {
-                console.log(file);
                 if (file.commit == true) {
                     count++
                 }
@@ -407,26 +403,48 @@ define(['d3'], function () {
             }
 
             if (this.stagingArea.length > 0 && flag === false) {
-                message += 'Changes to be committed:\n';
-                this.stagingArea.forEach(file => {
-                    if (file.commit == false) {
-                        message += '  new file:   ' + file.name + '\n';
-                    } 
-                });
-                message += '\n';
+                if (args[0] == '--short' || args[0] == '-s') {
+                    message = message == 'On branch master\n\n' ? '' : message;
+                    this.stagingArea.forEach(file => {
+                        if (file.commit == false) {
+                            message += 'A ' + file.name + '\n';
+                        } 
+                    });
+                } else {
+                    message += 'Changes to be committed:\n';
+                    this.stagingArea.forEach(file => {
+                        if (file.commit == false) {
+                            message += '  new file:   ' + file.name + '\n';
+                        } 
+                    });
+                    message += '\n';
+                }
             }
             // Simulamos los archivos en el directorio de trabajo que no están en staging area
             const untracked = this.workingDirectory.filter(file => this.stagingArea.indexOf(file) === -1);
             if (untracked.length > 0 && flag === false) {
-                message += 'Untracked files:\n';
-                untracked.forEach(file => {
-                    if (file.commit == false ){
-                        message += '  ' + file.name + '\n';
-                    }
-                });
-                message += '\n';
+                if (args[0] == '--short' || args[0] == '-s') {
+                    message == 'On branch master\n\n' ? '' : message;
+                    untracked.forEach(file => {
+                        if (file.commit == false) {
+                            message += '?? ' + file.name + '\n';
+                        }
+                    });
+                    message += '\n';
+                } else {
+                    message += 'Untracked files:\n';
+                    message += '(use "git add <file>..." to include in what will be committed)\n';
+                    untracked.forEach(file => {
+                        if (file.commit == false ){
+                            message += '  ' + file.name + '\n';
+                        }
+                    });
+                    message += '\n';
+                    message += 'no changes added to commit (use "git add" and/or "git commit -a")\n';
+                    message += '\n';
+                }
             } else {
-                message += 'nothing added to commit but untracked files present (use "git add" to track)\n';
+                message += 'nothing to commit, working tree clean\n';
             }
             this.info(message);
         },
@@ -442,15 +460,107 @@ define(['d3'], function () {
                 return;
             }
 
-            while (args.length > 0) {
-                var arg = args.shift();
-
+            // Tag anotado
+            if (args[0] === '-a') {
+                let tagName = args[1];
+                let tagMessage = args[2] == '-m' ? args.slice(3).join(' ').replace(/^["']+|["']+$/g, '') : '';
+                let flagCommit = false;
+                let tag = {
+                    name: tagName,
+                    message: tagMessage,
+                    isLightweight: false,
+                }
+                if (args[2] && args[2] != '-m') {
+                    tag.commit = args[2];
+                    flagCommit = true;
+                } else {
+                    tag.commit = this.historyView.getCommit('HEAD').id
+                }
+            
                 try {
-                    this.historyView.tag(arg);
+                    if (flagCommit) {
+                        this.historyView.getCommit(tag.commit).tags.push("[" + tag.name + "]");
+                        this.historyView.renderTags();
+                    } else {
+                        this.historyView.tag(tag.name);
+                    }
+                    
                 } catch (err) {
                     if (err.message.indexOf('ya existe') === -1) {
                         throw new Error(err.message);
                     }
+                }
+
+                this.tags.push(tag);
+            } 
+            else if (args[0] === '-d') {
+                let tagName = args[1];
+                let tag = this.tags.find(tag => tag.name === tagName);
+                if (tag) {
+                    this.tags = this.tags.filter(tag => tag.name !== tagName);
+                    this.historyView.deleteTag(tag.commit, "[" + tagName + "]");
+                } else {
+                    this.info('fatal: tag ' + tagName + ' no encontrada.');
+                }
+            } // Tag ligero
+            else {
+                let tagName = args[0];
+                let tag = {
+                    name: tagName,
+                    isLightweight: true,
+                    commit: this.historyView.getCommit('HEAD').id
+                }
+
+                try {
+                    this.historyView.tag(tag.name);
+                } catch (err) {
+                    if (err.message.indexOf('ya existe') === -1) {
+                        throw new Error(err.message);
+                    }
+                }
+
+                this.tags.push(tag);
+            }
+        },
+
+        show: function (args) {
+            if (args.length < 1) {
+                this.info(
+                    'Por favor provee un tag, commit o branch para mostrar.'
+                );
+                return;
+            }
+
+            let ref = args[0];
+            let commit = this.historyView.getCommit(ref);
+            
+            if (commit && this.tags.find(tag => tag.name === ref) == undefined) {
+                this.info("commit: " + commit.id + "..." + "\n");
+                this.info("Author: John Doe <johndoe@gmail.com>\n");
+                this.info("Date: Fri Mar 21 20:28:32 2025 -0300 \n\n");
+                if (commit.message != undefined) {
+                    this.info("  " + commit.message);
+                }
+            } else {
+                let tag = this.tags.find(tag => tag.name === ref);
+                
+                if (tag) {
+                    if (tag.isLightweight === false) {
+                        this.info("tag " + tag.name + "\n");
+                        this.info("Tagger: John Doe <johndoe@gmail.com>\n");
+                        this.info("Date: Fri Mar 21 20:28:32 2025 -0300 \n\n");
+                        this.info(tag.message);
+                    }
+                    this.info("commit: " + tag.commit + "..." + "\n");
+                    this.info("Author: John Doe <johndoe@gmail.com>\n");
+                    this.info("Date: Fri Mar 21 20:28:32 2025 -0300 \n\n");
+
+                    commit = this.historyView.getCommit(tag.commit);
+                    if (commit.message != undefined) {
+                        this.info("  " + commit.message);
+                    }
+                } else {
+                    this.info('fatal: referencia no encontrada: ' + ref);
                 }
             }
         },
