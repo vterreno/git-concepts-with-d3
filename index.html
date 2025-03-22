@@ -836,14 +836,25 @@
           <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
           <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Diferencias entre reset y revert</h2>
           <p class="text-sm md:text-base">
-            La primera diferencia, es que <span class="cmd font-mono bg-gray-100 px-1 rounded">git revert</span> no altera el historial del proyecto <span class="italic">; 
-              se considera una acción "segura" para revertir cambios en repositorios compartidos</span>. 
+            La primera diferencia, es que <span class="cmd font-mono bg-gray-100 px-1 rounded">git revert</span> no
+            altera el historial del proyecto <span class="italic">;
+              se considera una acción "segura" para revertir cambios en repositorios compartidos</span>.
           </p>
           <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
-            La segunda es que <span class="cmd font-mono bg-gray-100 px-1 rounded">git revert</span> permite hacer foco en commit particular en un punto arbitrario de la historia
-            del repositorio. Mientras que, <span class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span> solamente puede trabajar hacia atrás en la historia desde el commit actual.
-            Por ejemplo, si queremos deshacer un commit que ocurrió hace 5 commits atrás, <span class="cmd font-mono bg-gray-100 px-1 rounded">git revert</span> es la opción correcta. De lo contrario, 
-            si utilizaramos <span class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span> estaríamos eliminando los commits posteriores a ese commit.
+            La segunda es que <span class="cmd font-mono bg-gray-100 px-1 rounded">git revert</span> permite hacer foco
+            en commit particular en un punto arbitrario de la historia
+            del repositorio. Mientras que, <span class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span>
+            solamente puede trabajar hacia atrás en la historia desde el commit actual.
+            Por ejemplo, si queremos deshacer un commit que ocurrió hace 5 commits atrás, <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git revert</span> es la opción correcta. De lo contrario,
+            si utilizaramos <span class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span> estaríamos eliminando
+            los commits posteriores a ese commit.
+          </p>
+          <p class="text-sm md:text-base">
+            <a href="https://www.atlassian.com/git/tutorials/undoing-changes/git-revert" target="_blank"
+              class="italic text-blue-500 hover:underline">
+              Imagen de comparación entre git revert y git reset - Bitbucket
+            </a>
           </p>
           <!-- End Contenido -->
 
@@ -855,16 +866,88 @@
         <section id="ExplainGitMerge-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
           <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">¿Qué es una fusión?</h2>
+          <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
+            La fusión en Git es el proceso de combinar ramas o commits en la rama actual. Git toma los cambios
+            realizados en otra rama (o en commits específicos) desde que se separó de la rama actual y los integra en
+            ésta. La fusión es una operación fundamental en Git, ya que permite combinar el trabajo de diferentes
+            desarrolladores que trabajan en paralelo.
+          </p>
+          <p class="text-sm md:text-base">
+            El proceso puede dar lugar a dos situaciones principales:
+          <ul class="list-disc ml-6 text-sm md:text-base">
+            <li class="my-2">
+              <b>Fusión por avance rápido ("fast-forward"):</b> si la rama actual es un ancestro directo de la rama que
+              se quiere unir, Git simplemente actualiza el puntero (HEAD) de la rama actual al commit más reciente de la
+              otra rama. <b>En este caso, no se crea un nuevo commit de merge.</b>
+            </li>
+            <li>
+              <b>Fusión de ramas divergentes:</b> cuando las ramas han divergido, es decir, han tenido cambios
+              diferentes, Git "reproduce" los cambios realizados en la rama que se une y crea un nuevo commit que
+              tiene dos padres (uno para cada rama). Este commit de merge refleja la integración de ambos conjuntos de
+              cambios.
+            </li>
+          </ul>
+          <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+          <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
+            ℹ️ <b>Aclaración:</b> siempre que se debe realizar un merge surge confusión sobre qué rama es la que se va a
+            fusionar y va a tener los cambios.
+            Es por ello que la rama que desean que tenga los cambios se debe encontrar en la rama actual, luego realizan
+            el merge con la rama que posee los cambios.
+            <b>La fusión TRAE los cambios de una rama a otra.</b>
+          </p>
+          <p class="text-sm md:text-base">
+            Es recomendable que todos tus cambios locales estén confirmados (o guardados usando git stash) para evitar
+            que se sobrescriban durante el merge. También,
+            Git abortará la fusión si hay cambios sin confirmar en el área de staging que puedan interferir con el
+            proceso.
+          </p>
+          <p class="text-sm md:text-base">
+            Si los cambios en ambas ramas afectan la misma parte de un archivo, Git no puede decidir automáticamente
+            cuál versión usar. En ese caso, se produce un conflicto
+            y el archivo se marcará con indicadores (<<<<<<<,=======,>>>>>>>). En estos casos podrás: resolver el
+              conflicto manualmente y luego agregar los cambios con git add, o
+              utilizar herramientas de fusión gráfica.
+          </p>
+          <p class="text-sm md:text-base">
+            Es posible abortar el merge con <span class="cmd font-mono bg-gray-100 px-1 rounded">git merge
+              --abort</span> si prefieres cancelar la operación.
+          </p>
           <p>
             <span class="cmd font-mono bg-gray-100 px-1 rounded">git merge</span> crea un commit con dos padres,
             combinando los cambios de ambas ramas.
           </p>
-          <p>
-            Si no hay divergencia, se realiza una fusión por avance rápido (“fast-forward”). Prueba a hacer <span
-              class="cmd font-mono bg-gray-100 px-1 rounded">git merge dev</span> en la rama ‘ff’.
+          <h3 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800 mt-4">Estrategías de merge</h3>
+          <p class="text-sm md:text-base">
+            Git permite seleccionar distintas estrategias para combinar los cambios. Algunas de las más utilizadas son:
+          <ul class="list-disc ml-6 text-sm md:text-base">
+            <li class="my-2">
+              <b>Fast-Forward:</b> actualiza el puntero de la rama actual si no hay cambios divergentes. Se puede
+              forzar la creación de un commit de merge usando la opción <span
+                class="cmd font-mono bg-gray-100 px-1 rounded">--no-ff</span>.
+            </li>
+            <li class="my-2">
+              <b> Merge tradicional (3-way):</b> compara la base común y las dos ramas para integrar los cambios,
+              creando un commit de merge que une ambas historias.
+            </li>
+            <li class="mt-2">
+              <b>Estrategias especializadas:</b> Git ofrece opciones como ours, theirs, y opciones para tratar
+              diferencias en espacios en blanco o renombres, que pueden ayudar a resolver conflictos específicos.
+            </li>
+          </ul>
           </p>
-          <div class="playground-container mt-4"></div>
+          <p class="text-sm md:text-base">
+            Cada estrategia tiene sus propias opciones, pero en la mayoría de los casos la <b>estrategia predeterminada
+              (ort o recursive) </b>es suficiente para la fusión de ramas. Si
+            te interesa conocer más al respecto, te recomiendo leer el siguiente <a
+              href="https://www.atlassian.com/git/tutorials/using-branches/merge-strategy" target="_blank"
+              class="text-blue-500 hover:underline">artículo</a>.
+          </p>
+          <!-- End Contenido -->
+
+          <div class="playground-container mt-4" id="playground-merge"></div>
         </section>
+        <!-- End Git Merge -->
 
         <section id="ExplainGitRebase-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
