@@ -949,18 +949,96 @@
         </section>
         <!-- End Git Merge -->
 
+        <!-- Start Git Rebase -->
         <section id="ExplainGitRebase-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
-          <p>
-            <span class="cmd font-mono bg-gray-100 px-1 rounded">git rebase</span> mueve los commits de una rama para
-            reubicarlos sobre otro commit.
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">¿Qué es un rebase?</h2>
+          <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
+            El rebase en Git permite mover o combinar una serie de commits a una nueva <b>"base" (commit inicial)</b> .
+            Esto ayuda a
+            mantener un historial lineal y limpio, como si hubieras trabajado siempre desde la versión más reciente del
+            proyecto.
           </p>
-          <p>
-            Observa cómo cambian los IDs de commit al realizar la rebase; recuerda que genera nuevos commits, por lo que
-            no debe usarse en ramas compartidas.
+          <p class="text-sm md:text-base">
+            Ejemplo visual:
           </p>
-          <div class="playground-container mt-4"></div>
+          <pre class="text-sm md:text-base">                         A---B---C (rama_feature)  
+                        /  
+          D---E---F---G (main)  
+          </pre>
+          <p class="text-sm md:text-base mb-4">
+            Al hacer <span class="cmd font-mono bg-gray-100 px-1 rounded">git rebase main</span> desde rama_feature, los
+            commits A, B y C se aplican sobre G:
+          </p>
+          <pre lass="text-sm md:text-base">                        A'--B'--C' (rama_feature)  
+                      /  
+          D---E---F---G (main)  
+          </pre>
+          <p class="text-sm md:text-base">
+            De esta forma, mantenemos un historial lineal lo cual evita commits de merge innecesarios. Nos ayuda
+            a sincronizar nuestra rama con los últimos cambios de main o una rama principal. Por último, nos permite 
+            limpiar commits, es decir, podemos combinar, editar o eliminar commits antes de fusionarlos.
+          </p>
+          <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+          <h3 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Modos de rebase</h3>
+          <p class="text-sm md:text-base">
+            Al igual que con el comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span>, el comando
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git rebase</span> tiene distintos modos de uso:
+          </p>
+          <ul class="list-disc ml-6 text-sm md:text-base">
+            <li class="my-2">
+              <b>Rebase estándar:</b> mueve automáticamente los commits de tu rama actual a la nueva base.
+            </li>
+            <li class="my-2">
+              <b>Rebase interactivo:</b> permite editar, combinar o eliminar commits antes de aplicarlos. Los comandos más usados son:
+              <ul class="list-disc ml-6 text-sm md:text-base">
+                <li class="my-2">
+                  <b>pick:</b> mantiene el commit.
+                </li>
+                <li class="my-2">
+                  <b>reword:</b> cambia el mensaje del commit.
+                </li>
+                <li class="my-2">
+                  <b>edit:</b> modifica el contenido del commit.
+                </li>
+                <li class="my-2">
+                  <b>squash:</b> combina commits anteriores.
+                </li>
+                <li class="my-2">
+                  <b>drop:</b> elimina el commit.
+                </li>
+              </ul>
+            </li>
+          </ul>
+          
+          <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
+            ℹ️ <b>Nota:</b> el rebase reescribe la historia del proyecto, por lo que no se recomienda en ramas
+            compartidas. Siempre es mejor utilizarlo en ramas locales. Si hay cambios contradictorios, Git detendrá el rebase, podes 
+            resolver los conflictos y continuar con <span class="cmd font-mono bg-gray-100 px-1 rounded">git rebase --continue</span> o
+            cancelar con <span class="cmd font-mono bg-gray-100 px-1 rounded">git rebase --abort</span>.
+          </p>
+          <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+          <h3 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Usos avanzados</h3> 
+          <ul class="list-disc ml-6 text-sm md:text-base">
+            <li class="my-2">
+              <b>Rebase</b> <span class="font-mono bg-gray-100 px-1 rounded">--onto</span>: útil para mover una rama que depende de otra. Por ejemplo, si featureB se basó en featureA pero debe moverse a main:
+              <span class="cmd font-mono bg-gray-100 px-1 rounded">git rebase --onto main featureA featureB</span>.
+            </li>
+            <li class="my-2">
+              <b>Recuperar commits perdidos:</b> si accidentalmente borraste algunos commits, usa 
+              <span class="cmd font-mono bg-gray-100 px-1 rounded">git reflog</span> para encontrar su hash y restaurarlos.
+            </li>
+          </ul>
+          <p class="text-sm md:text-base">
+            Este comando es ideal para limpiar ramas locales antes de fusionarlas con la rama principal. También es
+            útil para mantener un historial limpio y fácil de seguir. En el playground solamente se puede utilizar el modo estándar de rebase.
+          </p>
+          <!-- End Contenido -->
+
+          <div class="playground-container mt-4" id="playground-rebase"></div>
         </section>
+        <!-- End Git Rebase -->
 
         <section id="ExplainGitFetch-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">

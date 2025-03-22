@@ -361,7 +361,8 @@ g.head-tag > text {
 #playground-tag .file-box,
 #playground-reset .file-box,
 #playground-revert .file-box,
-#playground-merge .file-box {
+#playground-merge .file-box,
+#playground-rebase .file-box {
     width: 70%;
     margin-left: 30%;
 }
@@ -372,7 +373,8 @@ g.head-tag > text {
 #playground-tag .control-box,
 #playground-reset .control-box,
 #playground-revert .control-box,
-#playground-merge .control-box {
+#playground-merge .control-box,
+#playground-rebase .control-box {
     width: 30%;
 }
 
@@ -382,7 +384,8 @@ g.head-tag > text {
 #playground-tag .svg-container,
 #playground-reset .svg-container,
 #playground-revert .svg-container,
-#playground-merge .svg-container {
+#playground-merge .svg-container,
+#playground-rebase .svg-container {
     margin-left: 30%;
 }
 
@@ -458,7 +461,8 @@ g.head-tag > text {
     #playground-show .control-box,
     #playground-reset .control-box,
     #playground-revert .control-box,
-    #playground-merge .control-box {
+    #playground-merge .control-box,
+    #playground-rebase .control-box {
         width: 100%;
     }
     
@@ -470,7 +474,8 @@ g.head-tag > text {
     #playground-show .svg-container,
     #playground-reset .svg-container,
     #playground-revert .svg-container,
-    #playground-merge .svg-container {
+    #playground-merge .svg-container,
+    #playground-rebase .svg-container {
         margin-left: 0%;
         padding-top: 0;
         position: absolute;
@@ -498,7 +503,8 @@ g.head-tag > text {
 
     #playground-checkout .file-box, 
     #playground-checkout-b .file-box,
-    #playground-merge .file-box {
+    #playground-merge .file-box,
+    #playground-rebase .file-box {
         width: 100%;
         margin-left: 0%;
         position: absolute;
@@ -514,7 +520,7 @@ g.head-tag > text {
         height: 57.5em;
     }
 
-    #playground-checkout, #playground-checkout-b, #playground-merge {
+    #playground-checkout, #playground-checkout-b, #playground-merge, #playground-rebase {
         height: 63.5em;
     }
 
