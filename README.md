@@ -21,6 +21,8 @@
 
 Este proyecto tiene como finalidad ayudar a desarrolladores y estudiantes que están comenzando a adentrarse en el mundo del desarrollo o que ya poseen cierta experiencia. Conocer cómo funcionan los comandos de Git es fundamental para gestionar las versiones de nuestros proyectos. Git es una herramienta clave para el versionado de código en sistemas distribuidos. Aunque no se abordan los temas en profundidad, los invito a continuar investigando por su cuenta en la bibliografía utilizada a continuación. Es crucial comprender cómo funcionan las herramientas que utilizamos a diario para ser más eficientes y hacer uso de las buenas prácticas.
 
+### Si te resultó útil dale una ⭐️ al repo 
+
 ## 🔧 Instalación
 
 El proyecto en sí no precisa de ninguna instalación, para poder levantarlo se puede utilizar la extensión [**Live Server**](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) en Visual Studio Code.
