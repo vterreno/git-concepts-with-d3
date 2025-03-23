@@ -987,7 +987,7 @@ define(['d3'], function () {
                 commit.reverted = true;
                 this.commit({ reverts: commit.id });
             } else {
-                throw new Error(ref + 'no es un antecesor del HEAD.');
+                throw new Error(ref + ' no es un antecesor del HEAD.');
             }
         },
 
