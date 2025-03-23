@@ -1134,18 +1134,25 @@
         </section>
         <!-- End Git Push -->
 
+        <!-- Start Git Clean -->
         <section id="ExplainGitClean-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
-          <p>
-            Un ejemplo sencillo es restaurar el estado de tu rama local al del origen con <span
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">1. Ejemplo práctico</h2>
+          <p class="text-sm md:text-base">
+            En muchas situaciones, es posible que deseamos volver a un estado limpio del repositorio remoto. Para ello,
+            podemos restaurar el estado de nuestra rama local con la del origen utilizando <span
               class="cmd font-mono bg-gray-100 px-1 rounded">git reset origin/master</span>.
           </p>
-          <p>
-            Nota: Esto no elimina archivos no rastreados. Para ello, usa <span
+          <p class="text-sm md:text-base">
+            ℹ️ <b>Nota:</b> Esto no elimina archivos no rastreados. En esos casos, debemos utilizar <span
               class="cmd font-mono bg-gray-100 px-1 rounded">git clean -df</span>.
           </p>
-          <div class="playground-container mt-4"></div>
+          <!-- End Contenido -->
+
+          <div class="playground-container mt-4" id="playground-clean"></div>
         </section>
+        <!-- End Git Clean -->
 
         <section id="ExplainGitFetchRebase-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
@@ -1451,7 +1458,7 @@
             { id: '090e2b8', parent: '7eb7654' },
             { id: 'ee5df4b', parent: '090e2b8', tags: ['master'] }
           ],
-          initialMessage: 'Compara cuidadosamente los IDs de los commits entre el origen y el repositorio local. Luego, escribe "git pull".'
+          initialMessage: 'Compara cuidadosamente los IDs de los commits entre el origen y el repositorio local. Luego, escribe "git pull" en la terminal.'
         },
         'push': {
           name: 'Push',
@@ -1464,7 +1471,7 @@
             { id: 'e137e9b' },
             { id: '7eb7654', parent: 'e137e9b', tags: ['master'] }
           ],
-          initialMessage: 'Compara cuidadosamente los IDs de los commits entre el origen y el repositorio local. Luego, escribe "git push".'
+          initialMessage: 'Compara cuidadosamente los IDs de los commits entre el origen y el repositorio local. Luego, escribe "git push" en la terminal.'
         },
         'clean': {
           name: 'Clean',
@@ -1475,7 +1482,7 @@
             { id: '0e70093', parent: 'e137e9b' },
             { id: '3e33afd', parent: '0e70093', tags: ['master'] }
           ],
-          initialMessage: 'Escribe "git reset origin/master".'
+          initialMessage: 'Escribe "git reset origin/master" en la terminal.'
         },
         'fetchrebase': {
           name: 'FetchRebase',

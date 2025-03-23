@@ -295,11 +295,15 @@ g.head-tag > text {
     width: 45%;
 }
 
-#playground-commit .control-box, #playground-show .control-box {
+#playground-commit .control-box, 
+#playground-show .control-box,
+#playground-clean .control-box {
     width: 40%;
 }
 
-#playground-commit .svg-container, #playground-show .svg-container {
+#playground-commit .svg-container, 
+#playground-show .svg-container,
+#playground-clean .svg-container {
     margin-left: 40%;
 }
 
@@ -351,7 +355,8 @@ g.head-tag > text {
 }
 
 #playground-commit .file-box,
-#playground-show .file-box {
+#playground-show .file-box,
+#playground-clean .file-box {
     width: 60%;
     margin-left: 40%;
 }
@@ -487,7 +492,8 @@ g.head-tag > text {
     #playground-rebase .control-box,
     #playground-fetch .control-box,
     #playground-pull .control-box,
-    #playground-push .control-box {
+    #playground-push .control-box,
+    #playground-clean .control-box {
         width: 100%;
     }
     
@@ -503,7 +509,8 @@ g.head-tag > text {
     #playground-rebase .svg-container,
     #playground-fetch .svg-container,
     #playground-pull .svg-container,
-    #playground-push .svg-container {
+    #playground-push .svg-container,
+    #playground-clean .svg-container {
         margin-left: 0%;
         padding-top: 0;
         position: absolute;
@@ -512,7 +519,8 @@ g.head-tag > text {
     }
 
     #playground-commit .file-box,
-    #playground-show .file-box {
+    #playground-show .file-box,
+    #playground-clean .file-box {
         width: 100%;
         margin-left: 0%;
         position: absolute;
@@ -543,7 +551,8 @@ g.head-tag > text {
     }
 
     #playground-commit,
-    #playground-show {
+    #playground-show,
+    #playground-clean {
         height: 45em;
     }
 
