@@ -1154,16 +1154,25 @@
         </section>
         <!-- End Git Clean -->
 
+        <!-- Start Git Fetch Rebase -->
         <section id="ExplainGitFetchRebase-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
-          <p>
-            Si trabajas en una rama local y deseas actualizarla con el último código de origin/master sin cambiar de
-            rama,
-            primero ejecuta <span class="cmd font-mono bg-gray-100 px-1 rounded">git fetch</span> y luego <span
-              class="cmd font-mono bg-gray-100 px-1 rounded">git rebase origin/master</span>.
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">2. Ejemplo práctico</h2>
+          <p class="text-sm md:text-base">
+            Si estamos trabajando en una rama local y deseamos actualizarla con el último código de origin/master sin cambiar de
+            rama, podemos hacer un <span class="cmd font-mono bg-gray-100 px-1 rounded">git fetch</span> y luego <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git rebase origin/master</span>. 
           </p>
-          <div class="playground-container mt-4"></div>
+          <p class="text-sm md:text-base">
+            ℹ️ <b>Nota:</b> Al realizar esta acción, estamos alternado la historia de la rama local. Por lo tanto, no es recomendable
+            hacerlo en ramas compartidas.
+          </p>
+          <!-- End Contenido -->
+          
+          <div class="playground-container mt-4" id="playground-fetchrebase"></div>
         </section>
+        <!-- End Git Fetch Rebase -->
 
         <section id="ExplainGitDeleteBranches-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
