@@ -297,13 +297,15 @@ g.head-tag > text {
 
 #playground-commit .control-box, 
 #playground-show .control-box,
-#playground-clean .control-box {
+#playground-clean .control-box,
+#playground-deletebranches .control-box {
     width: 40%;
 }
 
 #playground-commit .svg-container, 
 #playground-show .svg-container,
-#playground-clean .svg-container {
+#playground-clean .svg-container,
+#playground-deletebranches .svg-container {
     margin-left: 40%;
 }
 
@@ -356,7 +358,8 @@ g.head-tag > text {
 
 #playground-commit .file-box,
 #playground-show .file-box,
-#playground-clean .file-box {
+#playground-clean .file-box,
+#playground-deletebranches .file-box {
     width: 60%;
     margin-left: 40%;
 }
@@ -498,7 +501,8 @@ g.head-tag > text {
     #playground-pull .control-box,
     #playground-push .control-box,
     #playground-clean .control-box,
-    #playground-fetchrebase .control-box {
+    #playground-fetchrebase .control-box,
+    #playground-deletebranches .control-box {
         width: 100%;
     }
     
@@ -516,7 +520,8 @@ g.head-tag > text {
     #playground-pull .svg-container,
     #playground-push .svg-container,
     #playground-clean .svg-container,
-    #playground-fetchrebase .svg-container {
+    #playground-fetchrebase .svg-container,
+    #playground-deletebranches .svg-container {
         margin-left: 0%;
         padding-top: 0;
         position: absolute;
@@ -550,7 +555,8 @@ g.head-tag > text {
     #playground-fetch .file-box,
     #playground-pull .file-box,
     #playground-push .file-box,
-    #playground-fetchrebase .file-box {
+    #playground-fetchrebase .file-box,
+    #playground-deletebranches .file-box {
         width: 100%;
         margin-left: 0%;
         position: absolute;
@@ -574,7 +580,8 @@ g.head-tag > text {
     #playground-fetch, 
     #playground-pull,
     #playground-push,
-    #playground-fetchrebase {
+    #playground-fetchrebase,
+    #playground-deletebranches {
         height: 63.5em;
     }
 
@@ -617,7 +624,7 @@ g.head-tag > text {
         bottom: 1em;
     }
 
-    #FetchRebase {
+    #FetchRebase, #DeleteBranches {
         width: 40em;
     }
   }

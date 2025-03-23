@@ -1174,14 +1174,25 @@
         </section>
         <!-- End Git Fetch Rebase -->
 
+        <!-- Start Git Delete Branches -->
         <section id="ExplainGitDeleteBranches-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
-          <p>
-            <span class="cmd font-mono bg-gray-100 px-1 rounded">git branch -d</span> se utiliza para eliminar ramas.
-            Prueba a borrar algunas de las ramas pre-creadas en el playground.
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">3. Ejemplo práctico</h2>
+          <p class="text-sm md:text-base">
+            En Git, las ramas son ligeras y fáciles de crear, pero a veces es necesario
+            eliminarlas para mantener un historial limpio. Para ello, podemos utilizar el comando <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git branch -d</span>.
           </p>
-          <div class="playground-container mt-4"></div>
+          <p class="text-sm md:text-base">
+            ℹ️ <b>Nota:</b> Si la rama que deseas eliminar tiene cambios sin confirmar, Git no permitirá eliminarla. En ese caso,
+            podes forzar la eliminación con <span class="cmd font-mono bg-gray-100 px-1 rounded">git branch -D</span>.
+          </p>
+          <!-- End Contenido -->
+        
+          <div class="playground-container mt-4" id="playground-deletebranches"></div>
         </section>
+        <!-- End Git Delete Branches -->
 
         <section id="ExplainGitFree-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
