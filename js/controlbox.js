@@ -117,9 +117,11 @@ define(['d3'], function () {
             if (split[0].toLowerCase() === 'exit') {
                 document.getElementById('ExplainGitZen-Container').style.display = 'none';
                 history.replaceState(null, "", window.location.pathname + window.location.search);
-                let link = 'open-' + this.previousHash
-                document.getElementById(link).click();
-
+                
+                if (this.previousHash !== '') {
+                    let link = 'open-' + this.previousHash
+                    document.getElementById(link).click();
+                }
             }
 
             this.log.append('div')
