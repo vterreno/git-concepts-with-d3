@@ -375,7 +375,8 @@ g.head-tag > text {
 #playground-fetch .file-box,
 #playground-pull .file-box,
 #playground-push .file-box,
-#playground-fetchrebase .file-box {
+#playground-fetchrebase .file-box,
+#playground-free .file-box {
     width: 70%;
     margin-left: 30%;
 }
@@ -391,7 +392,8 @@ g.head-tag > text {
 #playground-fetch .control-box,
 #playground-pull .control-box,
 #playground-push .control-box,
-#playground-fetchrebase .control-box {
+#playground-fetchrebase .control-box,
+#playground-free .control-box {
     width: 30%;
 }
 
@@ -406,7 +408,8 @@ g.head-tag > text {
 #playground-fetch .svg-container,
 #playground-pull .svg-container,
 #playground-push .svg-container,
-#playground-fetchrebase .svg-container {
+#playground-fetchrebase .svg-container,
+#playground-free .svg-container {
     margin-left: 30%;
 }
 
@@ -418,7 +421,8 @@ g.head-tag > text {
 #playground-fetch .svg-container.remote-container,
 #playground-pull .svg-container.remote-container,
 #playground-push .svg-container.remote-container,
-#playground-fetchrebase .svg-container.remote-container {
+#playground-fetchrebase .svg-container.remote-container,
+#playground-free .svg-container.remote-container {
     top: 16.8em;
     width: 34%;
 }
@@ -502,7 +506,8 @@ g.head-tag > text {
     #playground-push .control-box,
     #playground-clean .control-box,
     #playground-fetchrebase .control-box,
-    #playground-deletebranches .control-box {
+    #playground-deletebranches .control-box,
+    #playground-free .control-box {
         width: 100%;
     }
     
@@ -521,7 +526,8 @@ g.head-tag > text {
     #playground-push .svg-container,
     #playground-clean .svg-container,
     #playground-fetchrebase .svg-container,
-    #playground-deletebranches .svg-container {
+    #playground-deletebranches .svg-container,
+    #playground-free .svg-container {
         margin-left: 0%;
         padding-top: 0;
         position: absolute;
@@ -563,6 +569,13 @@ g.head-tag > text {
         bottom: 31.3em;
     }
 
+    #playground-free .file-box {
+        width: 100%;
+        margin-left: 0%;
+        position: absolute;
+        bottom: 43.9em;
+    }
+
     #playground-commit,
     #playground-show,
     #playground-clean {
@@ -585,10 +598,15 @@ g.head-tag > text {
         height: 63.5em;
     }
 
+    #playground-free {
+        height: 76.3em;
+    }
+
     #playground-fetch .svg-container.remote-container,
     #playground-pull .svg-container.remote-container,
     #playground-push .svg-container.remote-container,
-    #playground-fetchrebase .svg-container.remote-container {
+    #playground-fetchrebase .svg-container.remote-container,
+    #playground-free .svg-container.remote-container {
         position: absolute;
         top: 36em;
         right: 0;

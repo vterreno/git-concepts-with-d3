@@ -1194,13 +1194,19 @@
         </section>
         <!-- End Git Delete Branches -->
 
+        <!-- Start Git Free Play -->
         <section id="ExplainGitFree-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
-          <p>
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Playground</h2>
+          <p class="text-sm md:text-base">
             Esta es una zona libre para que experimentes sin restricciones.
           </p>
-          <div class="playground-container mt-4"></div>
+          <!-- End Contenido -->
+
+          <div class="playground-container mt-4" id="playground-free"></div>
         </section>
+        <!-- End Git Free Play -->
       </main>
     </div>
 
@@ -1536,7 +1542,7 @@
             { id: '593ae02', parent: '9e6c322', tags: ['terran'] }
           ],
           currentBranch: 'terran',
-          initialMessage: 'Elimina algunas ramas.'
+          initialMessage: 'Ingresa el comando "git branch -d protoss" en la terminal.'
         },
         'freeplay': {
           name: 'Free',
@@ -1573,7 +1579,7 @@
             name: 'Zen',
             height: '100%',
             commitData: [{ id: 'e137e9b', tags: ['master'], message: 'first commit' }],
-            initialMessage: 'Disfruta! Para salir del modo Zen, escribe "exit" en la terminal.',
+            initialMessage: 'Para salir del modo Zen, escribe "exit" en la terminal. Disfruta! ',
             previousHash: previousHash
           });
         }
