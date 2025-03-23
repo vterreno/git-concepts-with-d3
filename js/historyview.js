@@ -293,14 +293,14 @@ define(['d3'], function () {
                     break;
                 }
 
-                var matchedTag = function() { 
+                var matchedTag = function () {
                     for (var j = 0; j < commit.tags.length; j++) {
                         var tag = commit.tags[j];
                         if (tag === ref) {
                             matchedCommit = commit;
                             return true;
                         }
-                        
+
                         if (tag.indexOf('[') === 0 && tag.indexOf(']') === tag.length - 1) {
                             tag = tag.substring(1, tag.length - 1);
                         }
@@ -360,7 +360,7 @@ define(['d3'], function () {
             svgContainer = container.append('div')
                 .classed('svg-container', true)
                 .classed('remote-container', this.isRemote);
-                
+
             svg = svgContainer.append('svg:svg');
 
             svg.attr('id', this.name)
@@ -368,11 +368,22 @@ define(['d3'], function () {
                 .attr('height', this.height);
 
             if (this.isRemote) {
-                svg.append('svg:text')
+                const toggleGroup = svg.append('svg:g')
+                    .attr('transform', `translate(10, 25)`)
+                    .style('cursor', 'pointer')
+                    .on('click', () => this.toggleContainerVisibility());
+
+                // Flecha izquierda (◀)
+                toggleGroup.append('svg:text')
+                    .classed('toggle-arrow', true)
+                    .text('◀')
+                    .attr('x', 0);
+
+                // Nombre del remoto
+                toggleGroup.append('svg:text')
                     .classed('remote-name-display', true)
                     .text(this.remoteName)
-                    .attr('x', 10)
-                    .attr('y', 25);
+                    .attr('x', 20);
             } else {
                 svg.append('svg:text')
                     .classed('remote-name-display', true)
@@ -398,6 +409,9 @@ define(['d3'], function () {
         },
 
         destroy: function () {
+            this.commitData = [];
+            this.branches = [];
+            this.currentBranch = null;
             this.svg.remove();
             this.svgContainer.remove();
             clearInterval(this.refreshSizeTimer);
@@ -409,6 +423,27 @@ define(['d3'], function () {
             }
         },
 
+        toggleContainerVisibility: function () {
+            const elementsToToggle = this.svg.selectAll('.commits, .tags, .pointers');
+            const isHidden = elementsToToggle.style('display') === 'none';
+
+            elementsToToggle.style('display', isHidden ? 'inline' : 'none');
+
+            // Ajustar altura del SVG y contenedor padre
+            const newHeight = isHidden ? this.height : 40;
+            const container = d3.select(this.svg.node().parentNode);
+
+            this.svg.attr('height', newHeight);
+            container.style({
+                'height': newHeight + 'px',
+                'overflow-y': 'hidden',
+                'overflow-x': isHidden ? 'auto' : 'hidden'
+            });
+
+            this.svg.select('.toggle-arrow')
+                .text(isHidden ? '◀' : '▶');
+        },
+
         _calculatePositionData: function () {
             for (var i = 0; i < this.commitData.length; i++) {
                 var commit = this.commitData[i];
@@ -417,8 +452,8 @@ define(['d3'], function () {
                 preventOverlap(commit, this);
             }
         },
-        
-        _resizeSvg: function() {
+
+        _resizeSvg: function () {
             var ele = document.getElementById(this.svg.node().id);
             var container = ele.parentNode;
             var currentWidth = ele.offsetWidth;
@@ -518,7 +553,7 @@ define(['d3'], function () {
                 .classed('commit-pointer', true)
                 .call(fixPointerStartPosition, view)
                 .attr('x2', function () { return d3.select(this).attr('x1'); })
-                .attr('y2', function () {  return d3.select(this).attr('y1'); })
+                .attr('y2', function () { return d3.select(this).attr('y1'); })
                 .attr('marker-end', REG_MARKER_END)
                 .transition()
                 .duration(500)
@@ -582,7 +617,7 @@ define(['d3'], function () {
             this._renderText('message-label', function (d) { return d.message; }, 24);
         },
 
-        _renderText: function(className, getText, delta) {
+        _renderText: function (className, getText, delta) {
             var view = this,
                 existingTexts,
                 newtexts;
@@ -615,14 +650,14 @@ define(['d3'], function () {
                         this.branches.push(tagName);
                     }
 
-                    tagData.push({name: tagName, commit: c.id});
+                    tagData.push({ name: tagName, commit: c.id });
                 }
             }
 
             if (!headCommit) {
                 headCommit = this.getCommit(this.currentBranch);
                 headCommit.tags.push('HEAD');
-                tagData.push({name: 'HEAD', commit: headCommit.id});
+                tagData.push({ name: 'HEAD', commit: headCommit.id });
             }
 
             // find out which commits are not branchless
@@ -726,8 +761,8 @@ define(['d3'], function () {
             newTags.append('svg:text')
                 .text(function (d) {
                     if (d.name.indexOf('[') === 0 && d.name.indexOf(']') === d.name.length - 1)
-                        return d.name.substring(1, d.name.length - 1); 
-                    return d.name; 
+                        return d.name.substring(1, d.name.length - 1);
+                    return d.name;
                 })
                 .attr('y', function (d) {
                     return tagY(d, view) + 14;
@@ -950,7 +985,7 @@ define(['d3'], function () {
 
             if (this.isAncestor(commit, 'HEAD')) {
                 commit.reverted = true;
-                this.commit({reverts: commit.id});
+                this.commit({ reverts: commit.id });
             } else {
                 throw new Error(ref + 'no es un antecesor del HEAD.');
             }
@@ -984,15 +1019,15 @@ define(['d3'], function () {
                 while (branchStartCommit.parent !== currentCommit.id) {
                     branchStartCommit = this.getCommit(branchStartCommit.parent);
                 }
-                
+
                 branchStartCommit.isNoFFBranch = true;
-                
-                this.commit({parent2: mergeTarget.id, isNoFFCommit: true});
+
+                this.commit({ parent2: mergeTarget.id, isNoFFCommit: true });
             } else if (this.isAncestor(currentCommit, mergeTarget)) {
                 this.fastForward(mergeTarget);
                 return 'Fast-Forward';
             } else {
-                this.commit({parent2: mergeTarget.id});
+                this.commit({ parent2: mergeTarget.id });
             }
         },
 

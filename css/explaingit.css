@@ -70,6 +70,7 @@ span.cmd {
     background-color: #EFF1FF;
     border-left: 1px dotted #AAA;
     border-bottom: 1px dotted #AAA;
+    transition: height 0.3s ease;
 }
 
 #ExplainGitZen-Container {
@@ -362,7 +363,10 @@ g.head-tag > text {
 #playground-reset .file-box,
 #playground-revert .file-box,
 #playground-merge .file-box,
-#playground-rebase .file-box {
+#playground-rebase .file-box,
+#playground-fetch .file-box,
+#playground-pull .file-box,
+#playground-push .file-box {
     width: 70%;
     margin-left: 30%;
 }
@@ -374,7 +378,10 @@ g.head-tag > text {
 #playground-reset .control-box,
 #playground-revert .control-box,
 #playground-merge .control-box,
-#playground-rebase .control-box {
+#playground-rebase .control-box,
+#playground-fetch .control-box,
+#playground-pull .control-box,
+#playground-push .control-box {
     width: 30%;
 }
 
@@ -385,7 +392,10 @@ g.head-tag > text {
 #playground-reset .svg-container,
 #playground-revert .svg-container,
 #playground-merge .svg-container,
-#playground-rebase .svg-container {
+#playground-rebase .svg-container,
+#playground-fetch .svg-container,
+#playground-pull .svg-container,
+#playground-push .svg-container {
     margin-left: 30%;
 }
 
@@ -394,6 +404,18 @@ g.head-tag > text {
     width: 10px;
 }
 
+#playground-fetch .svg-container.remote-container,
+#playground-pull .svg-container.remote-container,
+#playground-push .svg-container.remote-container {
+    top: 16.8em;
+    width: 34%;
+}
+
+.svg-container.remote-container svg.collapsed .commits,
+.svg-container.remote-container svg.collapsed .tags,
+.svg-container.remote-container svg.collapsed .pointers {
+    display: none !important;
+}
 
 /* Ajustes generales para móviles */
 @media (max-width: 767px) {
@@ -462,7 +484,10 @@ g.head-tag > text {
     #playground-reset .control-box,
     #playground-revert .control-box,
     #playground-merge .control-box,
-    #playground-rebase .control-box {
+    #playground-rebase .control-box,
+    #playground-fetch .control-box,
+    #playground-pull .control-box,
+    #playground-push .control-box {
         width: 100%;
     }
     
@@ -475,7 +500,10 @@ g.head-tag > text {
     #playground-reset .svg-container,
     #playground-revert .svg-container,
     #playground-merge .svg-container,
-    #playground-rebase .svg-container {
+    #playground-rebase .svg-container,
+    #playground-fetch .svg-container,
+    #playground-pull .svg-container,
+    #playground-push .svg-container {
         margin-left: 0%;
         padding-top: 0;
         position: absolute;
@@ -504,7 +532,10 @@ g.head-tag > text {
     #playground-checkout .file-box, 
     #playground-checkout-b .file-box,
     #playground-merge .file-box,
-    #playground-rebase .file-box {
+    #playground-rebase .file-box,
+    #playground-fetch .file-box,
+    #playground-pull .file-box,
+    #playground-push .file-box {
         width: 100%;
         margin-left: 0%;
         position: absolute;
@@ -520,8 +551,24 @@ g.head-tag > text {
         height: 57.5em;
     }
 
-    #playground-checkout, #playground-checkout-b, #playground-merge, #playground-rebase {
+    #playground-checkout, 
+    #playground-checkout-b, 
+    #playground-merge, 
+    #playground-rebase, 
+    #playground-fetch, 
+    #playground-pull,
+    #playground-push {
         height: 63.5em;
+    }
+
+    #playground-fetch .svg-container.remote-container,
+    #playground-pull .svg-container.remote-container,
+    #playground-push .svg-container.remote-container {
+        position: absolute;
+        top: 36em;
+        right: 0;
+        width: 100%;
+        z-index: 10;
     }
 
     #playground-init .svg-container, 

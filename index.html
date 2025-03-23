@@ -962,13 +962,14 @@
           </p>
           <p class="text-sm md:text-base">
             De esta forma, mantenemos un historial lineal lo cual evita commits de merge innecesarios. Nos ayuda
-            a sincronizar nuestra rama con los últimos cambios de main o una rama principal. Por último, nos permite 
+            a sincronizar nuestra rama con los últimos cambios de main o una rama principal. Por último, nos permite
             limpiar commits, es decir, podemos combinar, editar o eliminar commits antes de fusionarlos.
           </p>
           <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
           <h3 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Modos de rebase</h3>
           <p class="text-sm md:text-base">
-            Al igual que con el comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span>, el comando
+            Al igual que con el comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git reset</span>, el
+            comando
             <span class="cmd font-mono bg-gray-100 px-1 rounded">git rebase</span> tiene distintos modos de uso:
           </p>
           <ul class="list-disc ml-6 text-sm md:text-base">
@@ -976,7 +977,8 @@
               <b>Rebase estándar:</b> mueve automáticamente los commits de tu rama actual a la nueva base.
             </li>
             <li class="my-2">
-              <b>Rebase interactivo:</b> permite editar, combinar o eliminar commits antes de aplicarlos. Los comandos más usados son:
+              <b>Rebase interactivo:</b> permite editar, combinar o eliminar commits antes de aplicarlos. Los comandos
+              más usados son:
               <ul class="list-disc ml-6 text-sm md:text-base">
                 <li class="my-2">
                   <b>pick:</b> mantiene el commit.
@@ -996,28 +998,33 @@
               </ul>
             </li>
           </ul>
-          
+
           <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
             ℹ️ <b>Nota:</b> el rebase reescribe la historia del proyecto, por lo que no se recomienda en ramas
-            compartidas. Siempre es mejor utilizarlo en ramas locales. Si hay cambios contradictorios, Git detendrá el rebase, podes 
-            resolver los conflictos y continuar con <span class="cmd font-mono bg-gray-100 px-1 rounded">git rebase --continue</span> o
+            compartidas. Siempre es mejor utilizarlo en ramas locales. Si hay cambios contradictorios, Git detendrá el
+            rebase, podes
+            resolver los conflictos y continuar con <span class="cmd font-mono bg-gray-100 px-1 rounded">git rebase
+              --continue</span> o
             cancelar con <span class="cmd font-mono bg-gray-100 px-1 rounded">git rebase --abort</span>.
           </p>
           <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
-          <h3 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Usos avanzados</h3> 
+          <h3 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Usos avanzados</h3>
           <ul class="list-disc ml-6 text-sm md:text-base">
             <li class="my-2">
-              <b>Rebase</b> <span class="font-mono bg-gray-100 px-1 rounded">--onto</span>: útil para mover una rama que depende de otra. Por ejemplo, si featureB se basó en featureA pero debe moverse a main:
+              <b>Rebase</b> <span class="font-mono bg-gray-100 px-1 rounded">--onto</span>: útil para mover una rama que
+              depende de otra. Por ejemplo, si featureB se basó en featureA pero debe moverse a main:
               <span class="cmd font-mono bg-gray-100 px-1 rounded">git rebase --onto main featA featB</span>.
             </li>
             <li class="my-2">
-              <b>Recuperar commits perdidos:</b> si accidentalmente borraste algunos commits, usa 
-              <span class="cmd font-mono bg-gray-100 px-1 rounded">git reflog</span> para encontrar su hash y restaurarlos.
+              <b>Recuperar commits perdidos:</b> si accidentalmente borraste algunos commits, usa
+              <span class="cmd font-mono bg-gray-100 px-1 rounded">git reflog</span> para encontrar su hash y
+              restaurarlos.
             </li>
           </ul>
           <p class="text-sm md:text-base">
             Este comando es ideal para limpiar ramas locales antes de fusionarlas con la rama principal. También es
-            útil para mantener un historial limpio y fácil de seguir. En el playground solamente se puede utilizar el modo estándar de rebase.
+            útil para mantener un historial limpio y fácil de seguir. En el playground solamente se puede utilizar el
+            modo estándar de rebase.
           </p>
           <!-- End Contenido -->
 
@@ -1025,43 +1032,107 @@
         </section>
         <!-- End Git Rebase -->
 
+        <!-- Start Git Fetch -->
         <section id="ExplainGitFetch-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
-          <p>
-            <span class="cmd font-mono bg-gray-100 px-1 rounded">git fetch</span> actualiza las “ramas remotas” en tu
-            repositorio local.
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">¿Qué es un fetch?</h2>
+          <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
+            El comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git fetch</span> es una herramienta esencial
+            que te permite descargar commits, archivos y referencias de un repositorio remoto a tu repositorio local.
+            <b>Este sólo trae la información remota sin modificar tu entorno de trabajo actual.</b> Esto lo convierte en
+            una
+            opción segura para revisar lo que han hecho otros antes de integrar esos cambios en tu proyecto.
           </p>
-          <div class="playground-container mt-4"></div>
-        </section>
+          <p class="text-sm md:text-base">
+            Los cambios descargados se almacenan de forma separada en tu repositorio local. No afectan tu trabajo actual
+            hasta que decidas revisarlos o fusionarlos con comandos como <b>git checkout</b> o <b>git merge</b>.
+          </p>
+          <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+          <h3 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">Ramas remotas</h3>
+          <p class="text-sm md:text-base">
+            Git organiza las ramas remotas en una estructura distinta a las locales. Las ramas locales se encuentran en
+            <span class="font-mono bg-gray-100 px-1 rounded">./.git/refs/heads/</span> y las remotas en <span
+              class="font-mono bg-gray-100 px-1 rounded">./.git/refs/remotes/</span>.
+            Por lo general, el flujo de trabajo implica traer los cambios de las ramas remotas, revisar los commits y
+            por último integrar los cambios.
+          </p>
+          <!-- End Contenido -->
 
+          <div class="playground-container mt-4" id="playground-fetch"></div>
+        </section>
+        <!-- End Git Fetch -->
+
+        <!-- Start Git Pull -->
         <section id="ExplainGitPull-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
-          <p>
-            <span class="cmd font-mono bg-gray-100 px-1 rounded">git pull</span> combina un <span
-              class="cmd font-mono bg-gray-100 px-1 rounded">git fetch</span> seguido de un <span
-              class="cmd font-mono bg-gray-100 px-1 rounded">git merge</span> (o rebase si se indica) para actualizar la
-            rama actual.
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">¿Qué es un pull?</h2>
+          <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
+            El comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git pull</span> descarga el contenido de un
+            repositorio remoto y
+            de forma inmediata actualiza el repositorio local para que tengan el mismo contenido. Este comando es la
+            combinación
+            de dos comandos: un <span class="cmd font-mono bg-gray-100 px-1 rounded">git fetch</span> seguido de un
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git merge</span> (o rebase si se indica) para
+            actualizar la
+            rama actual. En una primera instacia, se ejecuta el <b>fetch</b> sobre la rama local donde apunta el HEAD.
+            Una vez
+            que el contenido haya sido descargado, se realiza un <b>merge</b> con la rama actual.
+          <p class="text-sm md:text-base">
+            Es el responsable de <span class="italic">"sincronizar"</span> el contenido remoto con nuestras ramas
+            locales.
+            <span class="cmd font-mono bg-gray-100 px-1 rounded">git fetch</span> es considerado una opción más <span
+              class="italic">"segura"</span>
+            porque solamente descarga el contenido remoto sin modificar el entorno de trabajo actual. Suele suceder que
+            al realizar
+            el <b>merge</b> nuestro repositorio local quede en un estado de conflictos.
           </p>
-          <p>
-            Puedes usar <span class="cmd font-mono bg-gray-100 px-1 rounded">git pull --rebase</span> para rebasar en
-            lugar de fusionar. Configura este comportamiento por defecto con <span
-              class="cmd font-mono bg-gray-100 px-1 rounded">git config branch.BRANCHNAME.rebase true</span>.
+          <p class="text-sm md:text-base">
+            Si deseas evitar conflictos, puedes utilizar <span class="cmd font-mono bg-gray-100 px-1 rounded">git pull
+              --rebase</span>
+            para realizar un rebase en lugar de un merge. Esta alternativa es útil para mantener un historial lineal y
+            limpio.
           </p>
-          <div class="playground-container mt-4"></div>
-        </section>
+          <!-- End Contenido -->
 
+          <div class="playground-container mt-4" id="playground-pull"></div>
+        </section>
+        <!-- End Git Pull -->
+
+        <!-- Start Git Push -->
         <section id="ExplainGitPush-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
-          <p>
-            <span class="cmd font-mono bg-gray-100 px-1 rounded">git push</span> enviará los commits locales a la rama
-            correspondiente en el repositorio remoto.
+          <!-- Start Contenido -->
+          <h2 class="text-xl sm:text-xl md:text-2xl font-bold text-gray-800">¿Qué es un push?</h2>
+          <p class="text-sm mt-4 mb-4 md:text-base px-4 border-gray-200 outline-dashed p-2 rounded">
+            El comando <span class="cmd font-mono bg-gray-100 px-1 rounded">git push</span> envía los commits,
+            referencias y archivos locales a la rama correspondiente en el repositorio remoto.
+            Este comando es el complemento de <span class="cmd font-mono bg-gray-100 px-1 rounded">git fetch</span>;
+            mientras que el primero
+            descarga contenido remoto, el segundo envía contenido local. <br>
+            ‼️ Por defecto, Git evita evita que sobrescribas cambios en el repositorio remoto (no-fast-forward) para
+            proteger la historia compartida.
           </p>
-          <p>
-            Si hay divergencia entre la rama local y la remota, se rechazará el push y deberás hacer un pull antes de
-            intentarlo de nuevo.
+          <p class="text-sm md:text-base">
+            ℹ️ Es recomendable antes de realizar un push, ejecutar un <span
+              class="cmd font-mono bg-gray-100 px-1 rounded">git pull</span> para asegurarte de que tu rama local esté
+            actualizada con los últimos cambios remotos.
           </p>
-          <div class="playground-container mt-4"></div>
+          <p class="text-sm md:text-base">
+            En ocasiones, tras modificar commits (por ejemplo, usando <b>git
+              commit --amend o rebase interactivo</b>), Git no permitirá hacer push ya que la historia diverge. En ese caso,
+            se puede forzar el push: <span class="cmd font-mono bg-gray-100 px-1 rounded">git push --force</span>.
+          </p>
+          <p class="text-sm md:text-base">
+            ⚠️ <b>Advertencia</b>: utiliza <b>--force</b> solo si estás seguro de que nadie más ha extraído esos commits,
+            porque podes llegar a sobrescribir cambios en el repositorio remoto.
+          </p>
+          <!-- End Contenido -->
+
+          <div class="playground-container mt-4" id="playground-push"></div>
         </section>
+        <!-- End Git Push -->
 
         <section id="ExplainGitClean-Container"
           class="concept-container bg-white p-4 md:p-6 rounded border border-gray-200">
@@ -1310,7 +1381,7 @@
             { id: '0e70093', parent: 'e137e9b' },
             { id: '3e33afd', parent: '0e70093', tags: ['master'] }
           ],
-          initialMessage: 'Escribe "git reset HEAD^".'
+          initialMessage: 'Escribe "git reset HEAD^" en la terminal.'
         },
         'revert': {
           name: 'Revert',
@@ -1321,7 +1392,7 @@
             { id: '0e70093', parent: 'e137e9b' },
             { id: '3e33afd', parent: '0e70093', tags: ['master'] }
           ],
-          initialMessage: 'Escribe "git revert 0e70093".'
+          initialMessage: 'Escribe "git revert 0e70093" en la terminal.'
         },
         'merge': {
           name: 'Merge',
@@ -1332,7 +1403,7 @@
             { id: 'f5b32c8', parent: 'e137e9b', tags: ['ff'] },
             { id: 'e088135', parent: 'f5b32c8', tags: ['dev'] }
           ],
-          initialMessage: 'Escribe "git merge dev".'
+          initialMessage: 'Escribe "git merge dev" en la terminal.'
         },
         'rebase': {
           name: 'Rebase',
@@ -1344,7 +1415,7 @@
             { id: 'e088135', parent: 'f5b32c8', tags: ['dev'] }
           ],
           currentBranch: 'dev',
-          initialMessage: 'Escribe "git rebase master".'
+          initialMessage: 'Escribe "git rebase master" en la terminal.'
         },
         'fetch': {
           name: 'Fetch',
@@ -1365,7 +1436,7 @@
             { id: '2f8d946', parent: '0cff760' },
             { id: '29235ca', parent: '2f8d946', tags: ['dev'] }
           ],
-          initialMessage: 'Compara cuidadosamente los IDs de los commits entre el origen y el repositorio local. Luego, escribe "git fetch".'
+          initialMessage: 'Compara cuidadosamente los IDs de los commits entre el origen y el repositorio local. Luego, escribe "git fetch" en la terminal.'
         },
         'pull': {
           name: 'Pull',
@@ -1421,7 +1492,7 @@
             { id: '090e2b8', parent: '7eb7654' },
             { id: 'ee5df4b', parent: '090e2b8', tags: ['master'] }
           ],
-          initialMessage: 'Primero escribe "git fetch". Luego, escribe "git rebase origin/master".'
+          initialMessage: 'Primero escribe "git fetch". Luego, escribe "git rebase origin/master" en la terminal.'
         },
         'deletebranches': {
           name: 'DeleteBranches',

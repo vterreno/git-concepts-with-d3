@@ -17,18 +17,19 @@ define(['historyview', 'controlbox', 'filebox', 'd3'], function (HistoryView, Co
         container.style('display', 'block');
 
         args.name = name;
+        args = JSON.parse(JSON.stringify(_args));
         historyView = new HistoryView(args);
 
         if (args.originData) {
             originView = new HistoryView({
                 name: name + '-Origin',
                 width: 300,
-                height: 265,
+                height: 295,
                 commitRadius: 15,
                 remoteName: 'origin',
-                commitData: args.originData
+                commitData: JSON.parse(JSON.stringify(args.originData))
             });
-
+            
             originView.render(playground);
         }
 
@@ -51,6 +52,7 @@ define(['historyview', 'controlbox', 'filebox', 'd3'], function (HistoryView, Co
         openSandBoxes.push({
             hv: historyView,
             cb: controlBox,
+            ov: originView,
             fb: fileBox,
             container: container
         });
@@ -60,6 +62,7 @@ define(['historyview', 'controlbox', 'filebox', 'd3'], function (HistoryView, Co
         for (var i = 0; i < openSandBoxes.length; i++) {
             var osb = openSandBoxes[i];
             osb.hv.destroy();
+            osb.ov && osb.ov.destroy();
             osb.cb.destroy();
             osb.fb.destroy();
             osb.container.style('display', 'none');
